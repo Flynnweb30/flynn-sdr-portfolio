@@ -41,8 +41,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
     }, 900);
   };
 
-  const inputCls = "w-full px-3.5 py-2.5 text-[13.5px] bg-navy-900 border border-[rgba(91,168,221,0.14)] rounded-lg text-white placeholder-ink-400 focus:outline-none focus:border-brand-400/70 transition-colors";
-  const labelCls = "block text-[11px] font-mono text-ink-300 uppercase tracking-wider mb-2";
+  const inputCls = "w-full px-3.5 py-2.5 text-[13.5px] bg-white border border-[#0F1721]/15 rounded-lg text-[#0F1721] placeholder-[#0F1721]/40 focus:outline-none focus:border-[#4A7BB5] focus:ring-2 focus:ring-[#4A7BB5]/20 transition-all";
+  const labelCls = "block text-[11px] font-mono text-[#4A7BB5] uppercase tracking-wider mb-2 font-semibold";
 
   return (
     <>
@@ -51,15 +51,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
         eyebrow="Contact"
         title="Let's talk pipeline,"
         titleAccent="not pleasantries."
-        description="A 20-minute call to look at your current outbound motion and identify what's leaking. No pitch decks. No generic discovery framework. Just a working session."
+        description="A 20-minute call to look at your current outbound motion and identify what's leaking. No pitch decks, no generic discovery framework—just a working session."
       />
 
-      <Section>
+      <Section ariaLabel="Contact form and channels">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <h2 className="text-[18px] font-semibold text-white mb-3">Direct channels</h2>
-              <p className="text-[13.5px] text-ink-300 leading-[1.75]">
+              <h2 className="text-[18px] font-bold text-[#0F1721] mb-3">Direct channels</h2>
+              <p className="text-[13.5px] text-[#0F1721]/75 leading-[1.75]">
                 I typically respond within 2–4 hours during US business hours, within 24 hours otherwise.
               </p>
             </div>
@@ -67,37 +67,38 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
             <div className="space-y-3">
               <button
                 onClick={handleCopyEmail}
-                className="w-full text-left group p-4 bg-navy-800/50 border border-[rgba(91,168,221,0.10)] hover:border-brand-400/40 rounded-lg transition-colors"
+                className="w-full text-left group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
+                aria-label="Copy email address"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-navy-700 border border-[rgba(91,168,221,0.14)] flex items-center justify-center">
-                      <Mail className="w-4 h-4 text-brand-400" />
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
+                      <Mail className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10.5px] font-mono text-ink-300 uppercase tracking-wider">Email</div>
-                      <div className="text-[13.5px] text-white font-medium mt-0.5 truncate">{PERSONAL_INFO.email}</div>
+                      <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">Email</div>
+                      <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5 truncate">{PERSONAL_INFO.email}</div>
                     </div>
                   </div>
                   {copied ? (
-                    <CheckCircle2 className="w-4 h-4 text-brand-400 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#0F1721] shrink-0" aria-hidden="true" />
                   ) : (
-                    <Copy className="w-4 h-4 text-ink-400 group-hover:text-ink-200 shrink-0" />
+                    <Copy className="w-4 h-4 text-[#0F1721]/40 group-hover:text-[#4A7BB5] shrink-0" aria-hidden="true" />
                   )}
                 </div>
               </button>
 
               <a
                 href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
-                className="block group p-4 bg-navy-800/50 border border-[rgba(91,168,221,0.10)] hover:border-brand-400/40 rounded-lg transition-colors"
+                className="block group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="shrink-0 w-9 h-9 rounded-md bg-navy-700 border border-[rgba(91,168,221,0.14)] flex items-center justify-center">
-                    <Phone className="w-4 h-4 text-brand-400" />
+                  <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
                   </div>
                   <div>
-                    <div className="text-[10.5px] font-mono text-ink-300 uppercase tracking-wider">Phone / WhatsApp</div>
-                    <div className="text-[13.5px] text-white font-medium mt-0.5">{PERSONAL_INFO.phone}</div>
+                    <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">Phone / WhatsApp</div>
+                    <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5">{PERSONAL_INFO.phone}</div>
                   </div>
                 </div>
               </a>
@@ -106,19 +107,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group p-4 bg-navy-800/50 border border-[rgba(91,168,221,0.10)] hover:border-brand-400/40 rounded-lg transition-colors"
+                className="block group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-navy-700 border border-[rgba(91,168,221,0.14)] flex items-center justify-center">
-                      <Linkedin className="w-4 h-4 text-brand-400" />
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
+                      <Linkedin className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
                     </div>
                     <div>
-                      <div className="text-[10.5px] font-mono text-ink-300 uppercase tracking-wider">LinkedIn</div>
-                      <div className="text-[13.5px] text-white font-medium mt-0.5">/in/fjpontino</div>
+                      <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">LinkedIn</div>
+                      <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5">/in/fjpontino</div>
                     </div>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-ink-400 group-hover:text-ink-200 shrink-0" />
+                  <ExternalLink className="w-4 h-4 text-[#0F1721]/40 group-hover:text-[#4A7BB5] shrink-0" aria-hidden="true" />
                 </div>
               </a>
 
@@ -126,25 +127,25 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group p-4 bg-navy-800/50 border border-[rgba(91,168,221,0.10)] hover:border-brand-400/40 rounded-lg transition-colors"
+                className="block group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-navy-700 border border-[rgba(91,168,221,0.14)] flex items-center justify-center">
-                      <FileText className="w-4 h-4 text-brand-400" />
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
+                      <FileText className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
                     </div>
                     <div>
-                      <div className="text-[10.5px] font-mono text-ink-300 uppercase tracking-wider">Resume</div>
-                      <div className="text-[13.5px] text-white font-medium mt-0.5">Google Drive · PDF</div>
+                      <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">Resume</div>
+                      <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5">Google Drive · PDF</div>
                     </div>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-ink-400 group-hover:text-ink-200 shrink-0" />
+                  <ExternalLink className="w-4 h-4 text-[#0F1721]/40 group-hover:text-[#4A7BB5] shrink-0" aria-hidden="true" />
                 </div>
               </a>
             </div>
 
-            <div className="p-5 bg-navy-800/50 border border-[rgba(91,168,221,0.10)] rounded-lg">
-              <div className="text-[11px] font-mono text-ink-300 uppercase tracking-wider mb-4">
+            <div className="p-5 bg-white border border-[#0F1721]/10 rounded-lg shadow-[0_1px_2px_rgba(15,23,33,0.04)]">
+              <div className="text-[11px] font-mono text-[#4A7BB5] uppercase tracking-wider mb-4 font-semibold">
                 What happens next
               </div>
               <ul className="space-y-3">
@@ -154,8 +155,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                   { icon: CheckCircle2, text: 'Tailored pilot plan with clear KPIs.' },
                 ].map(({ icon: Icon, text }) => (
                   <li key={text} className="flex items-start gap-3">
-                    <Icon className="w-3.5 h-3.5 text-brand-400 shrink-0 mt-0.5" />
-                    <span className="text-[12.5px] text-ink-200 leading-relaxed">{text}</span>
+                    <Icon className="w-3.5 h-3.5 text-[#0F1721] shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-[12.5px] text-[#0F1721]/80 leading-relaxed">{text}</span>
                   </li>
                 ))}
               </ul>
@@ -166,36 +167,37 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-navy-800/50 border border-[rgba(91,168,221,0.10)] rounded-xl p-7 sm:p-9"
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="bg-white border border-[#0F1721]/8 rounded-xl p-7 sm:p-9 shadow-[0_10px_40px_-20px_rgba(15,23,33,0.15)]"
             >
               {submitted ? (
                 <div className="py-16 text-center">
-                  <div className="w-12 h-12 rounded-full bg-brand-400/10 border border-brand-400/30 text-brand-400 flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-5 h-5" />
+                  <div className="w-12 h-12 rounded-full bg-[#E8F1F8] border border-[#0F1721]/15 text-[#0F1721] flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
                   </div>
-                  <h2 className="text-[22px] font-bold text-white mb-3">Message received</h2>
-                  <p className="text-[13.5px] text-ink-300 max-w-md mx-auto leading-relaxed">
-                    Thanks, {formData.name}. I'll be in touch at <span className="text-brand-400">{formData.email}</span> within 24 hours.
+                  <h2 className="text-[22px] font-bold text-[#0F1721] mb-3">Message received</h2>
+                  <p className="text-[13.5px] text-[#0F1721]/75 max-w-md mx-auto leading-relaxed">
+                    Thanks, {formData.name}. I'll be in touch at <span className="text-[#4A7BB5] font-semibold">{formData.email}</span> within 24 hours.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-8 text-[12.5px] font-medium text-ink-300 hover:text-white transition-colors"
+                    className="mt-8 text-[12.5px] font-semibold text-[#0F1721]/70 hover:text-[#4A7BB5] transition-colors"
                   >
                     Send another message →
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="pb-5 border-b border-[rgba(91,168,221,0.10)]">
-                    <h2 className="text-[18px] font-semibold text-white">Send a message</h2>
-                    <p className="text-[12.5px] text-ink-300 mt-1.5">All information is confidential.</p>
+                  <div className="pb-5 border-b border-[#0F1721]/10">
+                    <h2 className="text-[18px] font-bold text-[#0F1721]">Send a message</h2>
+                    <p className="text-[12.5px] text-[#0F1721]/60 mt-1.5">All information is confidential.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className={labelCls}>Full name *</label>
+                      <label htmlFor="contact-name" className={labelCls}>Full name *</label>
                       <input
+                        id="contact-name"
                         type="text"
                         required
                         value={formData.name}
@@ -205,8 +207,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                       />
                     </div>
                     <div>
-                      <label className={labelCls}>Work email *</label>
+                      <label htmlFor="contact-email" className={labelCls}>Work email *</label>
                       <input
+                        id="contact-email"
                         type="email"
                         required
                         value={formData.email}
@@ -219,8 +222,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className={labelCls}>Company *</label>
+                      <label htmlFor="contact-company" className={labelCls}>Company *</label>
                       <input
+                        id="contact-company"
                         type="text"
                         required
                         value={formData.company}
@@ -230,8 +234,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                       />
                     </div>
                     <div>
-                      <label className={labelCls}>Service needed *</label>
+                      <label htmlFor="contact-service" className={labelCls}>Service needed *</label>
                       <select
+                        id="contact-service"
                         value={formData.serviceNeeded}
                         onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
                         className={inputCls}
@@ -248,8 +253,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className={labelCls}>Target market *</label>
+                      <label htmlFor="contact-market" className={labelCls}>Target market *</label>
                       <select
+                        id="contact-market"
                         value={formData.targetMarket}
                         onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
                         className={inputCls}
@@ -263,8 +269,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                       </select>
                     </div>
                     <div>
-                      <label className={labelCls}>Monthly meeting target</label>
+                      <label htmlFor="contact-target" className={labelCls}>Monthly meeting target</label>
                       <select
+                        id="contact-target"
                         value={formData.meetingTarget}
                         onChange={(e) => setFormData({ ...formData, meetingTarget: e.target.value })}
                         className={inputCls}
@@ -278,8 +285,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                   </div>
 
                   <div>
-                    <label className={labelCls}>ICP & current bottleneck *</label>
+                    <label htmlFor="contact-message" className={labelCls}>ICP & current bottleneck *</label>
                     <textarea
+                      id="contact-message"
                       required
                       rows={5}
                       value={formData.message}
@@ -292,19 +300,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 text-[13.5px] font-semibold text-navy-900 bg-brand-400 hover:bg-brand-500 hover:text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-3.5 px-6 text-[13.5px] font-bold text-white bg-[#0F1721] hover:bg-[#4A7BB5] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm"
                   >
                     {isSubmitting ? (
                       <span>Sending...</span>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4" aria-hidden="true" />
                         <span>Send message</span>
                       </>
                     )}
                   </button>
 
-                  <p className="text-[11px] text-center text-ink-400">
+                  <p className="text-[11px] text-center text-[#0F1721]/50">
                     No spam. 100% confidential. Response within 24 hours.
                   </p>
                 </form>

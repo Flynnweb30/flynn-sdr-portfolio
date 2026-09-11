@@ -12,20 +12,22 @@ interface ButtonProps {
   className?: string;
   type?: 'button' | 'submit';
   disabled?: boolean;
+  ariaLabel?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  children, variant = 'primary', size = 'md', onClick, href, external, withArrow, className = '', type = 'button', disabled
+  children, variant = 'primary', size = 'md', onClick, href, external, withArrow,
+  className = '', type = 'button', disabled, ariaLabel
 }) => {
-  const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
+  const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none';
   const sizes = {
-    md: 'px-4 py-2.5 text-[13px]',
-    lg: 'px-6 py-3.5 text-[14px]',
+    md: 'px-5 py-2.5 text-[13px]',
+    lg: 'px-7 py-3.5 text-[14px]',
   };
   const variants = {
-    primary:   'bg-brand-400 text-navy-900 hover:bg-brand-500 hover:text-white active:bg-brand-500 shadow-[0_0_0_1px_rgba(91,168,221,0.15)]',
-    secondary: 'bg-navy-700 text-ink-100 hover:bg-navy-600 border border-[rgba(91,168,221,0.14)]',
-    ghost:     'text-ink-300 hover:text-brand-400 hover:bg-navy-700/60',
+    primary: 'bg-[#0F1721] text-white hover:bg-[#4A7BB5] shadow-sm hover:shadow-md',
+    secondary: 'bg-white text-[#0F1721] hover:bg-[#E8F1F8] border border-[#0F1721]/15 hover:border-[#4A7BB5]/60',
+    ghost: 'text-[#0F1721] hover:text-[#4A7BB5] hover:bg-white/40',
   };
   const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
 
@@ -38,13 +40,20 @@ export const Button: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <a href={href} className={cls} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+      <a
+        href={href}
+        className={cls}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+        aria-label={ariaLabel}
+      >
         {content}
       </a>
     );
   }
+
   return (
-    <button type={type} onClick={onClick} disabled={disabled} className={cls}>
+    <button type={type} onClick={onClick} disabled={disabled} className={cls} aria-label={ariaLabel}>
       {content}
     </button>
   );

@@ -14,7 +14,7 @@ interface SectionHeadingProps {
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
   index, eyebrow, title, titleAccent, description, align = 'left', as = 'h2'
 }) => {
-  const HeadingTag = as as any;
+  const Heading = as;
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -25,24 +25,26 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
     >
       {(index || eyebrow) && (
         <div className={`flex items-center gap-3 mb-5 ${align === 'center' ? 'justify-center' : ''}`}>
-          {index && <span className="text-[11px] font-mono text-brand-400/90 tracking-wider">{index}</span>}
-          {index && eyebrow && <span className="h-px w-6 bg-brand-400/25" />}
-          {eyebrow && <span className="text-[11px] font-mono text-ink-300 uppercase tracking-wider">{eyebrow}</span>}
+          {index && <span className="text-[11px] font-mono font-semibold text-[#4A7BB5] tracking-wider">{index}</span>}
+          {index && eyebrow && <span className="h-px w-6 bg-[#0F1721]/25" />}
+          {eyebrow && <span className="text-[11px] font-mono text-[#0F1721]/60 uppercase tracking-wider">{eyebrow}</span>}
         </div>
       )}
 
-      <HeadingTag className="text-[28px] sm:text-[36px] lg:text-[40px] font-bold text-white leading-[1.15] tracking-tight">
+      <Heading className="text-[28px] sm:text-[36px] lg:text-[42px] font-extrabold text-[#0F1721] leading-[1.12] tracking-tight">
         {title}
         {titleAccent && (
           <>
             {' '}
-            <span className="font-serif italic text-brand-400">{titleAccent}</span>
+            <span className="font-serif italic text-[#0F1721]/85">{titleAccent}</span>
           </>
         )}
-      </HeadingTag>
+      </Heading>
 
       {description && (
-        <p className="mt-4 text-[15px] text-ink-300 leading-relaxed">{description}</p>
+        <p className="mt-4 text-[15px] sm:text-[16px] text-[#0F1721]/75 leading-relaxed">
+          {description}
+        </p>
       )}
     </motion.div>
   );
