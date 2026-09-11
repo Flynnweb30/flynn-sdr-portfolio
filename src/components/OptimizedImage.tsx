@@ -11,13 +11,6 @@ interface OptimizedImageProps {
   style?: React.CSSProperties;
 }
 
-/**
- * SEO-friendly image component:
- * - Always requires descriptive alt text
- * - Supports lazy loading (default) or eager (priority) loading
- * - Sets explicit width/height to prevent CLS
- * - Uses decoding="async" for non-blocking render
- */
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
   alt,

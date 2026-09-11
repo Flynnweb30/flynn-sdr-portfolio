@@ -14,9 +14,8 @@ interface ServicesPageProps {
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onOpenContact }) => {
   const [active, setActive] = useState<string>(CORE_SERVICES[0].id);
-  const activeService = CORE_SERVICES.find(s => s.id === active) || CORE_SERVICES[0];
+  const activeService = CORE_SERVICES.find((s) => s.id === active) || CORE_SERVICES[0];
 
-  // Per-service Service schema injection
   useEffect(() => {
     const schema = {
       '@context': 'https://schema.org',
@@ -36,7 +35,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
     script.setAttribute('data-service-schema', 'true');
     script.textContent = JSON.stringify(schema);
     document.head.appendChild(script);
-    return () => { script.remove(); };
+    return () => {
+      script.remove();
+    };
   }, [activeService]);
 
   return (
@@ -68,7 +69,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                         : 'text-slate-400 hover:bg-slate-900/60 hover:text-slate-200'
                     }`}
                   >
-                    <span className={`text-[10.5px] font-mono mt-0.5 ${active === service.id ? 'text-amber-400' : 'text-slate-600'}`}>
+                    <span
+                      className={`text-[10.5px] font-mono mt-0.5 ${
+                        active === service.id ? 'text-amber-400' : 'text-slate-600'
+                      }`}
+                    >
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span className="text-[13.5px] font-medium leading-snug">{service.title}</span>
@@ -100,9 +105,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                 {activeService.tagline}
               </p>
 
-              <p className="mt-7 text-[14.5px] text-slate-300 leading-[1.8]">
-                {activeService.description}
-              </p>
+              <p className="mt-7 text-[14.5px] text-slate-300 leading-[1.8]">{activeService.description}</p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-800/60 rounded-lg overflow-hidden border border-slate-800/60">
                 <div className="bg-[#0b0f19] p-5">
@@ -138,8 +141,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                   Tools & platforms
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {activeService.toolsUsed.map(t => (
-                    <span key={t} className="px-3 py-1.5 text-[12px] font-medium bg-slate-800/60 border border-slate-700/60 text-slate-300 rounded-md">
+                  {activeService.toolsUsed.map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1.5 text-[12px] font-medium bg-slate-800/60 border border-slate-700/60 text-slate-300 rounded-md"
+                    >
                       {t}
                     </span>
                   ))}

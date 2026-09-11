@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { X, CheckCircle2, Quote, ArrowRight } from 'lucide-react';
+import { X, CheckCircle2, ArrowRight } from 'lucide-react';
 import { CaseStudy } from '../types';
 
 interface CaseStudyModalProps {
@@ -36,7 +36,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ caseStudy, onClo
           <X className="w-4 h-4" />
         </button>
 
-        {/* Header */}
         <div className="p-7 sm:p-10 border-b border-slate-800/60 pr-16">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono tracking-wider mb-5">
             <span className="text-amber-400/80 uppercase">{caseStudy.industry}</span>
@@ -56,9 +55,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ caseStudy, onClo
           </div>
         </div>
 
-        {/* Body */}
         <div className="p-7 sm:p-10 space-y-9">
-          {/* Metrics */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-800/60 rounded-lg overflow-hidden border border-slate-800/60">
             {caseStudy.secondaryMetrics.map((m, i) => (
               <div key={i} className="bg-[#0b0f19] p-4">
@@ -68,21 +65,15 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ caseStudy, onClo
             ))}
           </div>
 
-          {/* Challenge */}
           <div>
             <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-3">
               01 · The challenge
             </h3>
-            <p className="text-[13.5px] text-slate-300 leading-[1.8]">
-              {caseStudy.challenge}
-            </p>
+            <p className="text-[13.5px] text-slate-300 leading-[1.8]">{caseStudy.challenge}</p>
           </div>
 
-          {/* Action */}
           <div>
-            <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-3">
-              02 · What I did
-            </h3>
+            <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-3">02 · What I did</h3>
             <ul className="space-y-2.5">
               {caseStudy.action.map((a, i) => (
                 <li key={i} className="flex items-start gap-3 text-[13.5px] text-slate-300 leading-relaxed">
@@ -93,14 +84,16 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ caseStudy, onClo
             </ul>
           </div>
 
-          {/* Results */}
           <div>
             <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-3">
               03 · Measurable outcomes
             </h3>
             <ul className="space-y-2.5">
               {caseStudy.result.map((r, i) => (
-                <li key={i} className="flex items-start gap-3 text-[13.5px] text-slate-200 leading-relaxed p-3.5 bg-emerald-500/5 border border-emerald-500/15 rounded-lg">
+                <li
+                  key={i}
+                  className="flex items-start gap-3 text-[13.5px] text-slate-200 leading-relaxed p-3.5 bg-emerald-500/5 border border-emerald-500/15 rounded-lg"
+                >
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <span>{r}</span>
                 </li>
@@ -108,7 +101,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ caseStudy, onClo
             </ul>
           </div>
 
-          {/* Quote */}
           {caseStudy.quote && (
             <div className="border-l-2 border-amber-400/60 pl-5">
               <p className="font-serif italic text-[15.5px] text-slate-200 leading-[1.6]">
@@ -120,12 +112,14 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ caseStudy, onClo
             </div>
           )}
 
-          {/* Tools */}
           <div>
             <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-3">Tools used</h3>
             <div className="flex flex-wrap gap-2">
-              {caseStudy.toolsUsed.map(t => (
-                <span key={t} className="px-2.5 py-1 text-[11.5px] font-mono bg-slate-900/60 border border-slate-800 text-slate-400 rounded">
+              {caseStudy.toolsUsed.map((t) => (
+                <span
+                  key={t}
+                  className="px-2.5 py-1 text-[11.5px] font-mono bg-slate-900/60 border border-slate-800 text-slate-400 rounded"
+                >
                   {t}
                 </span>
               ))}
@@ -133,11 +127,13 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ caseStudy, onClo
           </div>
         </div>
 
-        {/* Footer */}
         <div className="p-6 sm:p-7 border-t border-slate-800/60 bg-slate-950/40 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="text-[12.5px] text-slate-500">Want similar results?</span>
           <button
-            onClick={() => { onClose(); onOpenContact(); }}
+            onClick={() => {
+              onClose();
+              onOpenContact();
+            }}
             className="w-full sm:w-auto px-5 py-2.5 text-[12.5px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 rounded-md transition-colors inline-flex items-center justify-center gap-1.5"
           >
             <span>Book a strategy call</span>

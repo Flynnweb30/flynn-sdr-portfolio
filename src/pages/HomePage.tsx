@@ -18,13 +18,11 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, onSelectCaseStudy }) => {
   return (
     <>
-      {/* ── HERO ── */}
       <section className="relative pt-24 pb-24 sm:pt-32 sm:pb-32 overflow-hidden section-photo bg-photo-office">
         <div className="absolute inset-0 grid-lines opacity-40 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-start">
-
             <div className="lg:col-span-7">
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
@@ -97,7 +95,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
               </motion.div>
             </div>
 
-            {/* Profile card with portrait photo */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -125,9 +122,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                       <div className="text-[14.5px] font-semibold text-white leading-tight">
                         Junior Sales Team Lead
                       </div>
-                      <div className="text-[12px] text-slate-400 mt-0.5">
-                        Regen Digital US · Remote
-                      </div>
+                      <div className="text-[12px] text-slate-400 mt-0.5">Regen Digital US · Remote</div>
                     </div>
                   </div>
 
@@ -140,7 +135,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                     ].map((s) => (
                       <div key={s.l}>
                         <div className="text-[22px] font-bold text-white tabular leading-none">{s.v}</div>
-                        <div className="text-[11px] text-slate-500 mt-2 font-mono uppercase tracking-wider">{s.l}</div>
+                        <div className="text-[11px] text-slate-500 mt-2 font-mono uppercase tracking-wider">
+                          {s.l}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -170,7 +167,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
         </div>
       </section>
 
-      {/* ── CREDIBILITY STRIP ── */}
       <section className="border-y border-slate-800/60 bg-slate-950/70 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
@@ -181,7 +177,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
               { v: '100%', l: 'CRM discipline' },
             ].map((s, i) => (
               <div key={s.l} className={`${i !== 0 ? 'md:border-l md:border-slate-800/60 md:pl-8' : ''}`}>
-                <div className="text-[24px] sm:text-[28px] font-bold text-white tabular leading-none tracking-tight">{s.v}</div>
+                <div className="text-[24px] sm:text-[28px] font-bold text-white tabular leading-none tracking-tight">
+                  {s.v}
+                </div>
                 <div className="text-[11.5px] text-slate-500 mt-2 font-mono uppercase tracking-wider">{s.l}</div>
               </div>
             ))}
@@ -189,7 +187,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
         </div>
       </section>
 
-      {/* ── SERVICES ── */}
       <Section id="services-preview">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <SectionHeading
@@ -224,15 +221,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
               <h3 className="text-[16.5px] font-semibold text-white leading-snug mb-2 group-hover:text-amber-50 transition-colors">
                 {service.title}
               </h3>
-              <p className="text-[13px] text-slate-400 leading-relaxed">
-                {service.tagline}
-              </p>
+              <p className="text-[13px] text-slate-400 leading-relaxed">{service.tagline}</p>
             </motion.button>
           ))}
         </div>
       </Section>
 
-      {/* ── CASE STUDIES ── */}
       <Section id="cases-preview" bordered className="section-photo bg-photo-desk">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <SectionHeading
@@ -288,7 +282,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
         </div>
       </Section>
 
-      {/* ── TESTIMONIALS ── */}
       <Section bordered>
         <SectionHeading
           index="03"
@@ -314,9 +307,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                 ))}
               </div>
 
-              <p className="text-[13.5px] text-slate-300 leading-[1.75] flex-1">
-                "{t.quote}"
-              </p>
+              <p className="text-[13.5px] text-slate-300 leading-[1.75] flex-1">"{t.quote}"</p>
 
               <div className="mt-6 pt-5 border-t border-slate-700/60 flex items-center gap-3">
                 <OptimizedImage
@@ -327,9 +318,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                   className="w-9 h-9 rounded-full object-cover border border-slate-600/60"
                 />
                 <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-white leading-tight truncate">
-                    {t.author}
-                  </div>
+                  <div className="text-[13px] font-semibold text-white leading-tight truncate">{t.author}</div>
                   <div className="text-[11px] text-slate-500 mt-0.5 truncate">
                     {t.title} · {t.company}
                   </div>
@@ -340,7 +329,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
         </div>
       </Section>
 
-      {/* ── FINAL CTA ── */}
       <Section bordered>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -352,16 +340,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
           <div className="absolute inset-0 ambient-accent pointer-events-none" />
 
           <div className="relative max-w-2xl mx-auto">
-            <span className="text-[11px] font-mono text-amber-400 tracking-wider uppercase">
-              Ready when you are
-            </span>
+            <span className="text-[11px] font-mono text-amber-400 tracking-wider uppercase">Ready when you are</span>
             <h2 className="mt-5 text-[32px] sm:text-[42px] font-bold text-white leading-[1.1] tracking-tight">
               Let's fill your calendar with
               <br />
               <span className="font-serif italic text-amber-400/90">conversations that close.</span>
             </h2>
             <p className="mt-6 text-[15px] text-slate-300 max-w-xl mx-auto">
-              A free 20-minute pipeline audit. I'll look at your current outbound motion and share three things you can fix this week.
+              A free 20-minute pipeline audit. I'll look at your current outbound motion and share three things you can fix
+              this week.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">

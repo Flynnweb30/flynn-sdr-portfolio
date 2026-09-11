@@ -10,7 +10,6 @@ import { Breadcrumbs } from './components/Breadcrumbs';
 import { CaseStudy, WorkSample, ServiceItem, PageId } from './types';
 import { useSEO, SEO_CONFIGS } from './hooks/useSEO';
 
-// Page components
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
@@ -61,7 +60,6 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [contactServicePreselect, setContactServicePreselect] = useState<string | undefined>(undefined);
 
-  // Hash routing
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#/', '').replace('#', '') || 'home';
@@ -80,28 +78,35 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const navigateToContact = useCallback((serviceName?: string) => {
-    if (serviceName) setContactServicePreselect(serviceName);
-    navigate('contact');
-  }, [navigate]);
+  const navigateToContact = useCallback(
+    (serviceName?: string) => {
+      if (serviceName) setContactServicePreselect(serviceName);
+      navigate('contact');
+    },
+    [navigate],
+  );
 
-  // SEO per page
   const seo = SEO_CONFIGS[PAGE_TO_SEO_KEY[currentPage]];
-  const pageBreadcrumb = currentPage !== 'home' ? [
-    { name: 'Home', url: '/' },
-    { name: BREADCRUMB_LABELS[currentPage], url: `/${currentPage}` },
-  ] : undefined;
+  const pageBreadcrumb =
+    currentPage !== 'home'
+      ? [
+          { name: 'Home', url: '/' },
+          { name: BREADCRUMB_LABELS[currentPage], url: `/${currentPage}` },
+        ]
+      : undefined;
 
-  const breadcrumbSchema = pageBreadcrumb ? {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: pageBreadcrumb.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: b.name,
-      item: `https://flynnjames.com${b.url}`,
-    })),
-  } : undefined;
+  const breadcrumbSchema = pageBreadcrumb
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: pageBreadcrumb.map((b, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: b.name,
+          item: `https://flynnjames.com${b.url}`,
+        })),
+      }
+    : undefined;
 
   useSEO({
     title: seo.title,
@@ -115,7 +120,14 @@ export default function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onNavigate={navigate} onOpenContact={navigateToContact} onSelectCaseStudy={setSelectedCaseStudy} onSelectSample={setSelectedSample} />;
+        return (
+          <HomePage
+            onNavigate={navigate}
+            onOpenContact={navigateToContact}
+            onSelectCaseStudy={setSelectedCaseStudy}
+            onSelectSample={setSelectedSample}
+          />
+        );
       case 'about':
         return <AboutPage onNavigate={navigate} onOpenContact={navigateToContact} />;
       case 'services':
@@ -129,15 +141,21 @@ export default function App() {
       case 'contact':
         return <ContactPage initialService={contactServicePreselect} onSuccessToast={setToastMessage} />;
       default:
-        return <HomePage onNavigate={navigate} onOpenContact={navigateToContact} onSelectCaseStudy={setSelectedCaseStudy} onSelectSample={setSelectedSample} />;
+        return (
+          <HomePage
+            onNavigate={navigate}
+            onOpenContact={navigateToContact}
+            onSelectCaseStudy={setSelectedCaseStudy}
+            onSelectSample={setSelectedSample}
+          />
+        );
     }
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans antialiased">
+    <div className="min-h-screen text-slate-100 flex flex-col font-sans antialiased">
       <Navbar currentPage={currentPage} onNavigate={navigate} onOpenContact={() => navigateToContact()} />
 
-      {/* Breadcrumbs (visible, not just schema) */}
       <Breadcrumbs items={pageBreadcrumb} onNavigate={navigate} />
 
       <main className="flex-1">
@@ -160,19 +178,28 @@ export default function App() {
       <CaseStudyModal
         caseStudy={selectedCaseStudy}
         onClose={() => setSelectedCaseStudy(null)}
-        onOpenContact={() => { setSelectedCaseStudy(null); navigateToContact(); }}
+        onOpenContact={() => {
+          setSelectedCaseStudy(null);
+          navigateToContact();
+        }}
       />
 
       <WorkSampleModal
         sample={selectedSample}
         onClose={() => setSelectedSample(null)}
-        onOpenContact={() => { setSelectedSample(null); navigateToContact(); }}
+        onOpenContact={() => {
+          setSelectedSample(null);
+          navigateToContact();
+        }}
       />
 
       <ServiceDetailModal
         service={selectedService}
         onClose={() => setSelectedService(null)}
-        onOpenContact={(serviceName) => { setSelectedService(null); navigateToContact(serviceName); }}
+        onOpenContact={(serviceName) => {
+          setSelectedService(null);
+          navigateToContact(serviceName);
+        }}
       />
 
       <Toast message={toastMessage} onClose={() => setToastMessage(null)} />

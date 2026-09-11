@@ -161,7 +161,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                     <Phone className="w-4 h-4 text-amber-400" />
                   </div>
                   <div>
-                    <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Phone / WhatsApp</div>
+                    <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
+                      Phone / WhatsApp
+                    </div>
                     <div className="text-[13.5px] text-white font-medium mt-0.5">{PERSONAL_INFO.phone}</div>
                   </div>
                 </div>
@@ -193,7 +195,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
-                aria-label="View Flynn James resume (PDF)"
+                aria-label="View Flynn James resume"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
@@ -246,13 +248,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                     What happens on the free pipeline audit?
                   </dt>
                   <dd className="text-[12px] text-slate-400 leading-relaxed">
-                    A working session reviewing your current outbound motion, plus three specific improvements you can apply that week.
+                    A working session reviewing your current outbound motion, plus three specific improvements you can apply
+                    that week.
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">
-                    Which markets are supported?
-                  </dt>
+                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">Which markets are supported?</dt>
                   <dd className="text-[12px] text-slate-400 leading-relaxed">
                     US, UK, Europe, Australia, New Zealand, Canada, and Singapore.
                   </dd>
@@ -294,7 +295,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label htmlFor="contact-name" className={labelCls}>Full name *</label>
+                      <label htmlFor="contact-name" className={labelCls}>
+                        Full name *
+                      </label>
                       <input
                         id="contact-name"
                         type="text"
@@ -306,7 +309,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                       />
                     </div>
                     <div>
-                      <label htmlFor="contact-email" className={labelCls}>Work email *</label>
+                      <label htmlFor="contact-email" className={labelCls}>
+                        Work email *
+                      </label>
                       <input
                         id="contact-email"
                         type="email"
@@ -321,7 +326,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label htmlFor="contact-company" className={labelCls}>Company *</label>
+                      <label htmlFor="contact-company" className={labelCls}>
+                        Company *
+                      </label>
                       <input
                         id="contact-company"
                         type="text"
@@ -333,7 +340,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                       />
                     </div>
                     <div>
-                      <label htmlFor="contact-service" className={labelCls}>Service needed *</label>
+                      <label htmlFor="contact-service" className={labelCls}>
+                        Service needed *
+                      </label>
                       <select
                         id="contact-service"
                         value={formData.serviceNeeded}
@@ -352,7 +361,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label htmlFor="contact-market" className={labelCls}>Target market *</label>
+                      <label htmlFor="contact-market" className={labelCls}>
+                        Target market *
+                      </label>
                       <select
                         id="contact-market"
                         value={formData.targetMarket}
@@ -368,7 +379,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="contact-target" className={labelCls}>Monthly meeting target</label>
+                      <label htmlFor="contact-target" className={labelCls}>
+                        Monthly meeting target
+                      </label>
                       <select
                         id="contact-target"
                         value={formData.meetingTarget}
@@ -384,7 +397,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                   </div>
 
                   <div>
-                    <label htmlFor="contact-message" className={labelCls}>ICP & current bottleneck *</label>
+                    <label htmlFor="contact-message" className={labelCls}>
+                      ICP & current bottleneck *
+                    </label>
                     <textarea
                       id="contact-message"
                       required

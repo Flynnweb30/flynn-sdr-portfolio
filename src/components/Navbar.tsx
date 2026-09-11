@@ -11,13 +11,13 @@ interface NavbarProps {
 }
 
 const NAV_ITEMS: { label: string; page: PageId; index: string; ariaLabel: string }[] = [
-  { label: 'Home', page: 'home', index: '01', ariaLabel: 'Go to homepage — Flynn James B2B Sales Portfolio' },
-  { label: 'About', page: 'about', index: '02', ariaLabel: 'About Flynn James — 11+ years B2B outbound sales' },
+  { label: 'Home', page: 'home', index: '01', ariaLabel: 'Go to homepage' },
+  { label: 'About', page: 'about', index: '02', ariaLabel: 'About Flynn James' },
   { label: 'Services', page: 'services', index: '03', ariaLabel: 'B2B appointment setting and cold calling services' },
-  { label: 'Experience', page: 'experience', index: '04', ariaLabel: 'Career timeline — 11+ years of sales development' },
-  { label: 'Case Studies', page: 'case-studies', index: '05', ariaLabel: 'B2B sales case studies with measurable pipeline results' },
-  { label: 'Playbooks', page: 'samples', index: '06', ariaLabel: 'Sales playbooks, cold call scripts, and cadence templates' },
-  { label: 'Contact', page: 'contact', index: '07', ariaLabel: 'Contact Flynn James — book a strategy call' },
+  { label: 'Experience', page: 'experience', index: '04', ariaLabel: 'Career timeline' },
+  { label: 'Case Studies', page: 'case-studies', index: '05', ariaLabel: 'B2B sales case studies' },
+  { label: 'Playbooks', page: 'samples', index: '06', ariaLabel: 'Sales playbooks and scripts' },
+  { label: 'Contact', page: 'contact', index: '07', ariaLabel: 'Contact Flynn James' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenContact }) => {
@@ -32,7 +32,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [mobileMenuOpen]);
 
   const handleNav = (page: PageId) => {
@@ -51,18 +53,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
-            <button
-              onClick={() => handleNav('home')}
-              className="flex items-center gap-3 group"
-              aria-label="Flynn James — return to homepage"
-            >
+            <button onClick={() => handleNav('home')} className="flex items-center gap-3 group" aria-label="Flynn James — homepage">
               <div className="relative w-9 h-9 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center justify-center overflow-hidden group-hover:border-amber-400/60 transition-colors">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative font-bold text-[15px] text-amber-400 tracking-tight">FJ</span>
               </div>
               <div className="hidden sm:flex flex-col items-start leading-none">
                 <span className="text-[14px] font-semibold text-white tracking-tight">Flynn James</span>
-                <span className="text-[10.5px] text-slate-500 mt-1 font-mono tracking-tight uppercase">Senior SDR · Team Lead</span>
+                <span className="text-[10.5px] text-slate-500 mt-1 font-mono tracking-tight uppercase">
+                  Senior SDR · Team Lead
+                </span>
               </div>
             </button>
 
@@ -97,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Download Flynn James resume (PDF)"
+                aria-label="Download Flynn James resume"
                 className="hidden md:flex items-center gap-1.5 px-3 py-2 text-[12.5px] font-medium text-slate-400 hover:text-white transition-colors"
               >
                 <FileText className="w-3.5 h-3.5" />
@@ -106,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
 
               <button
                 onClick={onOpenContact}
-                aria-label="Book a B2B outbound strategy call with Flynn James"
+                aria-label="Book a strategy call"
                 className="hidden sm:flex items-center gap-1.5 px-4 py-2 text-[12.5px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 rounded-md transition-colors"
               >
                 <PhoneCall className="w-3.5 h-3.5" />
@@ -116,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="lg:hidden p-2 text-slate-300 hover:text-white rounded-md"
-                aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -145,7 +145,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
             >
               <div className="h-20 px-6 flex items-center justify-between border-b border-slate-800/60">
                 <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">Navigation</span>
-                <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-white rounded-md" aria-label="Close menu">
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 text-slate-400 hover:text-white rounded-md"
+                  aria-label="Close menu"
+                >
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -163,10 +167,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
                           }`}
                         >
                           <div className="flex items-baseline gap-3">
-                            <span className={`text-[11px] font-mono ${isActive ? 'text-amber-400' : 'text-slate-600'}`}>{item.index}</span>
+                            <span className={`text-[11px] font-mono ${isActive ? 'text-amber-400' : 'text-slate-600'}`}>
+                              {item.index}
+                            </span>
                             <span className="text-[15px] font-medium">{item.label}</span>
                           </div>
-                          <ArrowUpRight className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-slate-600 group-hover:text-slate-400'}`} />
+                          <ArrowUpRight
+                            className={`w-4 h-4 ${
+                              isActive ? 'text-amber-400' : 'text-slate-600 group-hover:text-slate-400'
+                            }`}
+                          />
                         </button>
                       </li>
                     );
@@ -176,7 +186,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
 
               <div className="p-6 border-t border-slate-800/60 space-y-3">
                 <button
-                  onClick={() => { setMobileMenuOpen(false); onOpenContact(); }}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenContact();
+                  }}
                   className="w-full flex items-center justify-center gap-2 py-3 text-[13px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors"
                 >
                   <PhoneCall className="w-4 h-4" />

@@ -75,9 +75,7 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseSt
                     {cs.title}
                   </h2>
 
-                  <p className="text-[14px] text-slate-400 leading-[1.75] line-clamp-3">
-                    {cs.challenge}
-                  </p>
+                  <p className="text-[14px] text-slate-400 leading-[1.75] line-clamp-3">{cs.challenge}</p>
 
                   <div className="mt-6 flex items-center gap-2 text-[12.5px] font-medium text-slate-400 group-hover:text-amber-400 transition-colors">
                     <span>Read full breakdown</span>
@@ -101,9 +99,7 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseSt
                         <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
                           {m.label}
                         </div>
-                        <div className="text-[15px] text-white font-semibold mt-1.5 tabular">
-                          {m.value}
-                        </div>
+                        <div className="text-[15px] text-white font-semibold mt-1.5 tabular">{m.value}</div>
                       </div>
                     ))}
                   </div>

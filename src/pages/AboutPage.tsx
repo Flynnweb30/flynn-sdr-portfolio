@@ -62,8 +62,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
         name: 'Flynn James Q. Pontino',
         alternateName: 'Flynn James',
         jobTitle: 'Senior B2B SDR & Junior Sales Team Lead',
-        description:
-          'Senior B2B Sales Development Representative with 11+ years of outbound experience.',
+        description: 'Senior B2B Sales Development Representative with 11+ years of outbound experience.',
         url: 'https://flynnjames.com/about',
         email: 'va.flynnjames@gmail.com',
         telephone: '+63-930-635-9306',
@@ -98,11 +97,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div className="lg:col-span-7 space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <h2 className="text-[24px] sm:text-[28px] font-bold text-white leading-snug tracking-tight">
                 Eleven years of turning cold lists into warm revenue.
               </h2>
@@ -114,9 +109,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-[15px] text-slate-300 leading-[1.8]"
             >
-              I'm <strong className="text-white font-semibold">{PERSONAL_INFO.name}</strong>. I started on the phone lines in 2014 —
-              hundreds of dials a day across time zones, accents, and industries I'd never heard of. What looked like a grind
-              became a craft.
+              I'm <strong className="text-white font-semibold">{PERSONAL_INFO.name}</strong>. I started on the phone lines in
+              2014 — hundreds of dials a day across time zones, accents, and industries I'd never heard of. What looked like
+              a grind became a craft.
             </motion.p>
 
             <motion.p
@@ -126,8 +121,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               className="text-[15px] text-slate-300 leading-[1.8]"
             >
               Over the years, I refined the craft into a science: permission-based phone openings, multi-touch email
-              cadences, hyper-targeted LinkedIn outreach, and CRM hygiene that makes your pipeline forecast actually
-              mean something.
+              cadences, hyper-targeted LinkedIn outreach, and CRM hygiene that makes your pipeline forecast actually mean
+              something.
             </motion.p>
 
             <motion.p
@@ -137,8 +132,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               className="text-[15px] text-slate-300 leading-[1.8]"
             >
               Whether I'm running independent outbound campaigns or leading SDR teams at{' '}
-              <strong className="text-white font-semibold">Regen Digital US</strong>, the mission stays the same:
-              put your closers in front of informed, engaged decision-makers who are actually ready to solve a problem.
+              <strong className="text-white font-semibold">Regen Digital US</strong>, the mission stays the same: put your
+              closers in front of informed, engaged decision-makers who are actually ready to solve a problem.
             </motion.p>
 
             <motion.div
@@ -148,12 +143,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               className="my-10 border-l-2 border-amber-400/60 pl-6"
             >
               <p className="font-serif italic text-[19px] sm:text-[21px] text-slate-200 leading-[1.5]">
-                "A calendar invite is only as valuable as the deal it generates. My job isn't to book a slot —
-                it's to hand your AE an informed, engaged buyer."
+                "A calendar invite is only as valuable as the deal it generates. My job isn't to book a slot — it's to hand
+                your AE an informed, engaged buyer."
               </p>
-              <div className="mt-4 text-[11.5px] font-mono text-slate-500 uppercase tracking-wider">
-                — Flynn James
-              </div>
+              <div className="mt-4 text-[11.5px] font-mono text-slate-500 uppercase tracking-wider">— Flynn James</div>
             </motion.div>
 
             <motion.p
@@ -162,8 +155,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               transition={{ duration: 0.6, delay: 0.35 }}
               className="text-[15px] text-slate-300 leading-[1.8]"
             >
-              When you bring me onto a campaign, there's no guesswork and no lengthy ramp. I plug into your CRM
-              immediately, align with your ICP, and start booking.
+              When you bring me onto a campaign, there's no guesswork and no lengthy ramp. I plug into your CRM immediately,
+              align with your ICP, and start booking.
             </motion.p>
 
             <motion.div
@@ -199,12 +192,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
                     priority
                   />
                   <div>
-                    <div className="text-[14.5px] font-semibold text-white leading-tight">
-                      Flynn James Q. Pontino
-                    </div>
-                    <div className="text-[11.5px] text-slate-400 mt-1">
-                      Senior B2B SDR · Team Lead
-                    </div>
+                    <div className="text-[14.5px] font-semibold text-white leading-tight">Flynn James Q. Pontino</div>
+                    <div className="text-[11.5px] text-slate-400 mt-1">Senior B2B SDR · Team Lead</div>
                   </div>
                 </div>
 
