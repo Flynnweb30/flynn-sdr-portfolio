@@ -1,4 +1,19 @@
+# robots.txt for flynnjames.com
 User-agent: *
 Allow: /
 
-Sitemap: https://flynnpontino.com/sitemap.xml
+# Block parameter-based duplicate URLs
+Disallow: /*?utm_
+Disallow: /*?ref=
+Disallow: /*?session=
+Disallow: /api/
+
+# Allow all major crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://flynnjamespontino-porfolio.onrender.com/sitemap.xml

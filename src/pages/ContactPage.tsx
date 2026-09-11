@@ -4,6 +4,7 @@ import { Mail, Phone, Linkedin, FileText, Send, CheckCircle2, Copy, ExternalLink
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { useSEO } from '../hooks/useSEO';
 
 interface ContactPageProps {
   initialService?: string;
@@ -24,6 +25,67 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
   const [submitted, setSubmitted] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  useSEO({
+    title: 'Contact Flynn James — Book a B2B Outbound Strategy Call',
+    description:
+      'Get in touch with Flynn James for B2B appointment setting, cold calling, or SDR coaching. Free 20-minute pipeline audit. Response within 24 hours.',
+    canonical: '/contact',
+    keywords: 'hire B2B SDR, book appointment setter, contact sales specialist, hire cold caller',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: 'Contact Flynn James',
+        description: 'Contact page for booking a B2B outbound strategy call with Flynn James.',
+        url: 'https://flynnjames.com/contact',
+        mainEntity: {
+          '@type': 'Person',
+          name: 'Flynn James Q. Pontino',
+          email: 'va.flynnjames@gmail.com',
+          telephone: '+63-930-635-9306',
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How quickly will Flynn James respond to my inquiry?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Flynn typically responds to all inquiries within 2–4 hours during US business hours, and within 24 hours otherwise.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What happens on the free 20-minute pipeline audit call?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'The call is a working session where Flynn reviews your current outbound motion, identifies where leads are leaking, and shares three specific improvements you can apply to your B2B sales process that week.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What B2B sales services does Flynn James offer?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Flynn offers six services: B2B appointment setting, high-volume cold calling, lead generation and account targeting, SDR coaching and team leadership, LinkedIn Sales Navigator outreach, and CRM pipeline management.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Which time zones and markets does Flynn support?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Flynn supports outbound campaigns across the United States, United Kingdom, Europe, Australia, New Zealand, Canada, and Singapore.',
+            },
+          },
+        ],
+      },
+    ],
+  });
+
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
     setCopied(true);
@@ -41,8 +103,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
     }, 900);
   };
 
-  const inputCls = "w-full px-3.5 py-2.5 text-[13.5px] bg-white border border-[#0F1721]/15 rounded-lg text-[#0F1721] placeholder-[#0F1721]/40 focus:outline-none focus:border-[#4A7BB5] focus:ring-2 focus:ring-[#4A7BB5]/20 transition-all";
-  const labelCls = "block text-[11px] font-mono text-[#4A7BB5] uppercase tracking-wider mb-2 font-semibold";
+  const inputCls =
+    'w-full px-3.5 py-2.5 text-[13.5px] bg-[#0b0f19] border border-slate-800 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-amber-400/60 transition-colors';
+  const labelCls = 'block text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-2';
 
   return (
     <>
@@ -51,15 +114,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
         eyebrow="Contact"
         title="Let's talk pipeline,"
         titleAccent="not pleasantries."
-        description="A 20-minute call to look at your current outbound motion and identify what's leaking. No pitch decks, no generic discovery framework—just a working session."
+        description="A 20-minute call to look at your current outbound motion and identify what's leaking. No pitch decks. No generic discovery framework. Just a working session."
       />
 
-      <Section ariaLabel="Contact form and channels">
+      <Section>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <h2 className="text-[18px] font-bold text-[#0F1721] mb-3">Direct channels</h2>
-              <p className="text-[13.5px] text-[#0F1721]/75 leading-[1.75]">
+              <h2 className="text-[18px] font-semibold text-white mb-3">Direct channels</h2>
+              <p className="text-[13.5px] text-slate-400 leading-[1.75]">
                 I typically respond within 2–4 hours during US business hours, within 24 hours otherwise.
               </p>
             </div>
@@ -67,38 +130,39 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
             <div className="space-y-3">
               <button
                 onClick={handleCopyEmail}
-                className="w-full text-left group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
-                aria-label="Copy email address"
+                className="w-full text-left group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="Copy Flynn James email address to clipboard"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
-                      <Mail className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                      <Mail className="w-4 h-4 text-amber-400" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">Email</div>
-                      <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5 truncate">{PERSONAL_INFO.email}</div>
+                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Email</div>
+                      <div className="text-[13.5px] text-white font-medium mt-0.5 truncate">{PERSONAL_INFO.email}</div>
                     </div>
                   </div>
                   {copied ? (
-                    <CheckCircle2 className="w-4 h-4 text-[#0F1721] shrink-0" aria-hidden="true" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   ) : (
-                    <Copy className="w-4 h-4 text-[#0F1721]/40 group-hover:text-[#4A7BB5] shrink-0" aria-hidden="true" />
+                    <Copy className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
                   )}
                 </div>
               </button>
 
               <a
                 href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
-                className="block group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
+                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="Call Flynn James"
               >
                 <div className="flex items-center gap-3">
-                  <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
-                    <Phone className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
+                  <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-amber-400" />
                   </div>
                   <div>
-                    <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">Phone / WhatsApp</div>
-                    <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5">{PERSONAL_INFO.phone}</div>
+                    <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Phone / WhatsApp</div>
+                    <div className="text-[13.5px] text-white font-medium mt-0.5">{PERSONAL_INFO.phone}</div>
                   </div>
                 </div>
               </a>
@@ -107,19 +171,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
+                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="View Flynn James LinkedIn profile"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
-                      <Linkedin className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                      <Linkedin className="w-4 h-4 text-amber-400" />
                     </div>
                     <div>
-                      <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">LinkedIn</div>
-                      <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5">/in/fjpontino</div>
+                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">LinkedIn</div>
+                      <div className="text-[13.5px] text-white font-medium mt-0.5">/in/fjpontino</div>
                     </div>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-[#0F1721]/40 group-hover:text-[#4A7BB5] shrink-0" aria-hidden="true" />
+                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
                 </div>
               </a>
 
@@ -127,25 +192,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group p-4 bg-white border border-[#0F1721]/10 hover:border-[#4A7BB5]/50 rounded-lg transition-colors shadow-[0_1px_2px_rgba(15,23,33,0.04)]"
+                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="View Flynn James resume (PDF)"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-[#E8F1F8] border border-[#0F1721]/10 flex items-center justify-center">
-                      <FileText className="w-4 h-4 text-[#0F1721]" aria-hidden="true" />
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                      <FileText className="w-4 h-4 text-amber-400" />
                     </div>
                     <div>
-                      <div className="text-[10.5px] font-mono text-[#4A7BB5] uppercase tracking-wider font-semibold">Resume</div>
-                      <div className="text-[13.5px] text-[#0F1721] font-semibold mt-0.5">Google Drive · PDF</div>
+                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Resume</div>
+                      <div className="text-[13.5px] text-white font-medium mt-0.5">Google Drive · PDF</div>
                     </div>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-[#0F1721]/40 group-hover:text-[#4A7BB5] shrink-0" aria-hidden="true" />
+                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
                 </div>
               </a>
             </div>
 
-            <div className="p-5 bg-white border border-[#0F1721]/10 rounded-lg shadow-[0_1px_2px_rgba(15,23,33,0.04)]">
-              <div className="text-[11px] font-mono text-[#4A7BB5] uppercase tracking-wider mb-4 font-semibold">
+            <div className="p-5 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-lg">
+              <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
                 What happens next
               </div>
               <ul className="space-y-3">
@@ -155,11 +221,43 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                   { icon: CheckCircle2, text: 'Tailored pilot plan with clear KPIs.' },
                 ].map(({ icon: Icon, text }) => (
                   <li key={text} className="flex items-start gap-3">
-                    <Icon className="w-3.5 h-3.5 text-[#0F1721] shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-[12.5px] text-[#0F1721]/80 leading-relaxed">{text}</span>
+                    <Icon className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <span className="text-[12.5px] text-slate-300 leading-relaxed">{text}</span>
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="p-5 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-lg">
+              <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
+                Frequently asked
+              </h3>
+              <dl className="space-y-4">
+                <div>
+                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">
+                    How quickly will Flynn respond?
+                  </dt>
+                  <dd className="text-[12px] text-slate-400 leading-relaxed">
+                    Within 2–4 hours during US business hours, within 24 hours otherwise.
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">
+                    What happens on the free pipeline audit?
+                  </dt>
+                  <dd className="text-[12px] text-slate-400 leading-relaxed">
+                    A working session reviewing your current outbound motion, plus three specific improvements you can apply that week.
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">
+                    Which markets are supported?
+                  </dt>
+                  <dd className="text-[12px] text-slate-400 leading-relaxed">
+                    US, UK, Europe, Australia, New Zealand, Canada, and Singapore.
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
 
@@ -167,30 +265,31 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="bg-white border border-[#0F1721]/8 rounded-xl p-7 sm:p-9 shadow-[0_10px_40px_-20px_rgba(15,23,33,0.15)]"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-7 sm:p-9"
             >
               {submitted ? (
                 <div className="py-16 text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#E8F1F8] border border-[#0F1721]/15 text-[#0F1721] flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <h2 className="text-[22px] font-bold text-[#0F1721] mb-3">Message received</h2>
-                  <p className="text-[13.5px] text-[#0F1721]/75 max-w-md mx-auto leading-relaxed">
-                    Thanks, {formData.name}. I'll be in touch at <span className="text-[#4A7BB5] font-semibold">{formData.email}</span> within 24 hours.
+                  <h2 className="text-[22px] font-bold text-white mb-3">Message received</h2>
+                  <p className="text-[13.5px] text-slate-400 max-w-md mx-auto leading-relaxed">
+                    Thanks, {formData.name}. I'll be in touch at{' '}
+                    <span className="text-amber-400">{formData.email}</span> within 24 hours.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-8 text-[12.5px] font-semibold text-[#0F1721]/70 hover:text-[#4A7BB5] transition-colors"
+                    className="mt-8 text-[12.5px] font-medium text-slate-400 hover:text-white transition-colors"
                   >
                     Send another message →
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="pb-5 border-b border-[#0F1721]/10">
-                    <h2 className="text-[18px] font-bold text-[#0F1721]">Send a message</h2>
-                    <p className="text-[12.5px] text-[#0F1721]/60 mt-1.5">All information is confidential.</p>
+                  <div className="pb-5 border-b border-slate-800/60">
+                    <h2 className="text-[18px] font-semibold text-white">Send a message</h2>
+                    <p className="text-[12.5px] text-slate-500 mt-1.5">All information is confidential.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -300,19 +399,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 text-[13.5px] font-bold text-white bg-[#0F1721] hover:bg-[#4A7BB5] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm"
+                    className="w-full py-3.5 px-6 text-[13.5px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 active:bg-amber-500 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <span>Sending...</span>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" aria-hidden="true" />
+                        <Send className="w-4 h-4" />
                         <span>Send message</span>
                       </>
                     )}
                   </button>
 
-                  <p className="text-[11px] text-center text-[#0F1721]/50">
+                  <p className="text-[11px] text-center text-slate-600">
                     No spam. 100% confidential. Response within 24 hours.
                   </p>
                 </form>
