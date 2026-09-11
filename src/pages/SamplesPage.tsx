@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Copy, Check } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { SectionHeading } from '../components/SectionHeading';
 import { WORK_SAMPLES } from '../data/portfolioData';
 import { WorkSample } from '../types';
 
@@ -33,6 +34,30 @@ export const SamplesPage: React.FC<SamplesPageProps> = ({ onSelectSample }) => {
       />
 
       <Section>
+        {/* SEO intro */}
+        <div className="max-w-3xl mb-14">
+          <SectionHeading
+            index="06.0"
+            eyebrow="Free resources"
+            title="Battle-tested sales playbooks,"
+            titleAccent="free to copy."
+          />
+          <div className="mt-6 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              These four B2B outbound playbooks are the exact frameworks Flynn James uses on live client campaigns today.
+              They include the permission-based cold call script that yields 12–18% conversation-to-meeting conversion,
+              a 7-touch multi-channel outbound cadence across phone + email + LinkedIn, a strict BANT & MEDDIC
+              qualification scorecard, and the executive handoff template used before every Account Executive discovery
+              call.
+            </p>
+            <p>
+              Everything on this page is free to copy, adapt, and implement on your own sales team. If you want help
+              customising any of these frameworks for your specific ICP, industry, or market — book a call and we'll
+              build it together.
+            </p>
+          </div>
+        </div>
+
         <div className="space-y-6">
           {WORK_SAMPLES.map((sample, i) => {
             const isCopied = copiedId === sample.id;
@@ -54,9 +79,9 @@ export const SamplesPage: React.FC<SamplesPageProps> = ({ onSelectSample }) => {
                       </span>
                     </div>
 
-                    <h3 className="text-[20px] sm:text-[24px] font-bold text-white leading-tight tracking-tight mb-4 group-hover:text-amber-50 transition-colors">
+                    <h2 className="text-[20px] sm:text-[24px] font-bold text-white leading-tight tracking-tight mb-4 group-hover:text-amber-50 transition-colors">
                       {sample.title}
-                    </h3>
+                    </h2>
 
                     <p className="text-[14px] text-slate-400 leading-[1.75]">{sample.summary}</p>
 

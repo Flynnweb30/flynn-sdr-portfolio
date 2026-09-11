@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Target, Headphones, Shield, Flame } from 'lucide-react';
+import { Award, Target, Headphones, Shield, Flame, Briefcase, GraduationCap, Globe } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { SectionHeading } from '../components/SectionHeading';
@@ -19,17 +19,17 @@ const PILLARS = [
   {
     icon: Target,
     title: 'Consultative, not transactional',
-    body: 'I diagnose before I prescribe. Every cold call starts with calculated questions that help prospects articulate their own bottlenecks.',
+    body: 'I diagnose before I prescribe. Every cold call starts with calculated questions that help prospects articulate their own bottlenecks before I ever pitch a solution.',
   },
   {
     icon: Flame,
     title: 'Relentless outbound grit',
-    body: "150+ dials a day doesn't intimidate me — it's the baseline I've held for over a decade. Mental endurance is a skill.",
+    body: "150+ dials a day doesn't intimidate me — it's the baseline I've held for over a decade. Mental endurance is a skill that takes years to build.",
   },
   {
     icon: Headphones,
     title: 'Active listening & pattern breaks',
-    body: 'Cold calling is 80% listening. I disarm knee-jerk defensiveness in the first seven seconds and turn it into conversation.',
+    body: 'Cold calling is 80% listening. I disarm knee-jerk defensiveness in the first seven seconds and turn objections into genuine business conversations.',
   },
   {
     icon: Shield,
@@ -43,6 +43,13 @@ const TRAITS = [
   'Executive phone presence with C-level buyers',
   'Strict BANT qualification on every meeting booked',
   'Autonomous work ethic in remote, KPI-driven teams',
+];
+
+const EXPERTISE = [
+  { icon: Briefcase, label: 'Core Discipline', value: 'B2B Outbound Sales Development' },
+  { icon: GraduationCap, label: 'Methodology', value: 'BANT · MEDDIC · Consultative Discovery' },
+  { icon: Globe, label: 'Markets Served', value: 'US · UK · ANZ · CA · SG' },
+  { icon: Award, label: 'Performance Tier', value: 'Level 4 · Top 5% Company-Wide' },
 ];
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact }) => {
@@ -66,7 +73,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
         url: 'https://flynnjames.com/about',
         email: 'va.flynnjames@gmail.com',
         telephone: '+63-930-635-9306',
-        image: 'https://flynnjames.com/images/flynn-james-sdr-portrait.jpg',
+        image: 'https://user29984.na.imgto.link/public/20260907/flynn-profile.avif',
         sameAs: ['https://www.linkedin.com/in/fjpontino'],
         knowsAbout: [
           'B2B Appointment Setting',
@@ -156,7 +163,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               className="text-[15px] text-slate-300 leading-[1.8]"
             >
               When you bring me onto a campaign, there's no guesswork and no lengthy ramp. I plug into your CRM immediately,
-              align with your ICP, and start booking.
+              align with your ICP, and start booking qualified meetings within the first week.
             </motion.p>
 
             <motion.div
@@ -184,7 +191,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               <div className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-6">
                 <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-800/60">
                   <OptimizedImage
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&h=200&q=80"
+                    src="https://user29984.na.imgto.link/public/20260907/flynn-profile.avif"
                     alt="Flynn James, Senior B2B SDR and outbound sales specialist"
                     width={56}
                     height={56}
@@ -216,20 +223,23 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
 
               <div className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-6">
                 <h3 className="text-[13px] font-semibold text-white uppercase tracking-wider font-mono mb-5">
-                  Quick facts
+                  Professional profile
                 </h3>
                 <dl className="space-y-4 text-[13px]">
-                  {[
-                    ['Calling hours', 'US / UK / ANZ timezones'],
-                    ['Top tier', 'Level 4 achieved'],
-                    ['Location', 'Remote · Global'],
-                    ['Languages', 'Fluent English'],
-                  ].map(([k, v]) => (
-                    <div key={k} className="flex items-center justify-between gap-4">
-                      <dt className="text-slate-500">{k}</dt>
-                      <dd className="text-slate-200 text-right font-medium">{v}</dd>
-                    </div>
-                  ))}
+                  {EXPERTISE.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.label} className="flex items-start gap-3">
+                        <Icon className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                        <div className="flex-1">
+                          <dt className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
+                            {item.label}
+                          </dt>
+                          <dd className="text-slate-200 mt-1 font-medium">{item.value}</dd>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </dl>
               </div>
             </div>
@@ -237,7 +247,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
         </div>
       </Section>
 
-      <Section bordered>
+      <Section bordered className="section-photo bg-photo-laptop">
         <SectionHeading
           index="02.1"
           eyebrow="How I think"
@@ -269,6 +279,35 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               </motion.div>
             );
           })}
+        </div>
+      </Section>
+
+      {/* Expanded SEO content block */}
+      <Section bordered>
+        <div className="max-w-3xl">
+          <SectionHeading
+            index="02.2"
+            eyebrow="Background"
+            title="Where the experience"
+            titleAccent="comes from."
+          />
+          <div className="mt-8 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              Flynn's career spans over a decade of frontline B2B outbound. He began in 2014 in a high-volume BPO
+              environment in the Philippines, moved through progressively senior sales roles across international
+              campaigns, and now operates as a remote Senior B2B SDR and Junior Sales Team Lead for Regen Digital US.
+            </p>
+            <p>
+              Along the way, he has generated qualified pipeline for companies in digital marketing, enterprise SaaS,
+              cloud IT infrastructure, government technology, and B2B events. His track record includes $1.8M+ in sourced
+              pipeline for a UK marketing agency, $1.2M in enterprise deals for a Singapore cloud provider, and Top 5%
+              rep status across two consecutive years at Public Sector Network in Toronto.
+            </p>
+            <p>
+              Beyond personal quota attainment, Flynn mentors junior SDRs — running call listening labs, objection
+              handling workshops, and structured onboarding playbooks that reduce ramp time by 25%.
+            </p>
+          </div>
         </div>
       </Section>
     </>

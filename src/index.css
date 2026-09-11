@@ -102,6 +102,7 @@
   background: linear-gradient(to right, transparent, rgba(148, 163, 184, 0.15), transparent);
 }
 
+/* ── Section-photo backgrounds (per page) ── */
 .section-photo {
   position: relative;
   isolation: isolate;
@@ -124,6 +125,7 @@
   background: linear-gradient(180deg, rgba(11,15,25,0.55) 0%, rgba(11,15,25,0.85) 100%);
 }
 
+/* Page-specific background photos */
 .bg-photo-office {
   background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=2400&q=80');
 }
@@ -135,6 +137,18 @@
 }
 .bg-photo-handshake {
   background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=2400&q=80');
+}
+.bg-photo-meeting {
+  background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2400&q=80');
+}
+.bg-photo-team {
+  background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2400&q=80');
+}
+.bg-photo-laptop {
+  background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2400&q=80');
+}
+.bg-photo-city {
+  background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=80');
 }
 
 @media (prefers-reduced-motion: reduce) {

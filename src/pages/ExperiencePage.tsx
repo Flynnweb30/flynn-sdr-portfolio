@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Building2, MapPin, Calendar, Award, CheckCircle2 } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { SectionHeading } from '../components/SectionHeading';
 import { CAREER_EXPERIENCES } from '../data/portfolioData';
 import { PageId } from '../types';
 import { Button } from '../components/Button';
@@ -27,6 +28,35 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
       />
 
       <Section>
+        {/* SEO intro content */}
+        <div className="max-w-3xl mb-14">
+          <SectionHeading
+            index="04.0"
+            eyebrow="Career overview"
+            title="A documented track record in"
+            titleAccent="B2B sales development."
+          />
+          <div className="mt-6 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              Flynn James has spent more than a decade in B2B outbound sales, progressing from a high-volume power caller
+              to a Junior Sales Team Lead responsible for coaching SDR teams. His career spans five distinct global
+              markets and four separate industries — BPO teleservices, B2B events, enterprise cloud SaaS, and digital
+              marketing services.
+            </p>
+            <p>
+              Highlights include: 120–150% quota attainment sustained over a 6-year tenure at Pacific Outsource
+              Teleservices; a Top 5% company-wide ranking across two consecutive years at Public Sector Network in
+              Toronto; $1.2M in qualified pipeline for Averps Pte Ltd in Singapore; $1.8M in sourced pipeline for Seek
+              Marketing Partners in the UK; and a Level 4 (highest tier) achievement at Regen Digital US within 3 weeks
+              of joining.
+            </p>
+            <p>
+              Every role has been remote-first since 2022, with disciplined KPI tracking, CRM hygiene, and structured
+              coaching of junior reps.
+            </p>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <aside className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
@@ -162,6 +192,54 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
                 Get in touch
               </Button>
             </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Expanded SEO content */}
+      <Section bordered className="section-photo bg-photo-team">
+        <SectionHeading
+          index="04.1"
+          eyebrow="Career highlights"
+          title="Industries served &"
+          titleAccent="markets covered."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          <div className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-7">
+            <h3 className="text-[15px] font-semibold text-white mb-4">Industries served</h3>
+            <ul className="space-y-2.5">
+              {[
+                'BPO & international telemarketing',
+                'B2B events & government technology summits',
+                'Enterprise SaaS & cloud IT infrastructure',
+                'Digital marketing & performance media',
+                'Web design & custom web applications',
+                'Customer acquisition & retail services',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-[13.5px] text-slate-300 leading-relaxed">
+                  <span className="mt-2 w-1 h-1 rounded-full bg-amber-400/70 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-7">
+            <h3 className="text-[15px] font-semibold text-white mb-4">Global markets covered</h3>
+            <ul className="space-y-2.5">
+              {[
+                'United States — EST, CST, MST, PST time zones',
+                'United Kingdom & Europe — GMT / BST calling hours',
+                'Australia & New Zealand — AEST / NZST coverage',
+                'Canada — EST, MST, PST',
+                'Singapore & APAC — SGT coverage',
+                'Philippines — native market experience',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-[13.5px] text-slate-300 leading-relaxed">
+                  <span className="mt-2 w-1 h-1 rounded-full bg-amber-400/70 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </Section>

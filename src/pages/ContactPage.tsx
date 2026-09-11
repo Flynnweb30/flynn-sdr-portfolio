@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, Linkedin, FileText, Send, CheckCircle2, Copy, ExternalLink, Clock, Shield } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { SectionHeading } from '../components/SectionHeading';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { useSEO } from '../hooks/useSEO';
 
@@ -118,6 +119,29 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
       />
 
       <Section>
+        {/* SEO intro */}
+        <div className="max-w-3xl mb-14">
+          <SectionHeading
+            index="07.0"
+            eyebrow="Get in touch"
+            title="Book a free"
+            titleAccent="B2B pipeline audit."
+          />
+          <div className="mt-6 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              If you're a founder, sales leader, or Account Executive looking to add consistent qualified meetings to
+              your calendar, the fastest way to find out if Flynn James is a fit is a 20-minute working session. Bring
+              your current outbound motion — scripts, ICP, tool stack, and existing results — and Flynn will identify
+              three specific improvements you can apply this week.
+            </p>
+            <p>
+              Whether you need a dedicated senior SDR, an appointment setting specialist for a specific region, or an
+              external coach to lift your current team, the call will clarify the next step. All inquiries receive a
+              response within 24 hours.
+            </p>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div className="lg:col-span-5 space-y-8">
             <div>
@@ -248,8 +272,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                     What happens on the free pipeline audit?
                   </dt>
                   <dd className="text-[12px] text-slate-400 leading-relaxed">
-                    A working session reviewing your current outbound motion, plus three specific improvements you can apply
-                    that week.
+                    A working session reviewing your current outbound motion, plus three specific improvements you can
+                    apply that week.
                   </dd>
                 </div>
                 <div>

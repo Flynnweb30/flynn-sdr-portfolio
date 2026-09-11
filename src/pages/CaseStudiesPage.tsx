@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { SectionHeading } from '../components/SectionHeading';
 import { CASE_STUDIES } from '../data/portfolioData';
 import { CaseStudy } from '../types';
 import { useSEO } from '../hooks/useSEO';
@@ -48,6 +49,28 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseSt
       />
 
       <Section>
+        {/* SEO intro */}
+        <div className="max-w-3xl mb-14">
+          <SectionHeading
+            index="05.0"
+            eyebrow="Verified results"
+            title="Measurable pipeline from"
+            titleAccent="real B2B campaigns."
+          />
+          <div className="mt-6 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              These case studies document four separate B2B outbound campaigns Flynn James has run across different
+              industries, markets, and buyer profiles. Each includes the specific bottleneck that was solved, the
+              tactical strategy that was executed, and the quantified revenue outcomes achieved.
+            </p>
+            <p>
+              Campaigns span the UK (marketing agency outbound), Singapore (enterprise cloud SaaS), the United States
+              (web design services), and Canada (public sector executive acquisition). Combined, they represent more than
+              $3M in directly sourced pipeline.
+            </p>
+          </div>
+        </div>
+
         <div className="space-y-6">
           {CASE_STUDIES.map((cs, i) => (
             <motion.button

@@ -126,6 +126,7 @@ export default function App() {
             onOpenContact={navigateToContact}
             onSelectCaseStudy={setSelectedCaseStudy}
             onSelectSample={setSelectedSample}
+            onSuccessToast={setToastMessage}
           />
         );
       case 'about':
@@ -147,6 +148,7 @@ export default function App() {
             onOpenContact={navigateToContact}
             onSelectCaseStudy={setSelectedCaseStudy}
             onSelectSample={setSelectedSample}
+            onSuccessToast={setToastMessage}
           />
         );
     }

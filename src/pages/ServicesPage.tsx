@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
+import { SectionHeading } from '../components/SectionHeading';
 import { CORE_SERVICES } from '../data/portfolioData';
 import { ServiceItem } from '../types';
 import { Button } from '../components/Button';
@@ -51,6 +52,29 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
       />
 
       <Section>
+        {/* SEO intro content */}
+        <div className="max-w-3xl mb-14">
+          <SectionHeading
+            index="03.0"
+            eyebrow="Overview"
+            title="Six outbound services for"
+            titleAccent="B2B sales teams."
+          />
+          <div className="mt-6 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              Flynn James offers six specialised B2B outbound services designed for SaaS, marketing agencies, IT firms,
+              and professional services companies. Each engagement is scoped to produce qualified pipeline — not vanity
+              activity metrics — and every service can run as a standalone project or as part of a full end-to-end
+              outbound motion.
+            </p>
+            <p>
+              Every campaign is executed across phone, email, and LinkedIn, with strict BANT qualification applied before
+              any meeting hits an Account Executive's calendar. Flynn supports clients across the United States, United
+              Kingdom, Australia, New Zealand, Canada, and Singapore.
+            </p>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
@@ -162,6 +186,28 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
               </div>
             </motion.article>
           </div>
+        </div>
+      </Section>
+
+      {/* Expanded detail per service (SEO body content) */}
+      <Section bordered className="section-photo bg-photo-callcenter">
+        <SectionHeading
+          index="03.1"
+          eyebrow="Service detail"
+          title="What each engagement"
+          titleAccent="actually delivers."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          {CORE_SERVICES.map((service) => (
+            <div
+              key={service.id}
+              className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-7"
+            >
+              <h3 className="text-[17px] font-semibold text-white mb-3 leading-snug">{service.title}</h3>
+              <p className="text-[13.5px] text-slate-400 leading-[1.75]">{service.tagline}</p>
+              <p className="text-[13.5px] text-slate-300 leading-[1.8] mt-4">{service.description}</p>
+            </div>
+          ))}
         </div>
       </Section>
     </>
