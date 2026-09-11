@@ -10,8 +10,8 @@ interface PageHeaderProps {
   align?: 'left' | 'center';
 }
 
-export const PageHeader: React.FC<PageHeaderProps> = ({ 
-  index, eyebrow, title, titleAccent, description, align = 'left' 
+export const PageHeader: React.FC<PageHeaderProps> = ({
+  index, eyebrow, title, titleAccent, description, align = 'left'
 }) => {
   return (
     <div className={`pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-slate-800/60 ${align === 'center' ? 'text-center' : ''}`}>

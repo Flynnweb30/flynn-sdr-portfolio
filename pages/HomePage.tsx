@@ -1,11 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, PhoneCall, FileText, TrendingUp, CheckCircle2, Star } from 'lucide-react';
-import { PERSONAL_INFO, CASE_STUDIES, CORE_SERVICES, TESTIMONIALS, CAREER_EXPERIENCES } from '../data/portfolioData';
+import { ArrowUpRight, PhoneCall, FileText, Star } from 'lucide-react';
+import { PERSONAL_INFO, CASE_STUDIES, CORE_SERVICES, TESTIMONIALS } from '../data/portfolioData';
 import { PageId, CaseStudy, WorkSample } from '../types';
 import { Section } from '../components/Section';
 import { SectionHeading } from '../components/SectionHeading';
-import { StatCard } from '../components/StatCard';
 import { Button } from '../components/Button';
 
 interface HomePageProps {
@@ -21,12 +20,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
       {/* Hero */}
       <section className="relative pt-32 pb-24 sm:pt-44 sm:pb-32 overflow-hidden grid-lines">
         <div className="absolute inset-0 ambient-top pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-start">
-            
+
             <div className="lg:col-span-7">
-              {/* Availability pill */}
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -42,7 +40,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                 </span>
               </motion.div>
 
-              {/* Headline */}
               <motion.h1
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -54,19 +51,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                 <span className="font-serif italic text-amber-400/90">actually converts.</span>
               </motion.h1>
 
-              {/* Subheadline */}
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.16 }}
                 className="mt-8 max-w-xl text-[16px] sm:text-[17px] text-slate-400 leading-[1.7]"
               >
-                I'm Flynn James — a senior B2B SDR and appointment setter with 11+ years on the phones. 
-                I help sales teams fill their calendars with qualified, decision-maker conversations 
+                I'm Flynn James — a senior B2B SDR and appointment setter with 11+ years on the phones.
+                I help sales teams fill their calendars with qualified, decision-maker conversations
                 across the US, UK, ANZ, and Singapore.
               </motion.p>
 
-              {/* CTA row */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -81,7 +76,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                 </Button>
               </motion.div>
 
-              {/* Trust row */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -101,7 +95,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
               </motion.div>
             </div>
 
-            {/* Right Column: Profile card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -109,12 +102,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
               className="lg:col-span-5 lg:pt-16"
             >
               <div className="relative">
-                {/* Decorative corner */}
                 <div className="absolute -top-3 -right-3 w-16 h-16 border-t border-r border-amber-400/20 rounded-tr-lg pointer-events-none" />
                 <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b border-l border-slate-700/30 rounded-bl-lg pointer-events-none" />
 
                 <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/80 rounded-xl p-6 sm:p-7">
-                  {/* Profile header */}
                   <div className="flex items-start justify-between pb-5 border-b border-slate-800/60">
                     <div>
                       <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider mb-1.5">
@@ -132,7 +123,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                     </div>
                   </div>
 
-                  {/* Mini stats */}
                   <div className="grid grid-cols-2 gap-x-4 gap-y-5 py-6">
                     <div>
                       <div className="text-[22px] font-bold text-white tabular leading-none">$1.8M</div>
@@ -152,7 +142,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
                     </div>
                   </div>
 
-                  {/* Quick links */}
                   <div className="pt-5 border-t border-slate-800/60 flex items-center justify-between">
                     <button
                       onClick={() => onNavigate('about')}
@@ -356,7 +345,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, o
           className="relative rounded-2xl overflow-hidden border border-slate-800/80 bg-gradient-to-br from-slate-900/80 via-slate-900/40 to-slate-900/80 p-10 sm:p-16 text-center"
         >
           <div className="absolute inset-0 ambient-accent pointer-events-none" />
-          
+
           <div className="relative max-w-2xl mx-auto">
             <span className="text-[11px] font-mono text-amber-400/80 tracking-wider uppercase">
               Ready when you are

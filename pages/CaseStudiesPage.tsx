@@ -4,14 +4,14 @@ import { ArrowUpRight } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { CASE_STUDIES } from '../data/portfolioData';
-import { CaseStudy, PageId } from '../types';
+import { CaseStudy } from '../types';
 
 interface CaseStudiesPageProps {
   onSelectCaseStudy: (cs: CaseStudy) => void;
   onOpenContact: (serviceName?: string) => void;
 }
 
-export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseStudy, onOpenContact }) => {
+export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseStudy }) => {
   return (
     <>
       <PageHeader
@@ -35,7 +35,6 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseSt
               className="w-full text-left group bg-slate-900/30 hover:bg-slate-900/60 border border-slate-800/60 hover:border-slate-700/80 rounded-xl p-7 sm:p-10 transition-all"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {/* Left: identity */}
                 <div className="lg:col-span-7">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-5 text-[11px] font-mono tracking-wider">
                     <span className="text-slate-500 uppercase">{cs.industry}</span>
@@ -59,7 +58,6 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseSt
                   </div>
                 </div>
 
-                {/* Right: metrics */}
                 <div className="lg:col-span-5">
                   <div className="pb-6 mb-6 border-b border-slate-800/60">
                     <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider mb-2">

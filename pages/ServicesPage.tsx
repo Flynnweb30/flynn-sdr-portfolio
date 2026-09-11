@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { CORE_SERVICES } from '../data/portfolioData';
-import { ServiceItem, PageId } from '../types';
+import { ServiceItem } from '../types';
 import { Button } from '../components/Button';
 
 interface ServicesPageProps {
@@ -28,9 +28,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
 
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-          {/* Side nav */}
           <aside className="lg:col-span-4">
-            <div className="sticky top-24">
+            <div className="lg:sticky lg:top-24">
               <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
                 Select service
               </div>
@@ -55,7 +54,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
             </div>
           </aside>
 
-          {/* Detail */}
           <div className="lg:col-span-8">
             <motion.div
               key={activeService.id}
@@ -82,7 +80,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                 {activeService.description}
               </p>
 
-              {/* Metric callout */}
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-800/60 rounded-lg overflow-hidden border border-slate-800/60">
                 <div className="bg-[#0b0f19] p-5">
                   <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider mb-2">
@@ -98,7 +95,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                 </div>
               </div>
 
-              {/* Features */}
               <div className="mt-10">
                 <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-5">
                   Included scope
@@ -113,7 +109,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                 </ul>
               </div>
 
-              {/* Tools */}
               <div className="mt-10 pt-8 border-t border-slate-800/60">
                 <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
                   Tools & platforms
@@ -127,7 +122,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                 </div>
               </div>
 
-              {/* Actions */}
               <div className="mt-10 pt-8 border-t border-slate-800/60 flex flex-wrap gap-3">
                 <Button variant="primary" onClick={() => onOpenContact(activeService.title)}>
                   Request a proposal

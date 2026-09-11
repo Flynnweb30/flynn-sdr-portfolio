@@ -56,7 +56,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
 
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left: Channels */}
           <div className="lg:col-span-5 space-y-8">
             <div>
               <h2 className="text-[18px] font-semibold text-white mb-3">Direct channels</h2>
@@ -92,15 +91,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
                 href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
                 className="block group p-4 bg-slate-900/40 border border-slate-800/60 hover:border-slate-700/80 rounded-lg transition-colors"
               >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
-                      <Phone className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div>
-                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Phone / WhatsApp</div>
-                      <div className="text-[13.5px] text-white font-medium mt-0.5">{PERSONAL_INFO.phone}</div>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Phone / WhatsApp</div>
+                    <div className="text-[13.5px] text-white font-medium mt-0.5">{PERSONAL_INFO.phone}</div>
                   </div>
                 </div>
               </a>
@@ -146,7 +143,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
               </a>
             </div>
 
-            {/* What happens next */}
             <div className="p-5 bg-slate-900/40 border border-slate-800/60 rounded-lg">
               <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
                 What happens next
@@ -166,7 +162,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSucc
             </div>
           </div>
 
-          {/* Right: Form */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, y: 16 }}

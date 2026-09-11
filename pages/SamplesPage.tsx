@@ -4,14 +4,14 @@ import { ArrowUpRight, Copy, Check } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { WORK_SAMPLES } from '../data/portfolioData';
-import { WorkSample, PageId } from '../types';
+import { WorkSample } from '../types';
 
 interface SamplesPageProps {
   onSelectSample: (s: WorkSample) => void;
   onOpenContact: (serviceName?: string) => void;
 }
 
-export const SamplesPage: React.FC<SamplesPageProps> = ({ onSelectSample, onOpenContact }) => {
+export const SamplesPage: React.FC<SamplesPageProps> = ({ onSelectSample }) => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const handleCopy = (sample: WorkSample, e: React.MouseEvent) => {
@@ -71,7 +71,6 @@ export const SamplesPage: React.FC<SamplesPageProps> = ({ onSelectSample, onOpen
                     </div>
                   </div>
 
-                  {/* Preview */}
                   <div className="lg:col-span-4">
                     <div className="bg-[#0b0f19] border border-slate-800/60 rounded-lg p-4 h-full">
                       <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider mb-3">

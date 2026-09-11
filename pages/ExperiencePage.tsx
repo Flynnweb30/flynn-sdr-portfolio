@@ -28,7 +28,6 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
 
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-          {/* Timeline list */}
           <aside className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
               <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-6">
@@ -47,18 +46,10 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
                           className="w-full text-left flex gap-5 py-4 group"
                         >
                           <span className={`relative z-10 shrink-0 mt-1.5 w-3 h-3 rounded-full border-2 transition-colors ${
-                            isActive 
-                              ? 'bg-amber-400 border-amber-400' 
+                            isActive
+                              ? 'bg-amber-400 border-amber-400'
                               : 'bg-[#0b0f19] border-slate-700 group-hover:border-slate-500'
-                          }`}>
-                            {isActive && (
-                              <motion.span
-                                layoutId="timeline-dot"
-                                className="absolute inset-0 rounded-full bg-amber-400"
-                                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                              />
-                            )}
-                          </span>
+                          }`} />
                           <div className="flex-1 min-w-0">
                             <div className={`text-[11px] font-mono ${isActive ? 'text-amber-400' : 'text-slate-500'} transition-colors`}>
                               {item.period}
@@ -81,7 +72,6 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
             </div>
           </aside>
 
-          {/* Detail panel */}
           <div className="lg:col-span-7">
             <motion.div
               key={exp.id}
@@ -90,7 +80,6 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
               transition={{ duration: 0.4 }}
               className="bg-slate-900/30 border border-slate-800/60 rounded-xl p-7 sm:p-10"
             >
-              {/* Header */}
               <div className="pb-7 border-b border-slate-800/60">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px] font-mono text-slate-500 mb-3">
                   <span className="flex items-center gap-1.5"><Calendar className="w-3 h-3" />{exp.period}</span>
@@ -112,7 +101,6 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
                 </div>
               </div>
 
-              {/* Responsibilities */}
               <div className="py-7 border-b border-slate-800/60">
                 <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-5">
                   Scope of responsibility
@@ -127,7 +115,6 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onOpenContact })
                 </ul>
               </div>
 
-              {/* Achievements */}
               <div className="pt-7">
                 <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-5 flex items-center gap-2">
                   <Award className="w-3.5 h-3.5 text-amber-400" />
