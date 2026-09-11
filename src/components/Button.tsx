@@ -17,22 +17,24 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({
   children, variant = 'primary', size = 'md', onClick, href, external, withArrow, className = '', type = 'button', disabled
 }) => {
-  const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
+  const base = 'group inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
   const sizes = {
-    md: 'px-4 py-2.5 text-[13px]',
-    lg: 'px-6 py-3.5 text-[14px]',
+    md: 'px-4 py-2.5 text-[13.5px]',
+    lg: 'px-6 py-3.5 text-[14.5px]',
   };
   const variants = {
-    primary: 'bg-amber-400 text-slate-900 hover:bg-amber-300 active:bg-amber-500',
-    secondary: 'bg-slate-800/80 text-slate-100 hover:bg-slate-700/80 border border-slate-700/60',
-    ghost: 'text-slate-300 hover:text-white hover:bg-slate-800/50',
+    primary: 'bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-hover)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)]',
+    secondary: 'bg-[var(--bg-elevated)] text-[var(--ink-primary)] border border-[var(--border-default)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-subtle)]',
+    ghost: 'text-[var(--ink-secondary)] hover:text-[var(--accent-primary)] hover:bg-[var(--accent-tint)]',
   };
   const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
 
   const content = (
     <>
       <span>{children}</span>
-      {withArrow && <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />}
+      {withArrow && (
+        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+      )}
     </>
   );
 

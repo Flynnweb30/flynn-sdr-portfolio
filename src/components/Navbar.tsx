@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, PhoneCall, FileText, ArrowUpRight } from 'lucide-react';
+import { Menu, X, PhoneCall, FileText, ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { PageId } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -23,12 +23,28 @@ const NAV_ITEMS: { label: string; page: PageId; index: string }[] = [
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenContact }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 16);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initial = stored || preferred;
+    setTheme(initial);
+    document.documentElement.classList.toggle('dark', initial === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    localStorage.setItem('theme', next);
+    document.documentElement.classList.toggle('dark', next === 'dark');
+  };
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
@@ -45,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0b0f19]/85 backdrop-blur-xl border-b border-slate-800/60'
+            ? 'bg-[var(--bg-base)]/85 backdrop-blur-xl border-b border-[var(--border-subtle)]'
             : 'bg-transparent border-b border-transparent'
         }`}
       >
@@ -57,13 +73,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
               className="flex items-center gap-3 group"
               aria-label="Go to homepage"
             >
-              <div className="relative w-9 h-9 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center justify-center overflow-hidden group-hover:border-amber-400/50 transition-colors">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="relative font-bold text-[15px] text-amber-400 tracking-tight">FJ</span>
+              <div className="relative w-9 h-9 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border-default)] flex items-center justify-center overflow-hidden group-hover:border-[var(--accent-primary)] transition-colors">
+                <span className="relative font-semibold text-[15px] text-[var(--accent-primary)] tracking-tight">FJ</span>
               </div>
               <div className="hidden sm:flex flex-col items-start leading-none">
-                <span className="text-[14px] font-semibold text-white tracking-tight">Flynn James</span>
-                <span className="text-[10.5px] text-slate-500 mt-1 font-mono tracking-tight uppercase">Senior SDR · Team Lead</span>
+                <span className="text-[14px] font-semibold text-[var(--ink-primary)] tracking-tight">Flynn James</span>
+                <span className="text-[10.5px] text-[var(--ink-tertiary)] mt-1 font-mono tracking-tight uppercase">Senior SDR · Team Lead</span>
               </div>
             </button>
 
@@ -76,13 +91,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
                     key={item.page}
                     onClick={() => handleNav(item.page)}
                     className={`relative px-3.5 py-2 text-[13px] font-medium rounded-md transition-colors ${
-                      isActive ? 'text-white' : 'text-slate-400 hover:text-slate-200'
+                      isActive ? 'text-[var(--ink-primary)]' : 'text-[var(--ink-secondary)] hover:text-[var(--ink-primary)]'
                     }`}
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-active"
-                        className="absolute inset-0 bg-slate-800/60 border border-slate-700/50 rounded-md -z-10"
+                        className="absolute inset-0 bg-[var(--bg-subtle)] border border-[var(--border-subtle)] rounded-md -z-10"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -94,11 +109,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
+              <button
+                onClick={toggleTheme}
+                className="hidden md:flex p-2 text-[var(--ink-tertiary)] hover:text-[var(--accent-primary)] hover:bg-[var(--accent-tint)] rounded-md transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
+
               <a
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-1.5 px-3 py-2 text-[12.5px] font-medium text-slate-400 hover:text-white transition-colors"
+                className="hidden md:flex items-center gap-1.5 px-3 py-2 text-[12.5px] font-medium text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] transition-colors"
               >
                 <FileText className="w-3.5 h-3.5" />
                 <span>Resume</span>
@@ -106,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
 
               <button
                 onClick={onOpenContact}
-                className="hidden sm:flex items-center gap-1.5 px-4 py-2 text-[12.5px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 rounded-md transition-colors"
+                className="hidden sm:flex items-center gap-1.5 px-4 py-2 text-[12.5px] font-medium text-white bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] rounded-md transition-colors"
               >
                 <PhoneCall className="w-3.5 h-3.5" />
                 <span>Get in Touch</span>
@@ -114,7 +137,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-slate-300 hover:text-white rounded-md"
+                className="lg:hidden p-2 text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] rounded-md"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -122,9 +145,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
             </div>
           </div>
         </div>
-
-        {/* Hairline */}
-        <div className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-700/40 to-transparent transition-opacity ${isScrolled ? 'opacity-100' : 'opacity-0'}`} />
       </header>
 
       {/* Mobile Menu */}
@@ -137,19 +157,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 lg:hidden"
           >
-            <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-[#0b0f19] border-l border-slate-800/80 flex flex-col"
+              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-[var(--bg-base)] border-l border-[var(--border-subtle)] flex flex-col"
             >
-              <div className="h-20 px-6 flex items-center justify-between border-b border-slate-800/60">
-                <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">Navigation</span>
-                <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-white rounded-md">
-                  <X className="w-5 h-5" />
-                </button>
+              <div className="h-20 px-6 flex items-center justify-between border-b border-[var(--border-subtle)]">
+                <span className="text-[11px] font-mono text-[var(--ink-tertiary)] uppercase tracking-wider">Navigation</span>
+                <div className="flex items-center gap-1">
+                  <button onClick={toggleTheme} className="p-2 text-[var(--ink-tertiary)] hover:text-[var(--accent-primary)] rounded-md">
+                    {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  </button>
+                  <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-[var(--ink-secondary)] hover:text-[var(--ink-primary)] rounded-md">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
               <nav className="flex-1 overflow-y-auto p-6">
@@ -161,14 +186,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
                         <button
                           onClick={() => handleNav(item.page)}
                           className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-colors group ${
-                            isActive ? 'bg-slate-800/60 text-white' : 'text-slate-300 hover:bg-slate-800/40'
+                            isActive ? 'bg-[var(--bg-subtle)] text-[var(--ink-primary)]' : 'text-[var(--ink-secondary)] hover:bg-[var(--bg-subtle)]'
                           }`}
                         >
                           <div className="flex items-baseline gap-3">
-                            <span className={`text-[11px] font-mono ${isActive ? 'text-amber-400' : 'text-slate-600'}`}>{item.index}</span>
+                            <span className={`text-[11px] font-mono ${isActive ? 'text-[var(--accent-primary)]' : 'text-[var(--ink-quaternary)]'}`}>{item.index}</span>
                             <span className="text-[15px] font-medium">{item.label}</span>
                           </div>
-                          <ArrowUpRight className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-slate-600 group-hover:text-slate-400'}`} />
+                          <ArrowUpRight className={`w-4 h-4 ${isActive ? 'text-[var(--accent-primary)]' : 'text-[var(--ink-quaternary)] group-hover:text-[var(--ink-tertiary)]'}`} />
                         </button>
                       </li>
                     );
@@ -176,10 +201,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
                 </ul>
               </nav>
 
-              <div className="p-6 border-t border-slate-800/60 space-y-3">
+              <div className="p-6 border-t border-[var(--border-subtle)] space-y-3">
                 <button
                   onClick={() => { setMobileMenuOpen(false); onOpenContact(); }}
-                  className="w-full flex items-center justify-center gap-2 py-3 text-[13px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors"
+                  className="w-full flex items-center justify-center gap-2 py-3 text-[13px] font-medium text-white bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] rounded-lg transition-colors"
                 >
                   <PhoneCall className="w-4 h-4" />
                   <span>Book a Call</span>
@@ -188,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenC
                   href={PERSONAL_INFO.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3 text-[13px] font-medium text-slate-300 bg-slate-900 border border-slate-800 rounded-lg"
+                  className="w-full flex items-center justify-center gap-2 py-3 text-[13px] font-medium text-[var(--ink-secondary)] bg-[var(--bg-elevated)] border border-[var(--border-default)] rounded-lg"
                 >
                   <FileText className="w-4 h-4" />
                   <span>Download Resume</span>

@@ -8,7 +8,6 @@ import { ServiceDetailModal } from './components/ServiceDetailModal';
 import { Toast } from './components/Toast';
 import { CaseStudy, WorkSample, ServiceItem, PageId } from './types';
 
-// Page components
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
@@ -25,7 +24,7 @@ const pageVariants = {
 
 const pageTransition = {
   type: 'tween',
-  ease: [0.22, 1, 0.36, 1],
+  ease: [0.22, 1, 0.36, 1] as const,
   duration: 0.45,
 };
 
@@ -37,7 +36,6 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [contactServicePreselect, setContactServicePreselect] = useState<string | undefined>(undefined);
 
-  // Handle hash-based routing
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#/', '').replace('#', '') || 'home';
@@ -86,7 +84,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans antialiased paper-texture">
+    <div className="min-h-screen bg-[var(--bg-base)] text-[var(--ink-primary)] flex flex-col font-sans antialiased paper-texture">
       <Navbar currentPage={currentPage} onNavigate={navigate} onOpenContact={() => navigateToContact()} />
 
       <main className="flex-1">
@@ -111,19 +109,16 @@ export default function App() {
         onClose={() => setSelectedCaseStudy(null)}
         onOpenContact={() => { setSelectedCaseStudy(null); navigateToContact(); }}
       />
-
       <WorkSampleModal
         sample={selectedSample}
         onClose={() => setSelectedSample(null)}
         onOpenContact={() => { setSelectedSample(null); navigateToContact(); }}
       />
-
       <ServiceDetailModal
         service={selectedService}
         onClose={() => setSelectedService(null)}
         onOpenContact={(serviceName) => { setSelectedService(null); navigateToContact(serviceName); }}
       />
-
       <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
     </div>
   );
