@@ -8,41 +8,41 @@ interface SectionHeadingProps {
   titleAccent?: string;
   description?: string;
   align?: 'left' | 'center';
+  as?: 'h1' | 'h2';
 }
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
-  index, eyebrow, title, titleAccent, description, align = 'left'
+  index, eyebrow, title, titleAccent, description, align = 'left', as = 'h2'
 }) => {
+  const HeadingTag = as as any;
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''}`}
     >
       {(index || eyebrow) && (
         <div className={`flex items-center gap-3 mb-5 ${align === 'center' ? 'justify-center' : ''}`}>
-          {index && <span className="text-[11px] font-mono text-[var(--accent-primary)] tracking-wider">{index}</span>}
-          {index && eyebrow && <span className="h-px w-6 bg-[var(--border-default)]" />}
-          {eyebrow && <span className="text-[11px] font-mono text-[var(--ink-tertiary)] uppercase tracking-wider">{eyebrow}</span>}
+          {index && <span className="text-[11px] font-mono text-brand-400/90 tracking-wider">{index}</span>}
+          {index && eyebrow && <span className="h-px w-6 bg-brand-400/25" />}
+          {eyebrow && <span className="text-[11px] font-mono text-ink-300 uppercase tracking-wider">{eyebrow}</span>}
         </div>
       )}
 
-      <h2 className="text-[28px] sm:text-[36px] lg:text-[40px] font-semibold text-[var(--ink-primary)] leading-[1.15] tracking-tight">
+      <HeadingTag className="text-[28px] sm:text-[36px] lg:text-[40px] font-bold text-white leading-[1.15] tracking-tight">
         {title}
         {titleAccent && (
           <>
             {' '}
-            <span className="font-serif italic text-[var(--accent-primary)]">{titleAccent}</span>
+            <span className="font-serif italic text-brand-400">{titleAccent}</span>
           </>
         )}
-      </h2>
+      </HeadingTag>
 
       {description && (
-        <p className="mt-4 text-[15px] text-[var(--ink-secondary)] leading-relaxed">
-          {description}
-        </p>
+        <p className="mt-4 text-[15px] text-ink-300 leading-relaxed">{description}</p>
       )}
     </motion.div>
   );
