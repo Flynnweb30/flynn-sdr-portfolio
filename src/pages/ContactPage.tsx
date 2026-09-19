@@ -1,37 +1,98 @@
 import React, { useState } from 'react';
-import { 
-  Mail, 
-  PhoneCall, 
-  ShieldCheck, 
-  Clock, 
-  CheckCircle2, 
-  Send, 
-  MapPin, 
-  Sparkles 
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Phone, Linkedin, FileText, Send, CheckCircle2, Copy, ExternalLink, Clock, Shield } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
-import { Button } from '../components/Button';
+import { SectionHeading } from '../components/SectionHeading';
+import { PERSONAL_INFO } from '../data/portfolioData';
+import { useSEO } from '../hooks/useSEO';
 
 interface ContactPageProps {
-  preselectedService?: string;
-  onSuccess?: () => void;
+  initialService?: string;
+  onSuccessToast?: (msg: string) => void;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({
-  preselectedService,
-  onSuccess,
-}) => {
+export const ContactPage: React.FC<ContactPageProps> = ({ initialService, onSuccessToast }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
-    service: preselectedService || 'Appointment Setting',
-    targetMarket: 'US & Canada',
-    message: ''
+    serviceNeeded: initialService || 'B2B Appointment Setting',
+    targetMarket: 'United States',
+    meetingTarget: '25-35 Meetings/Mo',
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  useSEO({
+    title: 'Contact Flynn James — Book a B2B Outbound Strategy Call',
+    description:
+      'Get in touch with Flynn James for B2B appointment setting, cold calling, or SDR coaching. Free 20-minute pipeline audit. Response within 24 hours.',
+    canonical: '/contact',
+    keywords: 'hire B2B SDR, book appointment setter, contact sales specialist, hire cold caller',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: 'Contact Flynn James',
+        description: 'Contact page for booking a B2B outbound strategy call with Flynn James.',
+        url: 'https://flynnjames.com/contact',
+        mainEntity: {
+          '@type': 'Person',
+          name: 'Flynn James Q. Pontino',
+          email: 'va.flynnjames@gmail.com',
+          telephone: '+63-930-635-9306',
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How quickly will Flynn James respond to my inquiry?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Flynn typically responds to all inquiries within 2–4 hours during US business hours, and within 24 hours otherwise.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What happens on the free 20-minute pipeline audit call?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'The call is a working session where Flynn reviews your current outbound motion, identifies where leads are leaking, and shares three specific improvements you can apply to your B2B sales process that week.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What B2B sales services does Flynn James offer?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Flynn offers six services: B2B appointment setting, high-volume cold calling, lead generation and account targeting, SDR coaching and team leadership, LinkedIn Sales Navigator outreach, and CRM pipeline management.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Which time zones and markets does Flynn support?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Flynn supports outbound campaigns across the United States, United Kingdom, Europe, Australia, New Zealand, Canada, and Singapore.',
+            },
+          },
+        ],
+      },
+    ],
+  });
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(PERSONAL_INFO.email);
+    setCopied(true);
+    onSuccessToast?.('Email copied to clipboard');
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,231 +100,365 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      onSuccess?.();
+      onSuccessToast?.('Message sent — expect a reply within 24 hours.');
     }, 900);
   };
 
+  const inputCls =
+    'w-full px-3.5 py-2.5 text-[13.5px] bg-[#0b0f19] border border-slate-800 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-amber-400/60 transition-colors';
+  const labelCls = 'block text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-2';
+
   return (
-    <div className="space-y-16 sm:space-y-24">
+    <>
       <PageHeader
-        index="06"
-        eyebrow="Availability & Inquiries"
-        title="Hire a Senior B2B SDR & Lead Generator"
-        description="Direct outbound telemarketing, contract pipeline sourcing, and SDR team calibration. Available for engagements across US, UK, ANZ, and Singapore."
+        index="07"
+        eyebrow="Contact"
+        title="Let's talk pipeline,"
+        titleAccent="not pleasantries."
+        description="A 20-minute call to look at your current outbound motion and identify what's leaking. No pitch decks. No generic discovery framework. Just a working session."
       />
 
-      <Section className="relative pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-6xl mx-auto">
-          {/* Left Column Contact Cards */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 backdrop-blur-md">
-              <h2 className="text-xl font-bold text-white tracking-tight border-b border-slate-800 pb-4">
-                Direct Contact Channels
-              </h2>
+      <Section>
+        {/* SEO intro */}
+        <div className="max-w-3xl mb-14">
+          <SectionHeading
+            index="07.0"
+            eyebrow="Get in touch"
+            title="Book a free"
+            titleAccent="B2B pipeline audit."
+          />
+          <div className="mt-6 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              If you're a founder, sales leader, or Account Executive looking to add consistent qualified meetings to
+              your calendar, the fastest way to find out if Flynn James is a fit is a 20-minute working session. Bring
+              your current outbound motion — scripts, ICP, tool stack, and existing results — and Flynn will identify
+              three specific improvements you can apply this week.
+            </p>
+            <p>
+              Whether you need a dedicated senior SDR, an appointment setting specialist for a specific region, or an
+              external coach to lift your current team, the call will clarify the next step. All inquiries receive a
+              response within 24 hours.
+            </p>
+          </div>
+        </div>
 
-              <div className="space-y-4">
-                <a
-                  href="mailto:va.flynnjames@gmail.com"
-                  className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 transition-colors group"
-                >
-                  <Mail className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <div className="text-xs font-mono text-slate-400">Direct Email</div>
-                    <div className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
-                      va.flynnjames@gmail.com
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="lg:col-span-5 space-y-8">
+            <div>
+              <h2 className="text-[18px] font-semibold text-white mb-3">Direct channels</h2>
+              <p className="text-[13.5px] text-slate-400 leading-[1.75]">
+                I typically respond within 2–4 hours during US business hours, within 24 hours otherwise.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <button
+                onClick={handleCopyEmail}
+                className="w-full text-left group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="Copy Flynn James email address to clipboard"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                      <Mail className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Email</div>
+                      <div className="text-[13.5px] text-white font-medium mt-0.5 truncate">{PERSONAL_INFO.email}</div>
                     </div>
                   </div>
-                </a>
+                  {copied ? (
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  ) : (
+                    <Copy className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
+                  )}
+                </div>
+              </button>
 
-                <a
-                  href="tel:+639306359306"
-                  className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 transition-colors group"
-                >
-                  <PhoneCall className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+              <a
+                href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
+                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="Call Flynn James"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-amber-400" />
+                  </div>
                   <div>
-                    <div className="text-xs font-mono text-slate-400">Phone / WhatsApp</div>
-                    <div className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
-                      +63-930-635-9306
+                    <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
+                      Phone / WhatsApp
+                    </div>
+                    <div className="text-[13.5px] text-white font-medium mt-0.5">{PERSONAL_INFO.phone}</div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href={PERSONAL_INFO.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="View Flynn James LinkedIn profile"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                      <Linkedin className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">LinkedIn</div>
+                      <div className="text-[13.5px] text-white font-medium mt-0.5">/in/fjpontino</div>
                     </div>
                   </div>
-                </a>
+                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
+                </div>
+              </a>
 
-                <a
-                  href="https://www.linkedin.com/in/fjpontino"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 transition-colors group"
-                >
-                  <ShieldCheck className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <div className="text-xs font-mono text-slate-400">LinkedIn Profile</div>
-                    <div className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
-                      linkedin.com/in/fjpontino
+              <a
+                href={PERSONAL_INFO.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
+                aria-label="View Flynn James resume"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
+                      <FileText className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Resume</div>
+                      <div className="text-[13.5px] text-white font-medium mt-0.5">Google Drive · PDF</div>
                     </div>
                   </div>
-                </a>
-              </div>
+                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
+                </div>
+              </a>
+            </div>
 
-              <div className="pt-4 border-t border-slate-800 space-y-3">
-                <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                  Target Markets Served
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {['US (EST/CST/PST)', 'UK (GMT)', 'Australia (AEST)', 'Singapore (SGT)'].map((tz) => (
-                    <span key={tz} className="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700/80 text-[11px] font-mono text-slate-300">
-                      {tz}
-                    </span>
-                  ))}
-                </div>
+            <div className="p-5 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-lg">
+              <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
+                What happens next
               </div>
+              <ul className="space-y-3">
+                {[
+                  { icon: Clock, text: 'Response within 24 hours guaranteed.' },
+                  { icon: Shield, text: 'Free 20-minute pipeline audit.' },
+                  { icon: CheckCircle2, text: 'Tailored pilot plan with clear KPIs.' },
+                ].map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex items-start gap-3">
+                    <Icon className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <span className="text-[12.5px] text-slate-300 leading-relaxed">{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              <div className="p-4 rounded-xl bg-amber-400/5 border border-amber-400/15 space-y-1.5">
-                <div className="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5" /> 24-Hour Response Guarantee
+            <div className="p-5 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-lg">
+              <h3 className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
+                Frequently asked
+              </h3>
+              <dl className="space-y-4">
+                <div>
+                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">
+                    How quickly will Flynn respond?
+                  </dt>
+                  <dd className="text-[12px] text-slate-400 leading-relaxed">
+                    Within 2–4 hours during US business hours, within 24 hours otherwise.
+                  </dd>
                 </div>
-                <p className="text-[12px] text-slate-300 leading-relaxed">
-                  Every inquiry receives a direct review of ICP alignment and current calendar capacity.
-                </p>
-              </div>
+                <div>
+                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">
+                    What happens on the free pipeline audit?
+                  </dt>
+                  <dd className="text-[12px] text-slate-400 leading-relaxed">
+                    A working session reviewing your current outbound motion, plus three specific improvements you can
+                    apply that week.
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[12.5px] font-semibold text-slate-200 mb-1">Which markets are supported?</dt>
+                  <dd className="text-[12px] text-slate-400 leading-relaxed">
+                    US, UK, Europe, Australia, New Zealand, Canada, and Singapore.
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
 
-          {/* Right Column Form Card */}
           <div className="lg:col-span-7">
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-7 sm:p-9"
+            >
               {submitted ? (
-                <div className="py-12 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-amber-400/15 border border-amber-400/40 flex items-center justify-center text-amber-400 mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
+                <div className="py-16 text-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">Inquiry Received</h3>
-                  <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
-                    Thank you. I have received your message and will review your target market requirements within 24 hours.
+                  <h2 className="text-[22px] font-bold text-white mb-3">Message received</h2>
+                  <p className="text-[13.5px] text-slate-400 max-w-md mx-auto leading-relaxed">
+                    Thanks, {formData.name}. I'll be in touch at{' '}
+                    <span className="text-amber-400">{formData.email}</span> within 24 hours.
                   </p>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormData({
-                        name: '',
-                        email: '',
-                        company: '',
-                        service: 'Appointment Setting',
-                        targetMarket: 'US & Canada',
-                        message: ''
-                      });
-                    }}
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-8 text-[12.5px] font-medium text-slate-400 hover:text-white transition-colors"
                   >
-                    Send Another Message
-                  </Button>
+                    Send another message →
+                  </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-300">Your Name *</label>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="pb-5 border-b border-slate-800/60">
+                    <h2 className="text-[18px] font-semibold text-white">Send a message</h2>
+                    <p className="text-[12.5px] text-slate-500 mt-1.5">All information is confidential.</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="contact-name" className={labelCls}>
+                        Full name *
+                      </label>
                       <input
+                        id="contact-name"
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Sarah Jenkins"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
+                        placeholder="Jane Smith"
+                        className={inputCls}
                       />
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-300">Work Email *</label>
+                    <div>
+                      <label htmlFor="contact-email" className={labelCls}>
+                        Work email *
+                      </label>
                       <input
+                        id="contact-email"
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="sarah@company.com"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
+                        placeholder="jane@company.com"
+                        className={inputCls}
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-300">Company / Website</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="contact-company" className={labelCls}>
+                        Company *
+                      </label>
                       <input
+                        id="contact-company"
                         type="text"
+                        required
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder="company.com"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
+                        placeholder="Acme Inc."
+                        className={inputCls}
                       />
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-300">Primary Service Needed</label>
+                    <div>
+                      <label htmlFor="contact-service" className={labelCls}>
+                        Service needed *
+                      </label>
                       <select
-                        value={formData.service}
-                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
+                        id="contact-service"
+                        value={formData.serviceNeeded}
+                        onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
+                        className={inputCls}
                       >
-                        <option>Appointment Setting</option>
-                        <option>Cold Calling & Phone Outreach</option>
-                        <option>Outbound Lead Generation</option>
-                        <option>SDR Team Coaching</option>
-                        <option>Multi-Touch Sequences</option>
-                        <option>Full-Time Senior SDR Role</option>
+                        <option>B2B Appointment Setting</option>
+                        <option>High-Volume Cold Calling</option>
+                        <option>Lead Generation & Targeting</option>
+                        <option>SDR Coaching & Team Leadership</option>
+                        <option>LinkedIn Social Selling</option>
+                        <option>Custom Hybrid Outbound</option>
                       </select>
                     </div>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-slate-300">Target Market / Region</label>
-                    <select
-                      value={formData.targetMarket}
-                      onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
-                    >
-                      <option>US & Canada (EST, CST, PST)</option>
-                      <option>United Kingdom & Europe (GMT / CET)</option>
-                      <option>Australia & New Zealand (AEST)</option>
-                      <option>Singapore & Southeast Asia (SGT)</option>
-                      <option>Global / Multi-Region</option>
-                    </select>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="contact-market" className={labelCls}>
+                        Target market *
+                      </label>
+                      <select
+                        id="contact-market"
+                        value={formData.targetMarket}
+                        onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
+                        className={inputCls}
+                      >
+                        <option>United States</option>
+                        <option>United Kingdom / Europe</option>
+                        <option>Australia & New Zealand</option>
+                        <option>Canada</option>
+                        <option>Singapore / APAC</option>
+                        <option>Global / Multi-region</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="contact-target" className={labelCls}>
+                        Monthly meeting target
+                      </label>
+                      <select
+                        id="contact-target"
+                        value={formData.meetingTarget}
+                        onChange={(e) => setFormData({ ...formData, meetingTarget: e.target.value })}
+                        className={inputCls}
+                      >
+                        <option>15–20 Meetings/Mo</option>
+                        <option>25–35 Meetings/Mo</option>
+                        <option>40+ Meetings/Mo</option>
+                        <option>Audit / Coaching Only</option>
+                      </select>
+                    </div>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-slate-300">Project Scope & Meeting Goals</label>
+                  <div>
+                    <label htmlFor="contact-message" className={labelCls}>
+                      ICP & current bottleneck *
+                    </label>
                     <textarea
-                      rows={4}
+                      id="contact-message"
                       required
+                      rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Share your current prospecting requirements, target titles, or monthly meeting objectives..."
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
+                      placeholder="We sell a $12k B2B SaaS platform to HR Directors in the US. Our closers aren't getting enough qualified meetings, and our SDR response rates are low..."
+                      className={inputCls + ' resize-none'}
                     />
                   </div>
 
-                  <Button
-                    variant="primary"
-                    size="lg"
+                  <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full justify-center"
+                    className="w-full py-3.5 px-6 text-[13.5px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 active:bg-amber-500 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
-                        Sending Inquiry...
-                      </span>
+                      <span>Sending...</span>
                     ) : (
-                      <span className="flex items-center gap-2">
-                        <Send className="w-4 h-4" /> Send Outbound Inquiry
-                      </span>
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Send message</span>
+                      </>
                     )}
-                  </Button>
+                  </button>
+
+                  <p className="text-[11px] text-center text-slate-600">
+                    No spam. 100% confidential. Response within 24 hours.
+                  </p>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </Section>
-    </div>
+    </>
   );
 };
