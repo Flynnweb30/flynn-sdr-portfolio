@@ -433,8 +433,5 @@ export const FAQ_ITEMS = [
   }
 ];
 
-export const FAQS = FAQ_ITEMS;
-
-// --- Auto-patched exports to safeguard build ---
 export const WORK_PROCESS_STEPS = [] as any;
 export const TOOL_CATEGORIES = [] as any;
