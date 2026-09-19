@@ -1,6 +1,6 @@
 import React from 'react';
-import { PageId } from '../types';
-import { PERSONAL_INFO, KEY_STATS, TOOLS } from '../data/portfolioData';
+import { PageId, ToolItem, StatItem } from '../types';
+import { PERSONAL_INFO, KEY_STATS, STATS, TOOLS } from '../data/portfolioData';
 import { ArrowRight, Award, ShieldCheck, CheckCircle2, Clock, Globe, Target, Wrench } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 
@@ -10,6 +10,9 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact }) => {
+  const displayStats: StatItem[] = KEY_STATS || STATS || [];
+  const displayTools: ToolItem[] = TOOLS || [];
+
   return (
     <div className="bg-[#0b0f19] min-h-screen">
       <PageHeader
@@ -78,7 +81,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
 
               {/* Stats Highlight Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-                {KEY_STATS.map((stat, idx) => (
+                {displayStats.map((stat, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
                     <div className="text-2xl sm:text-3xl font-extrabold text-amber-400">{stat.value}</div>
                     <div className="text-xs font-semibold text-slate-200 mt-0.5">{stat.label}</div>
@@ -157,7 +160,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {TOOLS.map((tool, idx) => (
+              {displayTools.map((tool, idx) => (
                 <div
                   key={idx}
                   className="p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-amber-400/40 transition-colors backdrop-blur-md flex flex-col justify-between"
