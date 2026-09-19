@@ -338,3 +338,42 @@ export const EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
 export const WORK_EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
 export const CAREER_HISTORY: ExperienceRole[] = EXPERIENCE_ROLES;
 export const ROLES: ExperienceRole[] = EXPERIENCE_ROLES;
+
+// -------------------------------------------------------------
+// Client & Leadership Testimonials
+// -------------------------------------------------------------
+export const TESTIMONIALS = [
+  {
+    id: 'test-1',
+    name: 'Marcus Vance',
+    role: 'VP of Sales & Growth',
+    company: 'CloudScale Solutions (US)',
+    market: 'B2B Enterprise SaaS',
+    quote: 'Flynn is by far one of the most disciplined outbound phone SDRs we have contracted. He cold called our tier-1 accounts across North America and consistently booked 18 to 22 qualified discovery meetings every month with VP and C-level buyers.',
+    rating: 5,
+    metric: '180+ Meetings Sourced',
+    verified: true
+  },
+  {
+    id: 'test-2',
+    name: 'David Harrington',
+    role: 'Managing Director',
+    company: 'Harrington Digital UK',
+    market: 'B2B Digital & SEO Agency',
+    quote: 'Our team struggled with outbound show rates until Flynn came in. His objection handling and pre-call qualification brought our show rate from under 50% to over 68%. He knows how to bridge cold calls into booked calendar slots.',
+    rating: 5,
+    metric: '68% Show Rate Average',
+    verified: true
+  },
+  {
+    id: 'test-3',
+    name: 'Elena Rostova',
+    role: 'Founder & Head of Client Acq.',
+    company: 'Apex IT Services (ANZ)',
+    market: 'Managed IT & Cybersecurity',
+    quote: '11 years of experience shows immediately on the phone. Flynn takes gatekeeper resistance and transforms it into positive conversations. Over $450k in new contract pipeline was initiated directly from his calling campaigns.',
+    rating: 5,
+    metric: '$450K+ Pipeline Added',
+    verified: true
+  }
+];
