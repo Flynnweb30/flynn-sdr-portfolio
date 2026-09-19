@@ -1,711 +1,565 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight, FileText, Star, PhoneCall, TrendingUp, Mail, Linkedin, Copy, CheckCircle2, ExternalLink, Clock, Shield, Send } from 'lucide-react';
-import { PERSONAL_INFO, CASE_STUDIES, CORE_SERVICES, TESTIMONIALS } from '../data/portfolioData';
-import { PageId, CaseStudy, WorkSample } from '../types';
-import { Section } from '../components/Section';
-import { SectionHeading } from '../components/SectionHeading';
-import { Button } from '../components/Button';
-import { OptimizedImage } from '../components/OptimizedImage';
+import {
+  PhoneCall,
+  CalendarCheck,
+  TrendingUp,
+  Target,
+  ArrowRight,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  Headphones,
+  Award,
+  Clock,
+  Mail,
+  Linkedin,
+  MapPin,
+  ExternalLink,
+  ChevronRight,
+  Database,
+  Users,
+  Compass
+} from 'lucide-react';
+import { PageId, CaseStudy, WorkSample, ServiceItem } from '../types';
+import { SERVICES, CASE_STUDIES, WORK_SAMPLES, PERSONAL_INFO, STATS_DATA } from '../data/portfolioData';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
   onOpenContact: (serviceName?: string) => void;
   onSelectCaseStudy: (cs: CaseStudy) => void;
-  onSelectSample: (s: WorkSample) => void;
-  onSuccessToast?: (msg: string) => void;
+  onSelectSample: (sample: WorkSample) => void;
+  onSelectService: (service: ServiceItem) => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenContact, onSelectCaseStudy, onSuccessToast }) => {
-  // ── Contact form state (Home page contact section) ──
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    serviceNeeded: 'B2B Appointment Setting',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [copied, setCopied] = useState(false);
+export const HomePage: React.FC<HomePageProps> = ({
+  onNavigate,
+  onOpenContact,
+  onSelectCaseStudy,
+  onSelectSample,
+  onSelectService
+}) => {
+  const [activeServiceHover, setActiveServiceHover] = useState<string | null>(SERVICES[0]?.id || null);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopied(true);
-    onSuccessToast?.('Email copied to clipboard');
-    setTimeout(() => setCopied(false), 2000);
+  const serviceThumbnails: Record<string, string> = {
+    'appointment-setting': 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=400&q=80',
+    'cold-calling': 'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=400&q=80',
+    'sdr-management': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80',
+    'crm-pipeline': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80'
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      onSuccessToast?.('Message sent — expect a reply within 24 hours.');
-    }, 900);
-  };
-
-  const inputCls =
-    'w-full px-3.5 py-2.5 text-[13.5px] bg-[#0b0f19] border border-slate-800 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-amber-400/60 transition-colors';
-  const labelCls = 'block text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-2';
+  const hoveredServiceObj = SERVICES.find(s => s.id === activeServiceHover) || SERVICES[0];
 
   return (
-    <>
-      {/* ── HERO ── */}
-      <section className="relative pt-24 pb-24 sm:pt-32 sm:pb-32 overflow-hidden section-photo bg-photo-office">
-        <div className="absolute inset-0 grid-lines opacity-40 pointer-events-none" />
+    <div className="flex flex-col w-full text-slate-100 selection:bg-amber-400/20 selection:text-amber-200">
+      
+      {/* ========================================================================= */}
+      {/* HERO SECTION  Team Office Photo Background With Subtle Scrim            */}
+      {/* ========================================================================= */}
+      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-slate-800/80">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/hero-team.jpg"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80";
+            }}
+            alt="Flynn James Pontino with his outbound sales team in the office"
+            className="w-full h-full object-cover object-[center_35%] scale-100 transition-transform duration-1000 ease-out"
+            loading="eager"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-[#0b0f19]/85 to-[#0b0f19]/65" />
+          <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#0b0f19]/40 to-[#0b0f19]/90" />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-start">
-            <div className="lg:col-span-7">
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/70 border border-slate-700/60 backdrop-blur-md"
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-                </span>
-                <span className="text-[11.5px] font-medium text-slate-200 tracking-tight">
-                  Available for Q1 2025 · Remote worldwide
-                </span>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-8 text-[40px] sm:text-[56px] lg:text-[68px] font-bold text-white leading-[1.02] tracking-tight"
-              >
-                B2B appointment setting
-                <br />
-                <span className="font-serif italic text-amber-400/90">that actually converts.</span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.16 }}
-                className="mt-8 max-w-xl text-[16px] sm:text-[17px] text-slate-300 leading-[1.7]"
-              >
-                I'm <strong className="text-white font-semibold">Flynn James</strong> — a senior B2B SDR and appointment setter
-                with 11+ years on the phones. I help SaaS, agencies, IT firms, and professional services companies
-                fill their calendars with qualified decision-maker conversations across the US, UK, ANZ, and Singapore.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.24 }}
-                className="mt-10 flex flex-wrap items-center gap-3"
-              >
-                <Button variant="primary" size="lg" onClick={() => onOpenContact()} className="group">
-                  <PhoneCall className="w-4 h-4" />
-                  Book a 20-min strategy call
-                </Button>
-                <Button variant="secondary" size="lg" onClick={() => onNavigate('case-studies')} withArrow className="group">
-                  See case studies
-                </Button>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="mt-12 pt-8 border-t border-slate-700/50"
-              >
-                <div className="flex items-center gap-6 flex-wrap">
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <span className="text-[12.5px] text-slate-300">
-                    Verified by <span className="text-white font-medium">4 sales leaders</span> across 3 continents
-                  </span>
-                </div>
-              </motion.div>
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-24 md:py-32 w-full">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-amber-400/30 text-amber-300 text-xs sm:text-[13px] font-medium tracking-wide mb-8 backdrop-blur-md shadow-lg shadow-black/40">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Available for Outbound Sales & Appointment Setting Engagements</span>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="lg:col-span-5 lg:pt-12"
-            >
-              <div className="relative">
-                <div className="absolute -top-3 -right-3 w-16 h-16 border-t border-r border-amber-400/30 rounded-tr-lg pointer-events-none" />
-                <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b border-l border-slate-600/40 rounded-bl-lg pointer-events-none" />
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15] mb-6">
+              B2B Appointment Setting & Cold Calling That Fills Calendars With{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500">
+                Qualified Pipeline.
+              </span>
+            </h1>
 
-                <div className="bg-slate-900/70 backdrop-blur-md border border-slate-700/60 rounded-xl p-6 sm:p-7 shadow-2xl shadow-black/40">
-                  <div className="flex items-start gap-4 pb-5 border-b border-slate-700/60">
-                    <OptimizedImage
-                      src="https://user29984.na.imgto.link/public/20260907/flynn-profile.avif"
-                      alt="Flynn James, Senior B2B SDR and Appointment Setting Specialist"
-                      width={56}
-                      height={56}
-                      className="w-14 h-14 rounded-lg object-cover border border-amber-400/30"
-                      priority
-                    />
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider mb-1">
-                        Currently
-                      </div>
-                      <div className="text-[14.5px] font-semibold text-white leading-tight">
-                        Junior Sales Team Lead
-                      </div>
-                      <div className="text-[12px] text-slate-400 mt-0.5">Regen Digital US · Remote</div>
-                    </div>
-                  </div>
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mb-10 font-normal">
+              Hi, Im <strong className="text-white font-semibold">Flynn James Q. Pontino</strong>  a Senior B2B SDR with 11+ years on the phones.
+              I connect SaaS platforms, IT firms, and agencies directly with executive buyers across the US, UK, ANZ, and Singapore.
+            </p>
 
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-5 py-6">
-                    {[
-                      { v: '$1.8M', l: 'Pipeline sourced' },
-                      { v: '120–150%', l: 'Quota attainment' },
-                      { v: '30+', l: 'Meetings / month' },
-                      { v: '150+', l: 'Dials / day' },
-                    ].map((s) => (
-                      <div key={s.l}>
-                        <div className="text-[22px] font-bold text-white tabular leading-none">{s.v}</div>
-                        <div className="text-[11px] text-slate-500 mt-2 font-mono uppercase tracking-wider">
-                          {s.l}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button
+                type="button"
+                onClick={() => onOpenContact()}
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-semibold text-sm transition-all duration-200 shadow-lg shadow-amber-400/20 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+              >
+                <span>Schedule a Discovery Call</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
-                  <div className="pt-5 border-t border-slate-700/60 flex items-center justify-between">
-                    <button
-                      onClick={() => onNavigate('about')}
-                      className="text-[12.5px] font-medium text-slate-300 hover:text-amber-400 transition-colors inline-flex items-center gap-1 group"
-                    >
-                      More about me
-                      <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </button>
-                    <a
-                      href={PERSONAL_INFO.resumeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[12.5px] font-medium text-slate-300 hover:text-amber-400 transition-colors inline-flex items-center gap-1.5"
-                    >
-                      <FileText className="w-3.5 h-3.5" />
-                      Resume
-                    </a>
-                  </div>
-                </div>
+              <button
+                type="button"
+                onClick={() => onNavigate('case-studies')}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-medium text-sm transition-all duration-200 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+              >
+                <span>View Proven Results</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-14 mt-12 border-t border-slate-800/80">
+              <div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">11+ Years</div>
+                <div className="text-xs sm:text-sm text-slate-400 mt-1">Outbound Calling Experience</div>
               </div>
-            </motion.div>
+              <div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-amber-400 tracking-tight">$1.8M+</div>
+                <div className="text-xs sm:text-sm text-slate-400 mt-1">Qualified Pipeline Sourced</div>
+              </div>
+              <div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">68%</div>
+                <div className="text-xs sm:text-sm text-slate-400 mt-1">Average Meeting Show Rate</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── CREDIBILITY STRIP ── */}
-      <section className="border-y border-slate-800/60 bg-slate-950/70 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {[
-              { v: '11+', l: 'Years outbound' },
-              { v: '5', l: 'Global markets' },
-              { v: '70%+', l: 'Show-up rate' },
-              { v: '100%', l: 'CRM discipline' },
-            ].map((s, i) => (
-              <div key={s.l} className={`${i !== 0 ? 'md:border-l md:border-slate-800/60 md:pl-8' : ''}`}>
-                <div className="text-[24px] sm:text-[28px] font-bold text-white tabular leading-none tracking-tight">
-                  {s.v}
+      {/* ========================================================================= */}
+      {/* SERVICES SECTION  Visual/Content Layout Inspired by Reference 2          */}
+      {/* ========================================================================= */}
+      <section id="services-overview" className="py-24 sm:py-28 bg-[#0b0f19] border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Anchor Column (Matching Reference Headline + Link Structure) */}
+            <div className="lg:col-span-4 lg:sticky lg:top-28">
+              <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-mono uppercase tracking-widest mb-3">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Outbound Capabilities</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight mb-4">
+                Appointment setting & outbound sales
+              </h2>
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
+                Targeted prospect research, natural phone cadence, and CRM pipeline hygienedelivered directly as an extension of your growth team.
+              </p>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('services')}
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors mb-8"
+              >
+                <span>See everything we do</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
+
+              {/* Dynamic Interactive Preview Card (Updates on Service Hover) */}
+              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 shadow-lg space-y-3 transition-all duration-300">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                  <span>Selected Capability Focus</span>
                 </div>
-                <div className="text-[11.5px] text-slate-500 mt-2 font-mono uppercase tracking-wider">{s.l}</div>
+                <h4 className="text-sm font-bold text-white">
+                  {hoveredServiceObj.title}
+                </h4>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  {hoveredServiceObj.tagline}
+                </p>
+                <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
+                  <span className="text-slate-500 font-mono">Performance Metric:</span>
+                  <span className="font-semibold text-amber-300">{hoveredServiceObj.metrics}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Multi-Column Service Listing (Inspired by Reference 2) */}
+            <div className="lg:col-span-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+                {SERVICES.map((service) => {
+                  const thumb = serviceThumbnails[service.id] || serviceThumbnails['appointment-setting'];
+                  const isHovered = activeServiceHover === service.id;
+
+                  return (
+                    <div
+                      key={service.id}
+                      onMouseEnter={() => setActiveServiceHover(service.id)}
+                      onClick={() => onSelectService(service)}
+                      className={`group cursor-pointer flex items-start gap-4 p-3 rounded-xl transition-all duration-200 border-b border-slate-800/80 pb-6 ${
+                        isHovered ? 'bg-slate-900/60 shadow-md' : 'hover:bg-slate-900/30'
+                      }`}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          onSelectService(service);
+                        }
+                      }}
+                    >
+                      {/* Left Thumbnail Image */}
+                      <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 bg-slate-800 border border-slate-700/60 shadow-sm">
+                        <img
+                          src={thumb}
+                          alt={service.title}
+                          className={`w-full h-full object-cover transition-transform duration-300 ${
+                            isHovered ? 'scale-110' : 'scale-100'
+                          }`}
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-black/15" />
+                      </div>
+
+                      {/* Right Title + Description Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-1">
+                          <h3 className={`text-sm sm:text-base font-bold transition-colors truncate ${
+                            isHovered ? 'text-amber-300' : 'text-white'
+                          }`}>
+                            {service.title}
+                          </h3>
+                          <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-200 shrink-0 ${
+                            isHovered ? 'text-amber-400 translate-x-1 opacity-100' : 'text-slate-600 opacity-0 group-hover:opacity-100'
+                          }`} />
+                        </div>
+                        <p className="text-xs sm:text-[13px] text-slate-400 leading-relaxed line-clamp-2 mt-1">
+                          {service.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Bottom Quick-Action Banner */}
+              <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 to-slate-900/40 border border-slate-800/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <h4 className="text-sm font-semibold text-white">Need custom campaign volume or an offshore sales squad?</h4>
+                  <p className="text-xs text-slate-400 mt-0.5">Let's walk through your TAM, lead lists, and weekly meeting benchmarks.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onOpenContact()}
+                  className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-semibold text-xs transition-colors shrink-0 shadow-sm"
+                >
+                  Book Discovery Session
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* PROOF & CASE STUDIES HIGHLIGHTS                                          */}
+      {/* ========================================================================= */}
+      <section className="py-24 bg-[#0d1322] border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+            <div>
+              <div className="text-amber-400 text-xs font-mono uppercase tracking-widest mb-2">Real Campaign Metrics</div>
+              <h2 className="text-2xl sm:text-4xl font-bold text-white">Featured Case Studies</h2>
+            </div>
+            <button
+              type="button"
+              onClick={() => onNavigate('case-studies')}
+              className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-amber-400 transition-colors font-medium self-start md:self-auto"
+            >
+              <span>View all client case studies</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CASE_STUDIES.slice(0, 3).map((cs) => (
+              <div
+                key={cs.id}
+                onClick={() => onSelectCaseStudy(cs)}
+                className="group cursor-pointer rounded-2xl bg-slate-900/70 border border-slate-800/90 hover:border-amber-400/40 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-black/60 hover:-translate-y-1"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onSelectCaseStudy(cs);
+                  }
+                }}
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs text-slate-400 mb-3">
+                    <span className="font-mono text-amber-300/90">{cs.clientType}</span>
+                    <span>{cs.market}</span>
+                  </div>
+
+                  <h3 className="text-lg font-semibold text-white group-hover:text-amber-300 transition-colors mb-3">
+                    {cs.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-3 mb-6">
+                    {cs.context}
+                  </p>
+                </div>
+
+                <div>
+                  <div className="grid grid-cols-2 gap-2 pt-4 border-t border-slate-800/80 mb-4">
+                    {cs.results.slice(0, 2).map((res, i) => (
+                      <div key={i}>
+                        <div className="text-base font-bold text-amber-400">{res.value}</div>
+                        <div className="text-[11px] text-slate-400">{res.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center text-xs font-semibold text-amber-400 group-hover:translate-x-1 transition-transform duration-200">
+                    <span>Read Full Breakdown</span>
+                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* ── SEO INTRO CONTENT ── */}
-      <Section>
-        <div className="max-w-3xl">
-          <SectionHeading
-            index="00"
-            eyebrow="What I do"
-            title="Senior B2B SDR & appointment setting"
-            titleAccent="specialist."
-          />
-          <div className="mt-8 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
-            <p>
-              Flynn James is a senior B2B Sales Development Representative (SDR) and appointment setter with over eleven
-              years of experience booking qualified discovery meetings for SaaS companies, marketing agencies, IT firms,
-              and professional services businesses. He specialises in cold calling, outbound lead generation, LinkedIn
-              Sales Navigator outreach, and SDR team coaching.
-            </p>
-            <p>
-              Working across the United States, United Kingdom, Australia, New Zealand, Canada, and Singapore markets,
-              Flynn has sourced more than $1.8M in B2B pipeline, held a consistent 120–150% quota attainment, and
-              maintained a 70%+ show-up rate on every meeting booked directly onto client Account Executives' calendars.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      {/* ── SERVICES ── */}
-      <Section id="services-preview" bordered>
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <SectionHeading
-            index="01"
-            eyebrow="Outbound services"
-            title="Focused B2B sales"
-            titleAccent="engagements."
-            description="Six services designed to move the needle — from cold calling and appointment setting to SDR coaching and CRM hygiene. No fluff, just qualified pipeline."
-          />
-          <Button variant="ghost" onClick={() => onNavigate('services')} withArrow className="group shrink-0">
-            View all services
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/60 rounded-lg overflow-hidden border border-slate-800/60">
-          {CORE_SERVICES.slice(0, 6).map((service, i) => (
-            <motion.button
-              key={service.id}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              onClick={() => onOpenContact(service.title)}
-              className="group relative bg-[#0b0f19]/90 hover:bg-slate-900/80 p-7 text-left transition-colors"
-            >
-              <div className="flex items-start justify-between mb-5">
-                <span className="text-[10.5px] font-mono text-amber-400/70 tracking-wider">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <ArrowUpRight className="w-4 h-4 text-slate-600 group-hover:text-amber-400 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
-              </div>
-              <h3 className="text-[16.5px] font-semibold text-white leading-snug mb-2 group-hover:text-amber-50 transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-[13px] text-slate-400 leading-relaxed">{service.tagline}</p>
-            </motion.button>
-          ))}
-        </div>
-      </Section>
-
-      {/* ── CASE STUDIES ── */}
-      <Section id="cases-preview" bordered className="section-photo bg-photo-desk">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <SectionHeading
-            index="02"
-            eyebrow="Selected work"
-            title="Campaigns with"
-            titleAccent="receipts."
-            description="Real numbers from real B2B outbound campaigns across marketing agencies, enterprise SaaS, and government technology."
-          />
-          <Button variant="ghost" onClick={() => onNavigate('case-studies')} withArrow className="group shrink-0">
-            All case studies
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {CASE_STUDIES.slice(0, 2).map((cs, i) => (
-            <motion.button
-              key={cs.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              onClick={() => onSelectCaseStudy(cs)}
-              className="group text-left bg-slate-900/60 hover:bg-slate-900/90 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-xl p-7 sm:p-8 transition-all"
-            >
-              <div className="flex items-center gap-2 mb-5">
-                <span className="text-[11px] font-mono text-slate-400 tracking-wider uppercase">{cs.industry}</span>
-                <span className="h-px w-4 bg-slate-600" />
-                <span className="text-[11px] font-mono text-slate-400 tracking-wider">{cs.region}</span>
-              </div>
-
-              <h3 className="text-[19px] sm:text-[21px] font-semibold text-white leading-snug mb-5 group-hover:text-amber-50 transition-colors">
-                {cs.title}
-              </h3>
-
-              <div className="flex items-baseline gap-3 pb-6 mb-6 border-b border-slate-700/60">
-                <span className="text-[26px] sm:text-[32px] font-bold text-amber-400 tabular tracking-tight leading-none">
-                  {cs.headlineMetric}
-                </span>
-                <span className="text-[11.5px] text-slate-500 font-mono">headline outcome</span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 text-[12.5px]">
-                {cs.secondaryMetrics.slice(0, 4).map((m, j) => (
-                  <div key={j}>
-                    <div className="text-slate-500 font-mono text-[10.5px] uppercase tracking-wider">{m.label}</div>
-                    <div className="text-slate-200 font-medium mt-1 tabular">{m.value}</div>
-                  </div>
-                ))}
-              </div>
-            </motion.button>
-          ))}
-        </div>
-      </Section>
-
-      {/* ── TESTIMONIALS ── */}
-      <Section bordered className="section-photo bg-photo-meeting">
-        <SectionHeading
-          index="03"
-          eyebrow="Client feedback"
-          title="What sales leaders"
-          titleAccent="say."
-          description="Genuine testimonials from operations leads, head of sales, and managing directors I've worked with."
-        />
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-14">
-          {TESTIMONIALS.slice(0, 3).map((t, i) => (
-            <motion.div
-              key={t.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-6 sm:p-7 flex flex-col"
-            >
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-
-              <p className="text-[13.5px] text-slate-300 leading-[1.75] flex-1">"{t.quote}"</p>
-
-              <div className="mt-6 pt-5 border-t border-slate-700/60 flex items-center gap-3">
-                <OptimizedImage
-                  src={t.avatarUrl}
-                  alt={`${t.author}, ${t.title} at ${t.company}`}
-                  width={36}
-                  height={36}
-                  className="w-9 h-9 rounded-full object-cover border border-slate-600/60"
-                />
-                <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-white leading-tight truncate">{t.author}</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5 truncate">
-                    {t.title} · {t.company}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ── CONTACT SECTION (added to homepage) ── */}
-      <Section id="contact" bordered className="section-photo bg-photo-handshake">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <SectionHeading
-            index="04"
-            eyebrow="Get in touch"
-            title="Let's talk pipeline,"
-            titleAccent="not pleasantries."
-            description="A 20-minute call to look at your current outbound motion and identify what's leaking. No pitch decks. No generic discovery framework. Just a working session."
-            align="center"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Channels */}
-          <div className="lg:col-span-5 space-y-8">
+      {/* ========================================================================= */}
+      {/* WORK SAMPLES PREVIEW                                                     */}
+      {/* ========================================================================= */}
+      <section className="py-24 bg-[#0b0f19] border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
             <div>
-              <h3 className="text-[18px] font-semibold text-white mb-3">Direct channels</h3>
-              <p className="text-[13.5px] text-slate-400 leading-[1.75]">
-                I typically respond within 2–4 hours during US business hours, within 24 hours otherwise.
-              </p>
+              <div className="text-amber-400 text-xs font-mono uppercase tracking-widest mb-2">Actual Execution Material</div>
+              <h2 className="text-2xl sm:text-4xl font-bold text-white">Call Recordings & Scripts</h2>
             </div>
-
-            <div className="space-y-3">
-              <button
-                onClick={handleCopyEmail}
-                className="w-full text-left group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
-                aria-label="Copy Flynn James email address to clipboard"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
-                      <Mail className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Email</div>
-                      <div className="text-[13.5px] text-white font-medium mt-0.5 truncate">{PERSONAL_INFO.email}</div>
-                    </div>
-                  </div>
-                  {copied ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  ) : (
-                    <Copy className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
-                  )}
-                </div>
-              </button>
-
-              <a
-                href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
-                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
-                aria-label="Call Flynn James"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
-                    <PhoneCall className="w-4 h-4 text-amber-400" />
-                  </div>
-                  <div>
-                    <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
-                      Phone / WhatsApp
-                    </div>
-                    <div className="text-[13.5px] text-white font-medium mt-0.5">{PERSONAL_INFO.phone}</div>
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
-                aria-label="View Flynn James LinkedIn profile"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
-                      <Linkedin className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div>
-                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">LinkedIn</div>
-                      <div className="text-[13.5px] text-white font-medium mt-0.5">/in/fjpontino</div>
-                    </div>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
-                </div>
-              </a>
-
-              <a
-                href={PERSONAL_INFO.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block group p-4 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-lg transition-colors"
-                aria-label="View Flynn James resume"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
-                      <FileText className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div>
-                      <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">Resume</div>
-                      <div className="text-[13.5px] text-white font-medium mt-0.5">Google Drive · PDF</div>
-                    </div>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-slate-300 shrink-0" />
-                </div>
-              </a>
-            </div>
-
-            <div className="p-5 bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-lg">
-              <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4">
-                What happens next
-              </div>
-              <ul className="space-y-3">
-                {[
-                  { icon: Clock, text: 'Response within 24 hours guaranteed.' },
-                  { icon: Shield, text: 'Free 20-minute pipeline audit.' },
-                  { icon: CheckCircle2, text: 'Tailored pilot plan with clear KPIs.' },
-                ].map(({ icon: Icon, text }) => (
-                  <li key={text} className="flex items-start gap-3">
-                    <Icon className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                    <span className="text-[12.5px] text-slate-300 leading-relaxed">{text}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <button
+              type="button"
+              onClick={() => onNavigate('samples')}
+              className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-amber-400 transition-colors font-medium self-start md:self-auto"
+            >
+              <span>Explore all recordings & sequences</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
 
-          {/* Form */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-7 sm:p-9"
-            >
-              {submitted ? (
-                <div className="py-16 text-center">
-                  <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-5 h-5" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {WORK_SAMPLES.slice(0, 3).map((sample) => (
+              <div
+                key={sample.id}
+                onClick={() => onSelectSample(sample)}
+                className="group cursor-pointer rounded-2xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-lg"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onSelectSample(sample);
+                  }
+                }}
+              >
+                <div>
+                  <div className="flex items-center gap-2 text-xs text-amber-400 font-mono mb-3">
+                    <Headphones className="w-3.5 h-3.5" />
+                    <span>{sample.badge}</span>
                   </div>
-                  <h3 className="text-[22px] font-bold text-white mb-3">Message received</h3>
-                  <p className="text-[13.5px] text-slate-400 max-w-md mx-auto leading-relaxed">
-                    Thanks, {formData.name}. I'll be in touch at{' '}
-                    <span className="text-amber-400">{formData.email}</span> within 24 hours.
+
+                  <h3 className="text-base font-semibold text-white group-hover:text-amber-300 transition-colors mb-2">
+                    {sample.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-3 mb-6">
+                    {sample.description}
                   </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-8 text-[12.5px] font-medium text-slate-400 hover:text-white transition-colors"
-                  >
-                    Send another message →
-                  </button>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="pb-5 border-b border-slate-800/60">
-                    <h3 className="text-[18px] font-semibold text-white">Send a message</h3>
-                    <p className="text-[12.5px] text-slate-500 mt-1.5">All information is confidential.</p>
-                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor="home-contact-name" className={labelCls}>
-                        Full name *
-                      </label>
-                      <input
-                        id="home-contact-name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Jane Smith"
-                        className={inputCls}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="home-contact-email" className={labelCls}>
-                        Work email *
-                      </label>
-                      <input
-                        id="home-contact-email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="jane@company.com"
-                        className={inputCls}
-                      />
-                    </div>
-                  </div>
+                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-amber-400">
+                  <span>Inspect Audio & Transcript</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
+            ))}
+          </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor="home-contact-company" className={labelCls}>
-                        Company *
-                      </label>
-                      <input
-                        id="home-contact-company"
-                        type="text"
-                        required
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder="Acme Inc."
-                        className={inputCls}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="home-contact-service" className={labelCls}>
-                        Service needed *
-                      </label>
-                      <select
-                        id="home-contact-service"
-                        value={formData.serviceNeeded}
-                        onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                        className={inputCls}
-                      >
-                        <option>B2B Appointment Setting</option>
-                        <option>High-Volume Cold Calling</option>
-                        <option>Lead Generation & Targeting</option>
-                        <option>SDR Coaching & Team Leadership</option>
-                        <option>LinkedIn Social Selling</option>
-                        <option>Custom Hybrid Outbound</option>
-                      </select>
-                    </div>
-                  </div>
+        </div>
+      </section>
 
+      {/* ========================================================================= */}
+      {/* CONTACT SECTION  Synchronized 1:1 with ContactPage.tsx                  */}
+      {/* ========================================================================= */}
+      <section id="contact-sync" className="py-24 sm:py-28 bg-[#090d16]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-mono uppercase tracking-widest mb-3">
+              <Mail className="w-3.5 h-3.5" />
+              <span>Direct Communication</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Start Building Outbound Momentum
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base mt-3">
+              Whether you need high-volume cold calling, consultative appointment setting, or SDR coaching, I'm ready to review your goals.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* Left Column: Direct Info Card */}
+            <div className="lg:col-span-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 space-y-6 shadow-xl">
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">Direct Contact Channels</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Based in Bacolod City, Philippines, maintaining full working shift overlap with the US (EST/CST/PST), UK (GMT), and ANZ.
+                </p>
+              </div>
+
+              <div className="space-y-4 pt-2">
+                <a
+                  href="mailto:va.flynnjames@gmail.com"
+                  className="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 hover:text-amber-300 transition-colors"
+                >
+                  <Mail className="w-4 h-4 text-amber-400 shrink-0" />
                   <div>
-                    <label htmlFor="home-contact-message" className={labelCls}>
-                      ICP & current bottleneck *
-                    </label>
-                    <textarea
-                      id="home-contact-message"
+                    <div className="text-[11px] text-slate-500 uppercase tracking-wider font-mono">Direct Email</div>
+                    <div className="text-sm font-medium text-slate-200">va.flynnjames@gmail.com</div>
+                  </div>
+                </a>
+
+                <a
+                  href="tel:+639306359306"
+                  className="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 hover:text-amber-300 transition-colors"
+                >
+                  <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
+                  <div>
+                    <div className="text-[11px] text-slate-500 uppercase tracking-wider font-mono">Direct Phone / WhatsApp</div>
+                    <div className="text-sm font-medium text-slate-200">+63-930-635-9306</div>
+                  </div>
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/fjpontino"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 hover:text-amber-300 transition-colors"
+                >
+                  <Linkedin className="w-4 h-4 text-amber-400 shrink-0" />
+                  <div>
+                    <div className="text-[11px] text-slate-500 uppercase tracking-wider font-mono">LinkedIn</div>
+                    <div className="text-sm font-medium text-slate-200">linkedin.com/in/fjpontino</div>
+                  </div>
+                </a>
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-2">
+                <div className="flex items-center gap-2 text-xs text-amber-300 font-mono">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>Working Hours & Response</span>
+                </div>
+                <p className="text-xs text-slate-400">
+                  Mon  Fri: 9:00 AM  6:00 PM EST / CST. Inquiries answered within 24 hours.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Interactive Form */}
+            <div className="lg:col-span-7 rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 shadow-xl">
+              <h3 className="text-xl font-bold text-white mb-1">Inquiry Form</h3>
+              <p className="text-xs text-slate-400 mb-6">Fill out the brief details below to coordinate a discovery call.</p>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  onOpenContact();
+                }}
+                className="space-y-4"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Your Name *</label>
+                    <input
+                      type="text"
                       required
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="We sell a $12k B2B SaaS platform to HR Directors in the US. Our closers aren't getting enough qualified meetings..."
-                      className={inputCls + ' resize-none'}
+                      placeholder="e.g. Alex Morgan"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 text-[13.5px] font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 active:bg-amber-500 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    {isSubmitting ? (
-                      <span>Sending...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        <span>Send message</span>
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-[11px] text-center text-slate-600">
-                    No spam. 100% confidential. Response within 24 hours.
-                  </p>
-                </form>
-              )}
-            </motion.div>
-          </div>
-        </div>
-      </Section>
-
-      {/* ── FINAL CTA ── */}
-      <Section bordered>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative rounded-2xl overflow-hidden border border-slate-700/60 section-photo bg-photo-city p-10 sm:p-16 text-center"
-        >
-          <div className="absolute inset-0 ambient-accent pointer-events-none" />
-
-          <div className="relative max-w-2xl mx-auto">
-            <span className="text-[11px] font-mono text-amber-400 tracking-wider uppercase">Ready when you are</span>
-            <h2 className="mt-5 text-[32px] sm:text-[42px] font-bold text-white leading-[1.1] tracking-tight">
-              Let's fill your calendar with
-              <br />
-              <span className="font-serif italic text-amber-400/90">conversations that close.</span>
-            </h2>
-            <p className="mt-6 text-[15px] text-slate-300 max-w-xl mx-auto">
-              A free 20-minute pipeline audit. I'll look at your current outbound motion and share three things you can fix
-              this week.
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              <Button variant="primary" size="lg" onClick={() => onOpenContact()}>
-                <TrendingUp className="w-4 h-4" />
-                Schedule the call
-              </Button>
-              <Button variant="secondary" size="lg" onClick={() => onNavigate('samples')} withArrow className="group">
-                Browse playbooks
-              </Button>
-            </div>
-
-            <div className="mt-10 pt-8 border-t border-slate-700/50 grid grid-cols-3 gap-6 max-w-lg mx-auto">
-              {[
-                { l: 'Response time', v: '< 24 hrs' },
-                { l: 'Kickoff', v: '48–72 hrs' },
-                { l: 'Contract', v: 'Flexible' },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">{s.l}</div>
-                  <div className="text-[14px] font-semibold text-white mt-1.5">{s.v}</div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Work Email *</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="alex@company.com"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                    />
+                  </div>
                 </div>
-              ))}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Company / Product</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. B2B SaaS"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Target Market</label>
+                    <select
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-300 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                    >
+                      <option value="US">United States (EST / CST / PST)</option>
+                      <option value="UK">United Kingdom / EMEA</option>
+                      <option value="ANZ">Australia & New Zealand</option>
+                      <option value="SG">Singapore / Southeast Asia</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Service of Interest</label>
+                  <input
+                    type="text"
+                    defaultValue="B2B Appointment Setting"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Outbound Goals / Message *</label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Share your outreach targets, target titles, or existing campaign challenges..."
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-semibold text-sm transition-all duration-200 shadow-md shadow-amber-400/20 active:scale-[0.98]"
+                >
+                  Send Inquiry Now
+                </button>
+              </form>
             </div>
+
           </div>
-        </motion.div>
-      </Section>
-    </>
+
+        </div>
+      </section>
+
+    </div>
   );
 };
