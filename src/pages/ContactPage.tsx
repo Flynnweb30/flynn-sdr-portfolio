@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, PhoneCall, Linkedin, MapPin, Clock, Send, CheckCircle2, MessageSquare, ShieldCheck } from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { Mail, PhoneCall, Linkedin, Clock, CheckCircle2 } from 'lucide-react';
 
 interface ContactPageProps {
   preselectedService?: string;
@@ -11,9 +10,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     targetMarket: 'US',
-    service: preselectedService || 'B2B Appointment Setting',
+    service: preselectedService || 'Appointment Setting',
     message: ''
   });
 
@@ -29,7 +29,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -39,7 +38,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
 
   return (
     <div className="flex flex-col w-full text-slate-100 selection:bg-amber-400/20 selection:text-amber-200">
-      
       <section className="relative py-20 sm:py-28 bg-[#0d1322] border-b border-slate-800/80 overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-3xl">
@@ -59,9 +57,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
 
       <section className="py-20 bg-[#0b0f19]">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            
             <div className="lg:col-span-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 space-y-6 shadow-xl">
               <div>
                 <h2 className="text-xl font-bold text-white mb-2">Direct Contact Channels</h2>
@@ -113,7 +109,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
                   <span>Working Hours & Response</span>
                 </div>
                 <p className="text-xs text-slate-400">
-                  Mon – Fri: 9:00 AM – 6:00 PM EST / CST. Inquiries answered within 24 hours.
+                  Mon - Fri: 9:00 AM - 6:00 PM EST / CST. Inquiries answered within 24 hours.
                 </p>
               </div>
             </div>
@@ -203,7 +199,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Outbound Goals / Message *</label>
+                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Message / Outreach Goals *</label>
                     <textarea
                       rows={4}
                       required
@@ -226,10 +222,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
             </div>
 
           </div>
-
         </div>
       </section>
-
     </div>
   );
 };

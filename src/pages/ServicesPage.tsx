@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageId, ServiceItem } from '../types';
 import { SERVICES } from '../data/portfolioData';
-import { Sparkles, CheckCircle2, ArrowRight, Layers, PhoneCall, CalendarCheck, Users, Database } from 'lucide-react';
+import { Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 
 interface ServicesPageProps {
   onSelectService: (service: ServiceItem) => void;
@@ -20,7 +20,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
 
   return (
     <div className="flex flex-col w-full text-slate-100 selection:bg-amber-400/20 selection:text-amber-200">
-      
       <section className="relative py-20 sm:py-28 bg-[#0d1322] border-b border-slate-800/80 overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-3xl">
@@ -40,7 +39,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
 
       <section className="py-20 bg-[#0b0f19]">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {SERVICES.map((service) => {
               const image = serviceImages[service.id] || serviceImages['appointment-setting'];
@@ -76,7 +74,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-85" />
-                    
                     <div className="absolute top-3 right-3 px-3 py-1 rounded-md bg-slate-900/90 text-xs font-mono text-amber-300 border border-amber-400/30 backdrop-blur-md">
                       {service.badge}
                     </div>
@@ -114,10 +111,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onSelectService, onO
               );
             })}
           </div>
-
         </div>
       </section>
-
     </div>
   );
 };

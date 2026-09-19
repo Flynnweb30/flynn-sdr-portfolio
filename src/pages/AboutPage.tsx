@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
-import { PERSONAL_INFO } from '../data/portfolioData';
-import { Award, Shield, CheckCircle2, Headphones, Target, Flame, ArrowRight, UserCheck, PhoneCall } from 'lucide-react';
+import { Award, Shield, CheckCircle2, Headphones, Target, ArrowRight } from 'lucide-react';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -11,17 +10,12 @@ interface AboutPageProps {
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact }) => {
   return (
     <div className="flex flex-col w-full text-slate-100 selection:bg-amber-400/20 selection:text-amber-200">
-      
       <section className="relative py-20 sm:py-28 overflow-hidden border-b border-slate-800/80 bg-[#0d1322]">
-        <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 z-0 opacity-15">
           <img
             src="/images/hero-team.jpg"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80";
-            }}
             alt="Outbound sales office environment"
-            className="w-full h-full object-cover object-[center_35%] filter blur-xs"
+            className="w-full h-full object-cover object-center filter blur-xs"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-[#0d1322]/90" />
@@ -45,7 +39,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
       <section className="py-20 bg-[#0b0f19] border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
             <div className="lg:col-span-5">
               <div className="sticky top-28 rounded-2xl overflow-hidden border border-slate-800/80 bg-slate-900 shadow-2xl shadow-black/80">
                 <div className="relative aspect-[4/5] w-full">
@@ -130,11 +123,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
               </div>
 
             </div>
-
           </div>
         </div>
       </section>
-
     </div>
   );
 };

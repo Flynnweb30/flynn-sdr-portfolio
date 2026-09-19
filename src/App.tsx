@@ -16,7 +16,6 @@ import { CaseStudiesPage } from './pages/CaseStudiesPage';
 import { SamplesPage } from './pages/SamplesPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPage } from './pages/PrivacyPage';
-import { CASE_STUDIES, WORK_SAMPLES, SERVICES } from './data/portfolioData';
 
 const VALID_PAGES: PageId[] = [
   'home',
