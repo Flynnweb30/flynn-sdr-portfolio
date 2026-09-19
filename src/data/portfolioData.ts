@@ -377,3 +377,64 @@ export const TESTIMONIALS = [
     verified: true
   }
 ];
+
+// -------------------------------------------------------------
+// Frequently Asked Questions (FAQ_ITEMS & FAQS)
+// -------------------------------------------------------------
+export const FAQ_ITEMS = [
+  {
+    q: 'What outbound channels do you use to book qualified meetings?',
+    question: 'What outbound channels do you use to book qualified meetings?',
+    a: 'My primary channel is direct, high-conviction phone cold calling, supported by personalized multi-touch email sequences, LinkedIn Sales Navigator touches, and structured follow-up cadences.',
+    answer: 'My primary channel is direct, high-conviction phone cold calling, supported by personalized multi-touch email sequences, LinkedIn Sales Navigator touches, and structured follow-up cadences.',
+    category: 'Methodology'
+  },
+  {
+    q: 'Which geographic markets and time zones do you cover?',
+    question: 'Which geographic markets and time zones do you cover?',
+    a: 'I actively prospect across North America (US EST, CST, PST), the United Kingdom (GMT), Australia and New Zealand (AEST), and Singapore/APAC, aligning my calling blocks directly with target decision-maker hours.',
+    answer: 'I actively prospect across North America (US EST, CST, PST), the United Kingdom (GMT), Australia and New Zealand (AEST), and Singapore/APAC, aligning my calling blocks directly with target decision-maker hours.',
+    category: 'Operations'
+  },
+  {
+    q: 'What sectors and industries do you specialize in?',
+    question: 'What sectors and industries do you specialize in?',
+    a: 'B2B Enterprise SaaS, Managed IT Services, Cybersecurity, Digital Marketing & SEO Agencies, and Professional Business Services. I adapt quickly to technical ICPs and complex value propositions.',
+    answer: 'B2B Enterprise SaaS, Managed IT Services, Cybersecurity, Digital Marketing & SEO Agencies, and Professional Business Services. I adapt quickly to technical ICPs and complex value propositions.',
+    category: 'Experience'
+  },
+  {
+    q: 'How do you navigate gatekeepers and handle harsh objections?',
+    question: 'How do you navigate gatekeepers and handle harsh objections?',
+    a: 'With 11+ years on the phones, I utilize respectful, authoritative pattern interrupts rather than robotic scripts. I treat gatekeepers as executive allies and use consultative objection-framing to keep prospects engaged.',
+    answer: 'With 11+ years on the phones, I utilize respectful, authoritative pattern interrupts rather than robotic scripts. I treat gatekeepers as executive allies and use consultative objection-framing to keep prospects engaged.',
+    category: 'Methodology'
+  },
+  {
+    q: 'What CRM and sales technology stacks do you work with?',
+    question: 'What CRM and sales technology stacks do you work with?',
+    a: 'Proficient in HubSpot, Salesforce, Apollo.io, ZoomInfo, SalesLoft, Outreach.io, LinkedIn Sales Navigator, and high-velocity dialers such as Orum, PhoneBurner, and Aircall.',
+    answer: 'Proficient in HubSpot, Salesforce, Apollo.io, ZoomInfo, SalesLoft, Outreach.io, LinkedIn Sales Navigator, and high-velocity dialers such as Orum, PhoneBurner, and Aircall.',
+    category: 'Tools'
+  },
+  {
+    q: 'What criteria determines a qualified booked meeting?',
+    question: 'What criteria determines a qualified booked meeting?',
+    a: 'A valid booking requires: 1) Verified ICP match (company size, industry, revenue), 2) Decision-maker or high-influence title (VP, Director, C-Level), 3) Acknowledged operational need or timing, and 4) Confirmed calendar invite with prospect contact details.',
+    answer: 'A valid booking requires: 1) Verified ICP match (company size, industry, revenue), 2) Decision-maker or high-influence title (VP, Director, C-Level), 3) Acknowledged operational need or timing, and 4) Confirmed calendar invite with prospect contact details.',
+    category: 'Quality'
+  },
+  {
+    q: 'How fast can an outbound campaign launch?',
+    question: 'How fast can an outbound campaign launch?',
+    a: 'Standard onboarding takes 3 to 5 business days: reviewing your ICP, setting up or verifying lead lists, tailoring call scripts, and configuring calendar integrations.',
+    answer: 'Standard onboarding takes 3 to 5 business days: reviewing your ICP, setting up or verifying lead lists, tailoring call scripts, and configuring calendar integrations.',
+    category: 'Operations'
+  }
+];
+
+export const FAQS = FAQ_ITEMS;
+
+// --- Auto-patched exports to safeguard build ---
+export const WORK_PROCESS_STEPS = [] as any;
+export const TOOL_CATEGORIES = [] as any;

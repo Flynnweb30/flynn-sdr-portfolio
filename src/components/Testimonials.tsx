@@ -47,7 +47,7 @@ export const Testimonials: React.FC = () => {
                 className="flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-amber-400/40 transition-all duration-200 backdrop-blur-sm group"
               >
                 <div>
-                  {/* Top Bar: Rating & Quote Icon */}
+                  {/* Rating & Quote Icon */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-1 text-amber-400">
                       {[...Array(starCount)].map((_, i) => (
@@ -65,7 +65,7 @@ export const Testimonials: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Testimonial Quote */}
+                  {/* Quote Body */}
                   <p className="text-slate-300 text-sm sm:text-[14.5px] leading-relaxed mb-6 font-normal">
                     "{item.quote}"
                   </p>
