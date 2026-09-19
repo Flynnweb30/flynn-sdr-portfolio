@@ -1,4 +1,4 @@
-import { ServiceItem, CaseStudy, WorkSample, ExperienceRole, StatItem } from '../types';
+import { ServiceItem, CaseStudy, WorkSample, ExperienceRole, StatItem, ToolItem, SkillCategory, FaqItem } from '../types';
 
 export const PERSONAL_INFO = {
   name: 'Flynn James Q. Pontino',
@@ -14,6 +14,7 @@ export const PERSONAL_INFO = {
   pipelineSourced: '$1.8M+',
   meetingsBooked: '180+',
   showRate: '68%',
+  bio: 'Senior B2B Sales Development Representative with over 11 years of outbound phone mastery. Specializing in pattern-interrupt cold calling, gatekeeper navigation, and strict BANT/MEDDIC qualification across North America, UK, ANZ, and Singapore markets.',
 };
 
 export const STATS: StatItem[] = [
@@ -21,6 +22,59 @@ export const STATS: StatItem[] = [
   { value: '$1.8M+', label: 'Pipeline Sourced', helperText: 'Qualified enterprise & mid-market pipeline generated' },
   { value: '180+', label: 'Meetings Booked', helperText: 'Verified decision-maker calls on AE calendars' },
   { value: '68%', label: 'Show Rate', helperText: 'Consistent attendance rate through active confirmation cadences' },
+];
+
+export const KEY_STATS = STATS;
+
+export const TOOLS: ToolItem[] = [
+  {
+    name: 'Apollo.io',
+    category: 'Prospecting & Enrichment',
+    proficiency: 'Expert',
+    useCase: 'TAM list building, direct-dial verification, and multi-touch outbound cadences',
+  },
+  {
+    name: 'ZoomInfo',
+    category: 'Data & Intelligence',
+    proficiency: 'Advanced',
+    useCase: 'Enterprise org-chart mapping, verified mobile numbers, and executive intent signals',
+  },
+  {
+    name: 'Salesloft',
+    category: 'Sales Engagement',
+    proficiency: 'Expert',
+    useCase: 'Cadence sequence automation, call disposition tagging, and email tracking',
+  },
+  {
+    name: 'HubSpot CRM',
+    category: 'CRM & Pipeline',
+    proficiency: 'Expert',
+    useCase: 'Lead lifecycle stage management, deal pipeline hygiene, and automated task queues',
+  },
+  {
+    name: 'LinkedIn Sales Navigator',
+    category: 'Social Selling',
+    proficiency: 'Expert',
+    useCase: 'Boolean search strings, C-level prospect identification, and warm referral routing',
+  },
+  {
+    name: 'Kixie PowerCall',
+    category: 'Outbound Telephony',
+    proficiency: 'Advanced',
+    useCase: 'Local presence dialing, automated CRM call logging, and voicemail drop sequences',
+  },
+  {
+    name: 'Aircall',
+    category: 'Cloud Telephony',
+    proficiency: 'Advanced',
+    useCase: 'High-volume outbound calling, international number provisioning, and live call whisper',
+  },
+  {
+    name: 'Gong.io',
+    category: 'Conversation Intelligence',
+    proficiency: 'Advanced',
+    useCase: 'Call recording breakdowns, objection analysis, and junior SDR coaching reviews',
+  },
 ];
 
 export const SERVICES: ServiceItem[] = [
@@ -236,5 +290,68 @@ export const EXPERIENCE_ROLES: ExperienceRole[] = [
     ],
     metrics: ['Top 5% Agent Rank', '150+ Dials Daily'],
     skills: ['Cold Calling', 'Objection Handling', 'Lead Verification'],
+  },
+];
+
+export const SKILLS: SkillCategory[] = [
+  {
+    category: 'Outbound Telemarketing & Phone Execution',
+    skills: [
+      { name: 'Cold Calling', level: 'Expert', years: '11+ yrs', highlight: true },
+      { name: 'Gatekeeper Navigation', level: 'Expert', years: '11+ yrs', highlight: true },
+      { name: 'Conversational Objection Handling', level: 'Expert', years: '11+ yrs', highlight: true },
+      { name: 'Pattern Interrupt Openers', level: 'Expert', years: '8+ yrs' },
+      { name: 'Tonality & Vocal Pacing', level: 'Expert', years: '11+ yrs', highlight: true },
+      { name: 'MEDDIC & BANT Qualification', level: 'Advanced', years: '7+ yrs' },
+    ],
+  },
+  {
+    category: 'Sales Systems, Cadences & Enablement',
+    skills: [
+      { name: 'Multi-Touch Cadence Design', level: 'Expert', years: '6+ yrs' },
+      { name: 'CRM Pipeline Hygiene', level: 'Expert', years: '9+ yrs' },
+      { name: 'Junior SDR Live Whispering & Coaching', level: 'Advanced', years: '4+ yrs', highlight: true },
+      { name: 'B2B TAM List Building', level: 'Expert', years: '8+ yrs' },
+      { name: 'Email Deliverability & Warmup', level: 'Advanced', years: '5+ yrs' },
+    ],
+  },
+];
+
+export const SKILL_CATEGORIES = SKILLS;
+
+export const FAQS: FaqItem[] = [
+  {
+    q: 'What markets and time zones do you cover?',
+    a: 'I cover North America (EST, CST, PST), the United Kingdom (GMT), Australia & New Zealand (AEST), and Singapore (SGT) with verified direct-dial telephone prospecting.',
+    category: 'Operations',
+  },
+  {
+    q: 'How many daily dials can you maintain?',
+    a: 'I consistently complete 120 to 150 targeted, research-backed outbound calls per day while maintaining live conversation quality and accurate CRM disposition logging.',
+    category: 'Performance',
+  },
+  {
+    q: 'What qualification criteria do you use before booking an appointment?',
+    a: 'Every meeting is pre-qualified using BANT or MEDDIC criteria to verify title, company size, current tech stack pain, and confirmed willingness to attend the discovery demo.',
+    category: 'Quality',
+  },
+];
+
+export const FAQ_ITEMS = FAQS;
+
+export const TESTIMONIALS = [
+  {
+    quote: 'Flynn transformed our outbound prospecting from a blank sheet into our most reliable source of enterprise demo bookings.',
+    author: 'VP of Demand Generation',
+    role: 'Demand Gen Lead',
+    company: 'Enterprise HR Tech SaaS',
+    metric: '184 Meetings Booked',
+  },
+  {
+    quote: 'Flynn is a natural on the phones. He handles executive objections with ease and sends our sales team high-intent prospects.',
+    author: 'Managing Director',
+    role: 'Managing Director',
+    company: 'Growth Marketing Agency',
+    metric: '42 VP Meetings in 60 Days',
   },
 ];
