@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background: Dark blue rounded square with a subtle border -->
+  <rect x="4" y="4" width="56" height="56" rx="14" ry="14" fill="#111b2e" stroke="#1f3a5f" stroke-width="2"/>
+  
+  <!-- Letter "F" -->
+  <path d="M24 22 H38 V28 H30 V32 H37 V38 H30 V48 H24 Z" fill="#ffc107"/>
+  
+  <!-- Letter "J" -->
+  <path d="M40 22 H46 V38 C46 44 42 48 36 48 C32 48 30 46 29 44 L34 40 C35 42 36 43 38 43 C40 43 41 42 41 39 V28 H40 Z" fill="#ffc107"/>
+</svg>

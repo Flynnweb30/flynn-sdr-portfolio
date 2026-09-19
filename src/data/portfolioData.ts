@@ -9,6 +9,9 @@ import {
   FaqItem,
 } from '../types';
 
+// =============================================================
+// PERSONAL INFO
+// =============================================================
 export const PERSONAL_INFO = {
   name: 'Flynn James Q. Pontino',
   shortName: 'Flynn James',
@@ -25,6 +28,9 @@ export const PERSONAL_INFO = {
   showRate: '68%',
 };
 
+// =============================================================
+// STATS
+// =============================================================
 export const STATS: StatItem[] = [
   { value: '11+', label: 'Years Experience', helperText: 'Outbound B2B telemarketing & sales development' },
   { value: '$1.8M+', label: 'Pipeline Sourced', helperText: 'Qualified enterprise & mid-market pipeline generated' },
@@ -33,58 +39,28 @@ export const STATS: StatItem[] = [
 ];
 
 export const KEY_STATS: StatItem[] = STATS;
+export const STAT_ITEMS: StatItem[] = STATS;
 
+// =============================================================
+// TOOLS
+// =============================================================
 export const TOOLS: ToolItem[] = [
-  {
-    name: 'Apollo.io',
-    category: 'Prospecting & Data',
-    proficiency: 'Expert',
-    useCase: 'TAM account mapping, verified mobile direct dials, and multi-step automated email sequencing.',
-  },
-  {
-    name: 'ZoomInfo',
-    category: 'Prospecting & Data',
-    proficiency: 'Advanced',
-    useCase: 'Enterprise org-chart intelligence, buying intent signals, and executive direct lines.',
-  },
-  {
-    name: 'Salesloft',
-    category: 'Sales Engagement',
-    proficiency: 'Expert',
-    useCase: 'High-velocity cadence management, integrated dialer acceleration, and disposition tagging.',
-  },
-  {
-    name: 'HubSpot CRM',
-    category: 'CRM & Pipeline',
-    proficiency: 'Expert',
-    useCase: 'Lead qualification tracking, automated meeting reminders, and deal pipeline hygiene.',
-  },
-  {
-    name: 'Salesforce',
-    category: 'CRM & Pipeline',
-    proficiency: 'Advanced',
-    useCase: 'Enterprise account routing, opportunity stage reporting, and activity metrics.',
-  },
-  {
-    name: 'LinkedIn Sales Navigator',
-    category: 'Social Outreach',
-    proficiency: 'Expert',
-    useCase: 'Account list segmentation, buyer intent alerts, and consultative InMail messaging.',
-  },
-  {
-    name: 'Kixie / Aircall',
-    category: 'Telephony & Dialers',
-    proficiency: 'Expert',
-    useCase: 'Local presence outbound dialing, live call whispering, and disposition workflow automation.',
-  },
-  {
-    name: 'Gong.io',
-    category: 'Conversation Intelligence',
-    proficiency: 'Advanced',
-    useCase: 'Call recording review, talk-to-listen ratio coaching, and objection pattern analysis.',
-  },
+  { name: 'Apollo.io', category: 'Prospecting & Data', proficiency: 'Expert', useCase: 'TAM account mapping, verified mobile direct dials, and multi-step automated email sequencing.' },
+  { name: 'ZoomInfo', category: 'Prospecting & Data', proficiency: 'Advanced', useCase: 'Enterprise org-chart intelligence, buying intent signals, and executive direct lines.' },
+  { name: 'Salesloft', category: 'Sales Engagement', proficiency: 'Expert', useCase: 'High-velocity cadence management, integrated dialer acceleration, and disposition tagging.' },
+  { name: 'HubSpot CRM', category: 'CRM & Pipeline', proficiency: 'Expert', useCase: 'Lead qualification tracking, automated meeting reminders, and deal pipeline hygiene.' },
+  { name: 'Salesforce', category: 'CRM & Pipeline', proficiency: 'Advanced', useCase: 'Enterprise account routing, opportunity stage reporting, and activity metrics.' },
+  { name: 'LinkedIn Sales Navigator', category: 'Social Outreach', proficiency: 'Expert', useCase: 'Account list segmentation, buyer intent alerts, and consultative InMail messaging.' },
+  { name: 'Kixie / Aircall', category: 'Telephony & Dialers', proficiency: 'Expert', useCase: 'Local presence outbound dialing, live call whispering, and disposition workflow automation.' },
+  { name: 'Gong.io', category: 'Conversation Intelligence', proficiency: 'Advanced', useCase: 'Call recording review, talk-to-listen ratio coaching, and objection pattern analysis.' },
 ];
 
+export const TOOL_STACK: ToolItem[] = TOOLS;
+export const TECH_STACK: ToolItem[] = TOOLS;
+
+// =============================================================
+// SKILLS
+// =============================================================
 export const SKILLS: SkillCategory[] = [
   {
     category: 'Outbound Sales & Execution',
@@ -107,24 +83,23 @@ export const SKILLS: SkillCategory[] = [
   },
 ];
 
+export const SKILL_CATEGORIES: SkillCategory[] = SKILLS;
+export const SKILL_SET: SkillCategory[] = SKILLS;
+
+// =============================================================
+// FAQS
+// =============================================================
 export const FAQS: FaqItem[] = [
-  {
-    q: 'What industries do you specialize in?',
-    a: 'Primarily B2B SaaS, IT security, digital marketing agencies, and professional services across North America, the UK, Australia, and Singapore.',
-    category: 'Scope',
-  },
-  {
-    q: 'How many cold calls do you typically make per day?',
-    a: 'On dedicated campaigns, I average 120 to 150 targeted, direct-dial dials per day while maintaining consultative, high-conversion conversations.',
-    category: 'Metrics',
-  },
-  {
-    q: 'How do you handle qualification before booking a meeting?',
-    a: 'Every prospect is vetted for authority, company size, current tech stack pain, and timeline before an appointment is scheduled on your AE calendar.',
-    category: 'Process',
-  },
+  { q: 'What industries do you specialize in?', a: 'Primarily B2B SaaS, IT security, digital marketing agencies, and professional services across North America, the UK, Australia, and Singapore.', category: 'Scope' },
+  { q: 'How many cold calls do you typically make per day?', a: 'On dedicated campaigns, I average 120 to 150 targeted, direct-dial dials per day while maintaining consultative, high-conversion conversations.', category: 'Metrics' },
+  { q: 'How do you handle qualification before booking a meeting?', a: 'Every prospect is vetted for authority, company size, current tech stack pain, and timeline before an appointment is scheduled on your AE calendar.', category: 'Process' },
 ];
 
+export const FREQUENTLY_ASKED: FaqItem[] = FAQS;
+
+// =============================================================
+// SERVICES
+// =============================================================
 export const SERVICES: ServiceItem[] = [
   {
     id: 'appointment-setting',
@@ -192,6 +167,11 @@ export const SERVICES: ServiceItem[] = [
   },
 ];
 
+export const SERVICE_ITEMS: ServiceItem[] = SERVICES;
+
+// =============================================================
+// CASE STUDIES
+// =============================================================
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'saas-appointment-surge',
@@ -259,6 +239,11 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
 ];
 
+export const CASE_STUDY_ITEMS: CaseStudy[] = CASE_STUDIES;
+
+// =============================================================
+// WORK SAMPLES
+// =============================================================
 export const WORK_SAMPLES: WorkSample[] = [
   {
     id: 'live-cold-call-audio',
@@ -297,6 +282,12 @@ export const WORK_SAMPLES: WorkSample[] = [
   },
 ];
 
+export const SAMPLES: WorkSample[] = WORK_SAMPLES;
+export const WORK_SAMPLE_ITEMS: WorkSample[] = WORK_SAMPLES;
+
+// =============================================================
+// EXPERIENCE
+// =============================================================
 export const EXPERIENCE_ROLES: ExperienceRole[] = [
   {
     title: 'Senior B2B SDR & Junior Sales Team Lead',
@@ -340,3 +331,10 @@ export const EXPERIENCE_ROLES: ExperienceRole[] = [
     skills: ['Cold Calling', 'Objection Handling', 'Lead Verification'],
   },
 ];
+
+// Aliases — any page importing under a different name resolves correctly.
+export const CAREER_EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
+export const EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
+export const WORK_EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
+export const CAREER_HISTORY: ExperienceRole[] = EXPERIENCE_ROLES;
+export const ROLES: ExperienceRole[] = EXPERIENCE_ROLES;
