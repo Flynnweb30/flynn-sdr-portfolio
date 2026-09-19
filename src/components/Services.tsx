@@ -1,192 +1,218 @@
 import React, { useState } from 'react';
-import { PhoneCall, CalendarCheck, Users, Database, ArrowRight, CheckCircle, Zap, Shield, Sparkles } from 'lucide-react';
+import {
+  Calendar,
+  PhoneCall,
+  Users,
+  Database,
+  CheckCircle2,
+  ArrowRight,
+  Sparkles,
+  ExternalLink,
+  Layers,
+  ChevronDown,
+} from 'lucide-react';
+import { ServiceItem, PageId } from '../types';
 import { SERVICES } from '../data/portfolioData';
-import { ServiceItem } from '../types';
 
 interface ServicesProps {
   onSelectService?: (service: ServiceItem) => void;
   onOpenContact?: (serviceName?: string) => void;
+  onNavigate?: (page: PageId) => void;
 }
 
-const SERVICE_ICONS: Record<string, React.ReactNode> = {
-  'cold-calling': <PhoneCall className="w-5 h-5 text-amber-400" />,
-  'appointment-setting': <CalendarCheck className="w-5 h-5 text-sky-400" />,
-  'sdr-leadership': <Users className="w-5 h-5 text-emerald-400" />,
-  'lead-generation': <Database className="w-5 h-5 text-violet-400" />,
+const getServiceIcon = (id: string) => {
+  switch (id) {
+    case 'appointment-setting':
+      return <Calendar className="w-6 h-6 text-amber-400" />;
+    case 'cold-calling':
+      return <PhoneCall className="w-6 h-6 text-amber-400" />;
+    case 'sdr-coaching':
+      return <Users className="w-6 h-6 text-amber-400" />;
+    case 'pipeline-management':
+      return <Database className="w-6 h-6 text-amber-400" />;
+    default:
+      return <Layers className="w-6 h-6 text-amber-400" />;
+  }
 };
 
-const WORKFLOW_STEPS: Record<string, { step: string; desc: string }[]> = {
-  'cold-calling': [
-    { step: '01. Account Prep', desc: 'Direct dials & title verification' },
-    { step: '02. Live Calling', desc: 'Pattern-interrupt & live discovery' },
-    { step: '03. Qualification', desc: 'BANT verification on the phone' },
-    { step: '04. Cal Handover', desc: 'Direct invite + CRM notes synced' },
-  ],
-  'appointment-setting': [
-    { step: '01. Tiering', desc: 'High-intent accounts classified' },
-    { step: '02. Cadence', desc: 'Phone + Email + LinkedIn touchpoints' },
-    { step: '03. Booking', desc: 'Prospect confirms calendar slot' },
-    { step: '04. Show-Up Flow', desc: 'Custom reminder series sent' },
-  ],
-  'sdr-leadership': [
-    { step: '01. Audit', desc: 'Call recordings & metrics reviewed' },
-    { step: '02. Playbooks', desc: 'Battlecards & script optimization' },
-    { step: '03. Live Labs', desc: 'Side-by-side live call coaching' },
-    { step: '04. KPI Tracking', desc: 'Weekly pipeline acceleration review' },
-  ],
-  'lead-generation': [
-    { step: '01. TAM Filter', desc: 'Industry, headcount, revenue' },
-    { step: '02. Data Scrub', desc: 'Triple-check email & phone accuracy' },
-    { step: '03. Enrichment', desc: 'Tech stack & buying intent added' },
-    { step: '04. Integration', desc: 'Direct sync to HubSpot / Salesforce' },
-  ],
-};
+export const Services: React.FC<ServicesProps> = ({
+  onSelectService,
+  onOpenContact,
+  onNavigate,
+}) => {
+  const [activeHoverId, setActiveHoverId] = useState<string | null>(SERVICES[0].id);
+  const [expandedMobileId, setExpandedMobileId] = useState<string | null>(SERVICES[0].id);
 
-export const Services: React.FC<ServicesProps> = ({ onSelectService, onOpenContact }) => {
-  const [activeHoverId, setActiveHoverId] = useState<string>(SERVICES[0].id);
+  const toggleMobileExpand = (id: string) => {
+    setExpandedMobileId(expandedMobileId === id ? null : id);
+  };
 
   return (
-    <section id="services-section" className="relative py-20 sm:py-28 bg-[#0b0f19] border-t border-slate-800/80 overflow-hidden">
-      {/* Subtle atmospheric ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-amber-500/5 via-sky-500/5 to-transparent blur-3xl pointer-events-none" />
+    <section className="py-20 sm:py-28 relative overflow-hidden bg-[#0b0f19]" id="services-section">
+      {/* Background radial glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-amber-500/5 blur-[140px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400 text-xs font-mono tracking-wider uppercase mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
-              Specialized Sales Capabilities
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-mono uppercase tracking-widest mb-3">
+              <Sparkles className="w-3 h-3" />
+              Specialized B2B Offerings
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-              Predictable Outbound Systems That Drive Revenue
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              Predictable Outbound Pipeline Services
             </h2>
-            <p className="mt-3.5 text-slate-400 text-base sm:text-lg leading-relaxed">
-              Every service is engineered around one standard: delivering high-conviction discovery calls to your calendar with zero fluff.
+            <p className="mt-3 text-slate-400 max-w-2xl text-base sm:text-lg">
+              End-to-end appointment setting, high-velocity cold calling, and SDR team enablement built on 11+ years of proven outbound execution.
             </p>
           </div>
 
-          <div className="text-xs font-mono text-slate-500 hidden md:block">
-            HOVER OVER CARDS TO INSPECT EXECUTION MATRIX & DELIVERABLES
-          </div>
+          {onNavigate && (
+            <button
+              onClick={() => onNavigate('services')}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors group self-start md:self-auto"
+            >
+              <span>Explore all service specifications</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </button>
+          )}
         </div>
 
-        {/* Dynamic Services Grid Inspired by Reference Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {SERVICES.map((service, index) => {
+        {/* Interactive Services Grid (sample-services.avif layout style) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {SERVICES.map((service) => {
             const isHovered = activeHoverId === service.id;
-            const steps = WORKFLOW_STEPS[service.id] || [];
+            const isMobileExpanded = expandedMobileId === service.id;
 
             return (
               <div
                 key={service.id}
                 onMouseEnter={() => setActiveHoverId(service.id)}
-                className={`group relative rounded-2xl border transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between ${
+                className={`group relative rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden ${
                   isHovered
-                    ? 'bg-slate-900/90 border-amber-400/50 shadow-2xl shadow-amber-500/10 -translate-y-1'
-                    : 'bg-slate-900/50 border-slate-800/80 hover:border-slate-700'
+                    ? 'border-amber-400/60 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/95 shadow-2xl shadow-amber-500/10 -translate-y-1'
+                    : 'border-slate-800/80 bg-slate-900/50 hover:border-slate-700 backdrop-blur-md'
                 }`}
               >
-                {/* Top Subtle Amber Glow Bar on Hover */}
+                {/* Top Glowing Accent Line on Hover */}
                 <div
-                  className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent transition-opacity duration-300 ${
+                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 transition-opacity duration-300 ${
                     isHovered ? 'opacity-100' : 'opacity-0'
                   }`}
                 />
 
-                {/* Card Top Information */}
-                <div>
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-2.5">
-                      <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
-                        {SERVICE_ICONS[service.id]}
+                <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                  {/* Top Metadata Row: Icon, Badge & Key Metric */}
+                  <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-center shadow-inner group-hover:border-amber-400/40 transition-colors">
+                        {getServiceIcon(service.id)}
                       </div>
-                      <span className="font-mono text-xs text-amber-400 font-semibold uppercase tracking-wider">
-                        {`[0${index + 1}] ${service.badge}`}
-                      </span>
+                      <div>
+                        <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-wider bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                          {service.badge}
+                        </span>
+                      </div>
                     </div>
 
-                    <span className="text-[11px] font-mono text-slate-400 bg-slate-950/80 border border-slate-800 px-2.5 py-1 rounded-full">
-                      {service.metrics.split('•')[0].trim()}
-                    </span>
+                    <div className="text-right">
+                      <span className="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800/90 text-slate-200 border border-slate-700 shadow-sm">
+                        {service.metrics}
+                      </span>
+                    </div>
                   </div>
 
+                  {/* Title & Tagline */}
                   <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-amber-300 transition-colors">
                     {service.title}
                   </h3>
-
-                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                  <p className="mt-2 text-sm text-slate-400 leading-relaxed">
                     {service.tagline}
                   </p>
 
-                  {/* Reference-Inspired Execution Matrix / Workflow Strip */}
-                  <div className="mt-6 pt-5 border-t border-slate-800/80">
-                    <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center justify-between">
-                      <span>Execution Cadence & Flow</span>
-                      <span className="text-amber-400/80">End-to-End Handled</span>
-                    </div>
+                  {/* Deliverable Callout Box */}
+                  <div className="mt-5 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 group-hover:border-slate-700/80 transition-colors">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold block mb-1">
+                      Deliverable Outcome:
+                    </span>
+                    <p className="text-xs sm:text-[13px] text-slate-300 leading-normal">
+                      {service.deliverableSummary}
+                    </p>
+                  </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {steps.map((st, i) => (
-                        <div
-                          key={i}
-                          className={`p-2.5 rounded-lg border text-left transition-all ${
-                            isHovered
-                              ? 'bg-slate-950/80 border-slate-800 text-slate-200'
-                              : 'bg-slate-950/40 border-slate-900 text-slate-400'
-                          }`}
+                  {/* Interactive Feature Matrix (Revealed on Hover / Desktop & Toggleable on Mobile) */}
+                  <div
+                    className={`mt-6 space-y-2.5 transition-all duration-300 ${
+                      isHovered || isMobileExpanded
+                        ? 'opacity-100 max-h-[500px]'
+                        : 'opacity-85 max-h-[220px] md:max-h-[500px]'
+                    }`}
+                  >
+                    <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block font-semibold">
+                      Key Inclusions:
+                    </span>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-[13.5px] text-slate-300">
+                          <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Tools Stack Chips */}
+                  <div className="mt-6 pt-5 border-t border-slate-800/60">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-2">
+                      Execution Tech Stack:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {service.toolsUsed.map((tool, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2.5 py-1 rounded bg-slate-800/60 text-slate-300 text-[11px] font-mono border border-slate-700/50"
                         >
-                          <div className="text-[10px] font-mono text-amber-400/90 font-bold">{st.step}</div>
-                          <div className="text-[11px] text-slate-300 font-medium leading-tight mt-1">{st.desc}</div>
-                        </div>
+                          {tool}
+                        </span>
                       ))}
                     </div>
                   </div>
-
-                  {/* Features / Deliverables Checklist */}
-                  <div className="mt-5 space-y-2">
-                    {service.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Tooling Tags */}
-                  <div className="mt-6 pt-4 border-t border-slate-800/60 flex flex-wrap items-center gap-1.5">
-                    <span className="text-[10px] font-mono text-slate-500 uppercase mr-1">Stack:</span>
-                    {service.toolsUsed.map((tool, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-950 border border-slate-800/80 text-slate-400"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
-                {/* Bottom Action Footer */}
-                <div className="mt-6 pt-5 border-t border-slate-800/80 flex items-center justify-between gap-3">
+                {/* Card Action Footer */}
+                <div className="p-6 sm:p-8 pt-0 mt-2 flex flex-wrap items-center justify-between gap-3">
                   <button
                     type="button"
-                    onClick={() => {
-                      if (onSelectService) onSelectService(service);
-                    }}
-                    className="text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+                    onClick={() => onOpenContact?.(service.title)}
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-colors shadow-md shadow-amber-500/10"
                   >
-                    View Deliverable Details
+                    <span>Book This Service</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
 
+                  {onSelectService && (
+                    <button
+                      type="button"
+                      onClick={() => onSelectService(service)}
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-800/70 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold border border-slate-700 transition-colors"
+                    >
+                      <span>View Full Scope</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+
+                  {/* Mobile expansion toggle button */}
                   <button
                     type="button"
-                    onClick={() => {
-                      if (onOpenContact) onOpenContact(service.title);
-                    }}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 px-3.5 py-2 rounded-lg bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 transition-all cursor-pointer"
+                    onClick={() => toggleMobileExpand(service.id)}
+                    className="md:hidden p-2.5 rounded-xl bg-slate-800/70 border border-slate-700 text-slate-400 hover:text-white text-xs inline-flex items-center gap-1"
+                    aria-label="Toggle details"
                   >
-                    <span>Pre-Select & Book</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    <span>{isMobileExpanded ? 'Less' : 'More'}</span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform ${isMobileExpanded ? 'rotate-180' : ''}`}
+                    />
                   </button>
                 </div>
               </div>
