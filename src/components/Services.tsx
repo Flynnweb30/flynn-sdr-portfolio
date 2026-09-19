@@ -1,224 +1,258 @@
 import React, { useState } from 'react';
-import {
-  Calendar,
-  PhoneCall,
-  Users,
-  Database,
-  CheckCircle2,
-  ArrowRight,
-  Sparkles,
-  ExternalLink,
-  Layers,
-  ChevronDown,
+import { 
+  Target, Calendar, PhoneCall, Users, Linkedin, Layers, 
+  ArrowRight, CheckCircle, ExternalLink, Sparkles 
 } from 'lucide-react';
-import { ServiceItem, PageId } from '../types';
-import { SERVICES } from '../data/portfolioData';
+import { CORE_SERVICES } from '../data/portfolioData';
+import { ServiceItem } from '../types';
 
 interface ServicesProps {
-  onSelectService?: (service: ServiceItem) => void;
-  onOpenContact?: (serviceName?: string) => void;
-  onNavigate?: (page: PageId) => void;
+  onSelectService: (service: ServiceItem) => void;
+  onOpenContactWithService: (serviceName: string) => void;
 }
 
-const getServiceIcon = (id: string) => {
-  switch (id) {
-    case 'appointment-setting':
-      return <Calendar className="w-6 h-6 text-amber-400" />;
-    case 'cold-calling':
-      return <PhoneCall className="w-6 h-6 text-amber-400" />;
-    case 'sdr-coaching':
-      return <Users className="w-6 h-6 text-amber-400" />;
-    case 'pipeline-management':
-      return <Database className="w-6 h-6 text-amber-400" />;
-    default:
-      return <Layers className="w-6 h-6 text-amber-400" />;
-  }
-};
+export const Services: React.FC<ServicesProps> = ({ onSelectService, onOpenContactWithService }) => {
+  const [activeFilter, setActiveFilter] = useState<'all' | 'outbound' | 'pipeline' | 'leadership'>('all');
 
-export const Services: React.FC<ServicesProps> = ({
-  onSelectService,
-  onOpenContact,
-  onNavigate,
-}) => {
-  const [activeHoverId, setActiveHoverId] = useState<string | null>(SERVICES[0].id);
-  const [expandedMobileId, setExpandedMobileId] = useState<string | null>(SERVICES[0].id);
-
-  const toggleMobileExpand = (id: string) => {
-    setExpandedMobileId(expandedMobileId === id ? null : id);
+  const getServiceIcon = (id: string) => {
+    switch (id) {
+      case 'lead-generation':
+        return Target;
+      case 'appointment-setting':
+        return Calendar;
+      case 'cold-calling':
+        return PhoneCall;
+      case 'sdr-support':
+        return Users;
+      case 'linkedin-outreach':
+        return Linkedin;
+      case 'pipeline-management':
+        return Layers;
+      default:
+        return Sparkles;
+    }
   };
 
+  const getServiceImage = (id: string) => {
+    switch (id) {
+      case 'lead-generation':
+        return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80";
+      case 'appointment-setting':
+        return "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=800&q=80";
+      case 'cold-calling':
+        return "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=800&q=80";
+      case 'sdr-support':
+        return "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80";
+      case 'linkedin-outreach':
+        return "https://images.unsplash.com/photo-1611944212129-29977ae1398c?auto=format&fit=crop&w=800&q=80";
+      case 'pipeline-management':
+        return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80";
+      default:
+        return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80";
+    }
+  };
+
+  const filteredServices = CORE_SERVICES.filter(service => {
+    if (activeFilter === 'outbound') {
+      return ['cold-calling', 'appointment-setting', 'linkedin-outreach'].includes(service.id);
+    }
+    if (activeFilter === 'pipeline') {
+      return ['lead-generation', 'pipeline-management'].includes(service.id);
+    }
+    if (activeFilter === 'leadership') {
+      return ['sdr-support', 'appointment-setting'].includes(service.id);
+    }
+    return true;
+  });
+
   return (
-    <section className="py-20 sm:py-28 relative overflow-hidden bg-[#0b0f19]" id="services-section">
-      {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-amber-500/5 blur-[140px] pointer-events-none rounded-full" />
-
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+    <section id="services" className="py-24 bg-[#0a0f1c] relative border-t border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-mono uppercase tracking-widest mb-3">
-              <Sparkles className="w-3 h-3" />
-              Specialized B2B Offerings
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-              Predictable Outbound Pipeline Services
-            </h2>
-            <p className="mt-3 text-slate-400 max-w-2xl text-base sm:text-lg">
-              End-to-end appointment setting, high-velocity cold calling, and SDR team enablement built on 11+ years of proven outbound execution.
-            </p>
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <span>FULL OUTBOUND ENGINE</span>
           </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Services Built to{' '}
+            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+              Fill Your Sales Pipeline
+            </span>
+          </h2>
+          <p className="mt-4 text-slate-300 text-base leading-relaxed">
+            From cold list generation and phone execution to AE calendar booking and team leadership.
+          </p>
 
-          {onNavigate && (
+          {/* Filter Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-7">
             <button
-              onClick={() => onNavigate('services')}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors group self-start md:self-auto"
+              onClick={() => setActiveFilter('all')}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                activeFilter === 'all'
+                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
+                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
+              }`}
             >
-              <span>Explore all service specifications</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              All 6 Services
             </button>
-          )}
+            <button
+              onClick={() => setActiveFilter('outbound')}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                activeFilter === 'outbound'
+                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
+                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
+              }`}
+            >
+              Outbound & Cold Calling
+            </button>
+            <button
+              onClick={() => setActiveFilter('pipeline')}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                activeFilter === 'pipeline'
+                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
+                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
+              }`}
+            >
+              Targeting & CRM Hygiene
+            </button>
+            <button
+              onClick={() => setActiveFilter('leadership')}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                activeFilter === 'leadership'
+                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
+                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
+              }`}
+            >
+              SDR Enablement & Coaching
+            </button>
+          </div>
         </div>
 
-        {/* Interactive Services Grid (sample-services.avif layout style) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {SERVICES.map((service) => {
-            const isHovered = activeHoverId === service.id;
-            const isMobileExpanded = expandedMobileId === service.id;
+        {/* Services Grid with Visual Placeholders */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredServices.map((service) => {
+            const Icon = getServiceIcon(service.id);
+            const imageUrl = getServiceImage(service.id);
 
             return (
               <div
                 key={service.id}
-                onMouseEnter={() => setActiveHoverId(service.id)}
-                className={`group relative rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden ${
-                  isHovered
-                    ? 'border-amber-400/60 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/95 shadow-2xl shadow-amber-500/10 -translate-y-1'
-                    : 'border-slate-800/80 bg-slate-900/50 hover:border-slate-700 backdrop-blur-md'
-                }`}
+                className="bg-[#0f172a] rounded-2xl border border-slate-800/90 hover:border-cyan-500/40 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-cyan-950/20 group"
+                id={`service-card-${service.id}`}
               >
-                {/* Top Glowing Accent Line on Hover */}
-                <div
-                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 transition-opacity duration-300 ${
-                    isHovered ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-
-                <div className="p-6 sm:p-8 flex-1 flex flex-col">
-                  {/* Top Metadata Row: Icon, Badge & Key Metric */}
-                  <div className="flex items-start justify-between gap-4 mb-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-center shadow-inner group-hover:border-amber-400/40 transition-colors">
-                        {getServiceIcon(service.id)}
-                      </div>
-                      <div>
-                        <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-wider bg-amber-400/10 text-amber-300 border border-amber-400/20">
-                          {service.badge}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="text-right">
-                      <span className="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800/90 text-slate-200 border border-slate-700 shadow-sm">
-                        {service.metrics}
-                      </span>
-                    </div>
+                {/* Visual Image Header */}
+                <div className="relative h-44 overflow-hidden bg-slate-900">
+                  <img
+                    src={imageUrl}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-90"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/40 to-transparent"></div>
+                  
+                  {/* Badge */}
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2.5 py-1 text-[11px] font-bold text-cyan-300 bg-[#070b14]/90 border border-cyan-500/40 rounded-full backdrop-blur-md">
+                      {service.badge}
+                    </span>
                   </div>
 
-                  {/* Title & Tagline */}
-                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-amber-300 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-400 leading-relaxed">
-                    {service.tagline}
-                  </p>
+                  {/* Icon badge */}
+                  <div className="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-cyan-400 text-slate-950 flex items-center justify-center shadow-lg shadow-cyan-400/20 font-bold">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                </div>
 
-                  {/* Deliverable Callout Box */}
-                  <div className="mt-5 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 group-hover:border-slate-700/80 transition-colors">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold block mb-1">
-                      Deliverable Outcome:
-                    </span>
-                    <p className="text-xs sm:text-[13px] text-slate-300 leading-normal">
-                      {service.deliverableSummary}
+                {/* Content Body */}
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-white font-heading group-hover:text-cyan-300 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs text-cyan-400/90 font-medium mt-1">
+                      {service.tagline}
+                    </p>
+                    <p className="text-xs text-slate-300 leading-relaxed mt-3">
+                      {service.description}
                     </p>
                   </div>
 
-                  {/* Interactive Feature Matrix (Revealed on Hover / Desktop & Toggleable on Mobile) */}
-                  <div
-                    className={`mt-6 space-y-2.5 transition-all duration-300 ${
-                      isHovered || isMobileExpanded
-                        ? 'opacity-100 max-h-[500px]'
-                        : 'opacity-85 max-h-[220px] md:max-h-[500px]'
-                    }`}
-                  >
-                    <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block font-semibold">
-                      Key Inclusions:
-                    </span>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-[13.5px] text-slate-300">
-                          <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Benchmark Metric Pill */}
+                  <div className="bg-[#070b14] border border-slate-800 p-2.5 rounded-lg text-xs">
+                    <span className="text-slate-400 text-[10px] uppercase tracking-wider block font-semibold">Key Benchmark</span>
+                    <span className="text-cyan-300 font-bold">{service.metrics}</span>
                   </div>
 
-                  {/* Tools Stack Chips */}
-                  <div className="mt-6 pt-5 border-t border-slate-800/60">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-2">
-                      Execution Tech Stack:
-                    </span>
+                  {/* Features bullets */}
+                  <ul className="space-y-1.5 text-xs text-slate-300 pt-1">
+                    {service.features.map((feat, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Tools Stack Tags */}
+                  <div className="pt-2 border-t border-slate-800/80">
+                    <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide mb-1.5">
+                      Tools & Stack:
+                    </div>
                     <div className="flex flex-wrap gap-1.5">
-                      {service.toolsUsed.map((tool, idx) => (
+                      {service.toolsUsed.map((tool) => (
                         <span
-                          key={idx}
-                          className="px-2.5 py-1 rounded bg-slate-800/60 text-slate-300 text-[11px] font-mono border border-slate-700/50"
+                          key={tool}
+                          className="px-2 py-0.5 text-[10px] font-medium bg-slate-900 border border-slate-700/80 text-slate-300 rounded"
                         >
                           {tool}
                         </span>
                       ))}
                     </div>
                   </div>
-                </div>
 
-                {/* Card Action Footer */}
-                <div className="p-6 sm:p-8 pt-0 mt-2 flex flex-wrap items-center justify-between gap-3">
-                  <button
-                    type="button"
-                    onClick={() => onOpenContact?.(service.title)}
-                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-colors shadow-md shadow-amber-500/10"
-                  >
-                    <span>Book This Service</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-
-                  {onSelectService && (
+                  {/* Action Buttons */}
+                  <div className="pt-3 flex items-center justify-between gap-2">
                     <button
-                      type="button"
                       onClick={() => onSelectService(service)}
-                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-800/70 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold border border-slate-700 transition-colors"
+                      className="text-xs font-semibold text-slate-300 hover:text-cyan-400 flex items-center gap-1 group/btn"
                     >
-                      <span>View Full Scope</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>View Deliverables</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
-                  )}
 
-                  {/* Mobile expansion toggle button */}
-                  <button
-                    type="button"
-                    onClick={() => toggleMobileExpand(service.id)}
-                    className="md:hidden p-2.5 rounded-xl bg-slate-800/70 border border-slate-700 text-slate-400 hover:text-white text-xs inline-flex items-center gap-1"
-                    aria-label="Toggle details"
-                  >
-                    <span>{isMobileExpanded ? 'Less' : 'More'}</span>
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform ${isMobileExpanded ? 'rotate-180' : ''}`}
-                    />
-                  </button>
+                    <button
+                      onClick={() => onOpenContactWithService(service.title)}
+                      className="px-3 py-1.5 text-xs font-semibold bg-cyan-500/10 hover:bg-cyan-400 hover:text-slate-950 text-cyan-300 border border-cyan-500/30 rounded-lg transition-all"
+                    >
+                      Inquire →
+                    </button>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
+
+        {/* Bottom Banner */}
+        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-blue-950/40 border border-cyan-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-center md:text-left">
+            <h4 className="text-lg sm:text-xl font-bold text-white font-heading">
+              Need a Custom Hybrid Campaign (Phone + LinkedIn + Email)?
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
+              I frequently build end-to-end bespoke outbound playbooks combining high-volume calling, social touches, and CRM setup.
+            </p>
+          </div>
+          <button
+            onClick={() => onOpenContactWithService("Custom Hybrid Outbound Campaign")}
+            className="shrink-0 px-6 py-3 text-xs font-bold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-xl shadow-md shadow-cyan-500/20 transition-all"
+          >
+            Design My Custom Outbound Motion →
+          </button>
+        </div>
+
       </div>
     </section>
   );

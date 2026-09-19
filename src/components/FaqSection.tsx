@@ -1,128 +1,110 @@
-import React, { useState, useMemo } from 'react';
-import { HelpCircle, ChevronDown, ChevronUp, Search, MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { HelpCircle, ChevronDown, ChevronUp, Search, Sparkles } from 'lucide-react';
 import { FAQ_ITEMS } from '../data/portfolioData';
 
-export interface FaqItemType {
-  q?: string;
-  question?: string;
-  a?: string;
-  answer?: string;
-  category?: string;
-}
-
 export const FaqSection: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [activeCategory, setActiveCategory] = useState<string>('All');
 
-  const rawList: FaqItemType[] = (FAQ_ITEMS as FaqItemType[]) || [];
+  const categories = ['All', 'Calling & Volume', 'Quality & Show-ups', 'Engagement', 'Tools & Stack'];
 
-  const categories = useMemo(() => {
-    const cats = new Set<string>();
-    rawList.forEach((item) => {
-      if (item.category) cats.add(item.category);
-    });
-    return ['All', ...Array.from(cats)];
-  }, [rawList]);
+  const filteredFaqs = FAQ_ITEMS.filter((item) => {
+    const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
+    const matchesSearch = item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          item.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
-  const filteredFaqs = useMemo(() => {
-    return rawList.filter((item) => {
-      const qText = (item.q || item.question || '').toLowerCase();
-      const aText = (item.a || item.answer || '').toLowerCase();
-      const matchesSearch = qText.includes(searchQuery.toLowerCase()) || aText.includes(searchQuery.toLowerCase());
-      const matchesCat = selectedCategory === 'All' || item.category === selectedCategory;
-      return matchesSearch && matchesCat;
-    });
-  }, [rawList, searchQuery, selectedCategory]);
-
-  const toggleAccordion = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
+  const toggleFaq = (idx: number) => {
+    setOpenIdx(openIdx === idx ? null : idx);
   };
 
   return (
-    <section className="relative py-16 sm:py-20 lg:py-24 bg-[#0b0f19] border-t border-slate-800/80">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section id="faq" className="py-24 bg-[#070b14] relative border-t border-slate-800/80">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 font-mono text-xs uppercase tracking-wider mb-4">
-            <HelpCircle className="w-3.5 h-3.5" />
-            <span>Common Inquiries</span>
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-3">
+            <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
+            <span>COMMONLY ASKED QUESTIONS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
-            Frequently Asked Questions
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Frequently Asked{' '}
+            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+              Questions
+            </span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-300">
-            Answers regarding cold calling methodology, SDR contract availability, market coverage, and campaign onboarding.
+          <p className="mt-4 text-slate-300 text-base leading-relaxed">
+            Straightforward answers regarding dial volume, show-up rates, CRM stacks, time zone overlap, and onboarding speed.
           </p>
-        </div>
 
-        {/* Search & Category Filter */}
-        <div className="mb-8 space-y-4">
-          <div className="relative">
-            <Search className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search questions (e.g. channels, CRM tools, show rate)..."
-              className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 text-sm font-mono transition-all"
-            />
-          </div>
+          {/* Search & Category filter */}
+          <div className="mt-8 space-y-4">
+            <div className="relative max-w-md mx-auto">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search questions (e.g. show-up, dial volume, CRM)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-slate-900 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
+              />
+            </div>
 
-          {categories.length > 2 && (
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                    selectedCategory === cat
-                      ? 'bg-amber-400 text-slate-950 font-semibold'
-                      : 'bg-slate-900/40 text-slate-400 hover:text-slate-200 border border-slate-800'
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                    activeCategory === cat
+                      ? 'bg-cyan-400 text-slate-950'
+                      : 'bg-[#0f172a] text-slate-400 border border-slate-800 hover:text-white'
                   }`}
                 >
                   {cat}
                 </button>
               ))}
             </div>
-          )}
+          </div>
         </div>
 
-        {/* Accordion Items */}
-        <div className="space-y-3">
+        {/* Accordion List */}
+        <div className="space-y-4">
           {filteredFaqs.length === 0 ? (
-            <div className="text-center py-10 text-slate-500 font-mono text-sm">
-              No matching questions found for "{searchQuery}".
+            <div className="text-center py-12 text-slate-400 text-sm bg-slate-900/50 rounded-2xl border border-slate-800">
+              No questions found matching "{searchQuery}".
             </div>
           ) : (
             filteredFaqs.map((faq, idx) => {
-              const question = faq.q || faq.question || '';
-              const answer = faq.a || faq.answer || '';
-              const isOpen = openIndex === idx;
+              const isOpen = openIdx === idx;
 
               return (
                 <div
-                  key={idx}
-                  className="rounded-xl border border-slate-800/80 bg-slate-900/50 overflow-hidden transition-all duration-200 hover:border-slate-700/80"
+                  key={faq.question}
+                  className="bg-[#0f172a] rounded-xl border border-slate-800/90 overflow-hidden transition-all duration-200 hover:border-cyan-500/40"
                 >
                   <button
-                    type="button"
-                    onClick={() => toggleAccordion(idx)}
-                    className="w-full flex items-center justify-between p-5 sm:p-6 text-left transition-colors focus:outline-none"
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full text-left p-5 flex items-center justify-between gap-4 focus:outline-none"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-base sm:text-lg font-semibold text-white pr-4">
-                      {question}
+                    <span className="text-sm sm:text-base font-bold text-white font-heading">
+                      {faq.question}
                     </span>
-                    <span className="p-1 rounded-lg bg-slate-800/60 text-slate-400 shrink-0">
-                      {isOpen ? <ChevronUp className="w-4 h-4 text-amber-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
-                    </span>
+                    <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center text-cyan-400 shrink-0">
+                      {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </div>
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-6 sm:px-6 sm:pb-6 text-slate-300 text-sm sm:text-[15px] leading-relaxed border-t border-slate-800/40 pt-4">
-                      {answer}
+                    <div className="px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/60 pt-3 animate-in fade-in duration-200">
+                      <p>{faq.answer}</p>
+                      <div className="mt-2 text-[11px] text-cyan-400/80 font-medium">
+                        Category: {faq.category}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -131,28 +113,6 @@ export const FaqSection: React.FC = () => {
           )}
         </div>
 
-        {/* Bottom CTA Card */}
-        <div className="mt-12 p-6 rounded-2xl bg-slate-900/40 border border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 shrink-0">
-              <MessageCircle className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-white">Have a specific question about your ICP?</div>
-              <div className="text-xs text-slate-400">Ask a question directly regarding your market or campaign goals.</div>
-            </div>
-          </div>
-          <a
-            href="#main-content"
-            onClick={() => {
-              const el = document.getElementById('main-content');
-              el?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider transition-colors shrink-0"
-          >
-            Direct Inquiry
-          </a>
-        </div>
       </div>
     </section>
   );

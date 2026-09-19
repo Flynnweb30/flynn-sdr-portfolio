@@ -1,437 +1,698 @@
-import {
-  ServiceItem,
-  CaseStudy,
-  WorkSample,
-  ExperienceRole,
-  StatItem,
-  ToolItem,
-  SkillCategory,
-  FaqItem,
-} from '../types';
+import { ServiceItem, ExperienceItem, ToolCategory, WorkStep, CaseStudy, Testimonial, FaqItem, WorkSample } from '../types';
 
-// =============================================================
-// PERSONAL INFO
-// =============================================================
 export const PERSONAL_INFO = {
-  name: 'Flynn James Q. Pontino',
-  shortName: 'Flynn James',
-  title: 'Senior B2B SDR & Junior Sales Team Lead',
-  email: 'va.flynnjames@gmail.com',
-  phone: '+63-930-635-9306',
-  location: 'Manila, Philippines (100% Remote — US/UK/ANZ/SG Timezone Coverage)',
-  linkedin: 'https://www.linkedin.com/in/fjpontino',
-  availability: 'Available for Q3/Q4 Outbound Campaigns',
-  responseTime: 'Replies within 4 hours',
-  yearsExperience: '11+',
-  pipelineSourced: '$1.8M+',
-  meetingsBooked: '180+',
-  showRate: '68%',
+  name: "Flynn James Q. Pontino",
+  shortName: "Flynn James",
+  role: "Senior B2B SDR, Appointment Setter & Outbound Specialist",
+  tagline: "I Turn Cold Outbound Into Predictable Qualified Pipeline",
+  email: "va.flynnjames@gmail.com",
+  phone: "+63 930 635 9306",
+  location: "Remote Global (Serving US, UK, ANZ, CA & SG)",
+  linkedin: "https://www.linkedin.com/in/fjpontino",
+  resumeUrl: "https://drive.google.com/file/d/1MIN-epAamM3280J2Qv9LwWoQ1w_b15Fd/view?usp=sharing",
+  availabilityStatus: "Available for Remote Roles & High-Impact B2B Contracts",
+  headlineBio: "11+ years of battle-tested B2B appointment-setting and outbound sales experience. Over $1.8M+ in pipeline sourced, consistent 120–150% quota attainment, and 30+ qualified discovery meetings booked per month across US, UK, ANZ, and Singapore.",
+  experienceYears: "11+",
+  totalPipelineSourced: "$1.8M+",
+  monthlyMeetings: "30+",
+  avgQuotaAttainment: "120-150%",
+  dailyDials: "150+",
+  showUpRate: "70%+",
+  marketsServed: "5 Global Markets"
 };
 
-// =============================================================
-// STATS
-// =============================================================
-export const STATS: StatItem[] = [
-  { value: '11+', label: 'Years Experience', helperText: 'Outbound B2B telemarketing & sales development' },
-  { value: '$1.8M+', label: 'Pipeline Sourced', helperText: 'Qualified enterprise & mid-market pipeline generated' },
-  { value: '180+', label: 'Meetings Booked', helperText: 'Verified decision-maker calls on AE calendars' },
-  { value: '68%', label: 'Show Rate', helperText: 'Consistent attendance rate through active confirmation cadences' },
-];
-
-export const KEY_STATS: StatItem[] = STATS;
-export const STAT_ITEMS: StatItem[] = STATS;
-
-// =============================================================
-// TOOLS
-// =============================================================
-export const TOOLS: ToolItem[] = [
-  { name: 'Apollo.io', category: 'Prospecting & Data', proficiency: 'Expert', useCase: 'TAM account mapping, verified mobile direct dials, and multi-step automated email sequencing.' },
-  { name: 'ZoomInfo', category: 'Prospecting & Data', proficiency: 'Advanced', useCase: 'Enterprise org-chart intelligence, buying intent signals, and executive direct lines.' },
-  { name: 'Salesloft', category: 'Sales Engagement', proficiency: 'Expert', useCase: 'High-velocity cadence management, integrated dialer acceleration, and disposition tagging.' },
-  { name: 'HubSpot CRM', category: 'CRM & Pipeline', proficiency: 'Expert', useCase: 'Lead qualification tracking, automated meeting reminders, and deal pipeline hygiene.' },
-  { name: 'Salesforce', category: 'CRM & Pipeline', proficiency: 'Advanced', useCase: 'Enterprise account routing, opportunity stage reporting, and activity metrics.' },
-  { name: 'LinkedIn Sales Navigator', category: 'Social Outreach', proficiency: 'Expert', useCase: 'Account list segmentation, buyer intent alerts, and consultative InMail messaging.' },
-  { name: 'Kixie / Aircall', category: 'Telephony & Dialers', proficiency: 'Expert', useCase: 'Local presence outbound dialing, live call whispering, and disposition workflow automation.' },
-  { name: 'Gong.io', category: 'Conversation Intelligence', proficiency: 'Advanced', useCase: 'Call recording review, talk-to-listen ratio coaching, and objection pattern analysis.' },
-];
-
-export const TOOL_STACK: ToolItem[] = TOOLS;
-export const TECH_STACK: ToolItem[] = TOOLS;
-
-// =============================================================
-// SKILLS
-// =============================================================
-export const SKILLS: SkillCategory[] = [
+export const CORE_SERVICES: ServiceItem[] = [
   {
-    category: 'Outbound Sales & Execution',
-    skills: [
-      { name: 'Cold Calling & Tonality', level: 'Expert', years: '11+', highlight: true },
-      { name: 'Gatekeeper Navigation', level: 'Expert', years: '11+', highlight: true },
-      { name: 'BANT / MEDDIC Qualification', level: 'Expert', years: '8+', highlight: true },
-      { name: 'Pattern-Interrupt Scripting', level: 'Expert', years: '9+' },
-      { name: 'Multi-Touch Cadences', level: 'Expert', years: '7+' },
-    ],
-  },
-  {
-    category: 'Sales Leadership & Enablement',
-    skills: [
-      { name: 'Junior SDR Mentorship', level: 'Advanced', years: '4+', highlight: true },
-      { name: 'Live Call Whispering', level: 'Expert', years: '5+' },
-      { name: 'Objection-Handling Workshops', level: 'Expert', years: '6+' },
-      { name: 'KPI & Pipeline Analytics', level: 'Advanced', years: '6+' },
-    ],
-  },
-];
-
-export const SKILL_CATEGORIES: SkillCategory[] = SKILLS;
-export const SKILL_SET: SkillCategory[] = SKILLS;
-
-// =============================================================
-// FAQS
-// =============================================================
-export const FAQS: FaqItem[] = [
-  { q: 'What industries do you specialize in?', a: 'Primarily B2B SaaS, IT security, digital marketing agencies, and professional services across North America, the UK, Australia, and Singapore.', category: 'Scope' },
-  { q: 'How many cold calls do you typically make per day?', a: 'On dedicated campaigns, I average 120 to 150 targeted, direct-dial dials per day while maintaining consultative, high-conversion conversations.', category: 'Metrics' },
-  { q: 'How do you handle qualification before booking a meeting?', a: 'Every prospect is vetted for authority, company size, current tech stack pain, and timeline before an appointment is scheduled on your AE calendar.', category: 'Process' },
-];
-
-export const FREQUENTLY_ASKED: FaqItem[] = FAQS;
-
-// =============================================================
-// SERVICES
-// =============================================================
-export const SERVICES: ServiceItem[] = [
-  {
-    id: 'appointment-setting',
-    title: 'B2B Appointment Setting',
-    tagline: 'High-intent sales meetings booked directly on your Account Executive calendar',
-    badge: 'Core Service',
-    description: 'Targeted multi-touch outbound prospecting across cold calling, email, and LinkedIn to connect your sales team with verified decision-makers across US, UK, ANZ, and Singapore markets.',
-    metrics: '15–25 Qualified Meetings / Month',
+    id: "lead-generation",
+    title: "B2B Lead Generation & Account Targeting",
+    tagline: "Laser-focused prospect lists with verified commercial intent",
+    badge: "High-Intent Targeting",
+    description: "I build pristine, verified prospect lists mapped to your Ideal Customer Profile (ICP). No bloated, outdated databases—only active decision-makers with direct-dial phones and validated email addresses.",
+    metrics: "98% data validity · 0% bounce rate target",
     features: [
-      'Ideal Customer Profile (ICP) & TAM tier-1 account mapping',
-      'Multi-touch cadence execution (Phone + Email + LinkedIn)',
-      'Rigorous BANT / MEDDIC qualification before scheduling',
-      'Automated show-rate reminder workflows & pre-call briefing notes',
+      "Account-Based Marketing (ABM) list development",
+      "Technographic & firmographic intent filtering",
+      "C-Suite & VP stakeholder mapping",
+      "Continuous list verification via Apollo, Sales Nav, and ZoomInfo"
     ],
-    toolsUsed: ['Apollo.io', 'ZoomInfo', 'Salesloft', 'HubSpot CRM', 'LinkedIn Sales Nav'],
-    deliverableSummary: 'Verified decision-maker appointments delivered straight to your CRM with complete pain point and qualification notes.',
+    toolsUsed: ["Apollo.io", "LinkedIn Sales Navigator", "ZoomInfo", "Lusha", "Clay"],
+    deliverableSummary: "Custom enriched prospect matrices segmented by buying tier, company revenue, and priority trigger events."
   },
   {
-    id: 'cold-calling',
-    title: 'Targeted Cold Calling & Telemarketing',
-    tagline: 'Direct, conversational phone outreach that breaks through gatekeepers and captures C-suite interest',
-    badge: 'High Conversion',
-    description: 'Over 11 years of outbound calling mastery. Navigating complex gatekeepers, handling reflex objections conversationally, and booking meetings with VP and C-level prospects.',
-    metrics: '120–150 Dials/Day | 4.8% Connect-to-Meeting Rate',
+    id: "appointment-setting",
+    title: "B2B Appointment Setting",
+    tagline: "Converting cold interest into confirmed, high-attendance meetings",
+    badge: "Core Superpower",
+    description: "Securing high-intent discovery calls and product demos directly on your Account Executives' calendars. Every meeting is confirmed with value expectations and pre-call context so show-up rates remain high.",
+    metrics: "30+ qualified meetings/mo · 70%+ show-up rate",
     features: [
-      'Pattern-interrupt script creation tailored to your value prop',
-      'Conversational objection-handling (Timing, Budget, Incumbents)',
-      'Gatekeeper navigation & executive assistant referral sourcing',
-      'Full call disposition transparency and recorded sample reviews',
+      "Strategic calendar scheduling & direct calendar invites",
+      "Pre-call reminder sequences to slash no-shows",
+      "Live transfers for urgent enterprise buyers",
+      "Thorough discovery notes provided before every AE call"
     ],
-    toolsUsed: ['Kixie', 'Aircall', 'PhoneBurner', 'Orum', 'HubSpot Calling'],
-    deliverableSummary: 'High-volume outbound calling executed with native-level English fluency, active listening, and daily transparent disposition logs.',
+    toolsUsed: ["Calendly", "HubSpot Meetings", "Google Workspace", "Chili Piper"],
+    deliverableSummary: "Confirmed calendar events synced to your CRM complete with company revenue, tech stack, and pain points."
   },
   {
-    id: 'sdr-coaching',
-    title: 'Junior SDR Coaching & Sales Enablement',
-    tagline: 'Elevating junior outbound reps into confident, quota-crushing appointment setters',
-    badge: 'Team Leadership',
-    description: 'Structured 1-on-1 and team coaching for SDR departments. Live call whispering, objection-handling workshops, script optimization, and accountability frameworks that lift team quota attainment.',
-    metrics: '+35% Quota Attainment Lift across mentored reps',
+    id: "cold-calling",
+    title: "High-Volume Cold Calling",
+    tagline: "150–500 dials/day backed by consultative phone presence",
+    badge: "Relentless Outbound",
+    description: "High-volume, high-conviction outbound calling that bypasses gatekeepers and commands attention in the first 7 seconds. I don't read robotic scripts—I hold natural, problem-centric commercial conversations.",
+    metrics: "150+ dials/day · 12-18% connect-to-conversation rate",
     features: [
-      'Call recording breakdowns with timestamped coaching feedback',
-      'Live call whispering and objection handling roleplay sessions',
-      'Conversion KPI tracking and daily accountability check-ins',
-      'Conversational talk-track playbooks replacing robotic scripts',
+      "Power dialer mastery (Aircall, RingCentral, Five9, PhoneBurner)",
+      "Instant objection pivoting ('send an email', 'not interested', 'no budget')",
+      "Pattern-interrupt cold openers that gain immediate permission",
+      "Active listening and rapid pain identification"
     ],
-    toolsUsed: ['Gong.io', 'Loom', 'Notion SOPs', 'Slack Sales Rooms'],
-    deliverableSummary: 'Customized SDR playbook, structured coaching cadences, and measurable weekly improvements in meeting velocity.',
+    toolsUsed: ["Aircall", "RingCentral", "Five9", "PhoneBurner", "Kixie"],
+    deliverableSummary: "High daily outbound call volume logged directly with call recordings, disposition notes, and callbacks."
   },
   {
-    id: 'pipeline-management',
-    title: 'CRM Pipeline & Lead Data Enrichment',
-    tagline: 'Clean prospect databases, verified direct dials, and zero CRM leakage',
-    badge: 'Operational Support',
-    description: 'Building targeted B2B contact lists, verifying mobile direct dials and corporate emails, eliminating CRM duplicate bloat, and configuring structured deal stages.',
-    metrics: '99% Email Deliverability | Zero CRM Leakage',
+    id: "sdr-support",
+    title: "SDR Support, Coaching & Floor Leadership",
+    tagline: "Elevating rep productivity, call execution, and onboarding velocity",
+    badge: "Sales Leadership",
+    description: "Mentoring and leading junior SDRs, auditing live calls, refining objection scripts, and establishing daily accountability to help teams exceed monthly appointment quotas.",
+    metrics: "+20% team productivity · 25% faster ramp time",
     features: [
-      'B2B list building and tier-1 account enrichment',
-      'Direct-dial verification and email bounce-prevention audits',
-      'CRM workflow configuration and custom disposition tagging',
-      'Weekly pipeline velocity analytics and campaign summaries',
+      "Call recording reviews & tactical 1-on-1 coaching",
+      "Custom objection turnaround playbooks",
+      "New hire onboarding & script shadowing programs",
+      "KPI pacing and weekly outbound sprint management"
     ],
-    toolsUsed: ['Apollo.io', 'NeverBounce', 'HubSpot', 'Salesforce', 'Google Sheets'],
-    deliverableSummary: 'Enriched, clean prospect databases with verified contact details ready for immediate multi-touch outbound cadences.',
+    toolsUsed: ["Gong", "HubSpot", "Slack", "Loom", "Notion"],
+    deliverableSummary: "Structured SDR onboarding guides, objection cheat sheets, and call quality scorecards."
   },
+  {
+    id: "linkedin-outreach",
+    title: "LinkedIn Social Selling & Sales Navigator Outreach",
+    tagline: "Building warm executive rapport across the world's top B2B network",
+    badge: "Social Selling",
+    description: "Hyper-personalized LinkedIn touches that cut through inbox noise. Combining content engagement, profile visits, tailored connection notes, and multi-touch messaging sequences.",
+    metrics: "28% higher connection rate · 5-10 meetings/week",
+    features: [
+      "Boolean search mastery on Sales Navigator",
+      "Trigger-based outreach (funding rounds, executive hiring, promotions)",
+      "Non-salesy consultative conversation starters",
+      "Integration with cold call touches for multi-channel dominance"
+    ],
+    toolsUsed: ["LinkedIn Sales Navigator", "Expandi", "Dux-Soup", "HubSpot"],
+    deliverableSummary: "Optimized connection sequences and direct message frameworks tailored to your specific industry."
+  },
+  {
+    id: "pipeline-management",
+    title: "Prospecting, Follow-Up & CRM Pipeline Hygiene",
+    tagline: "Zero lost leads, flawless deal stages, and accurate forecasting data",
+    badge: "Data Integrity",
+    description: "Managing the full prospect lifecycle from cold reach to handoff. Ensuring every conversation is logged, tasks are scheduled, and stalled leads receive systematic re-engagement sequences.",
+    metrics: "100% CRM data accuracy · 30% improved forecast accuracy",
+    features: [
+      "HubSpot, Salesforce, Pipedrive, and GoHighLevel configuration",
+      "Lifecycle stage mapping and automated task cadences",
+      "Cold contact resuscitation campaigns",
+      "Lead status hygiene and executive reporting"
+    ],
+    toolsUsed: ["HubSpot CRM", "Salesforce", "Pipedrive", "GoHighLevel"],
+    deliverableSummary: "Pristine CRM pipelines with transparent activity logs, stage tracking, and executive visibility."
+  }
 ];
 
-export const SERVICE_ITEMS: ServiceItem[] = SERVICES;
+export const WORK_PROCESS_STEPS: WorkStep[] = [
+  {
+    step: "01",
+    title: "Prospect & Research",
+    subtitle: "Identify High-Intent Accounts",
+    description: "We filter target accounts by strict criteria: company headcount, technology stack, hiring triggers, and geographic focus. Using Apollo and Sales Navigator, I pinpoint verified decision-makers.",
+    actionItems: [
+      "Define & validate the Ideal Customer Profile (ICP)",
+      "Build verified contact lists with direct mobile numbers and business emails",
+      "Uncover recent company triggers (funding, new leadership, tool adoption)"
+    ],
+    outcome: "Clean, verified list of 250–500 targeted decision-makers ready for outreach."
+  },
+  {
+    step: "02",
+    title: "Engage & Multi-Touch",
+    subtitle: "Coordinate Phone, Email & LinkedIn",
+    description: "Executing a synchronized 7-touch cadence over 14 business days. Cold calls are prioritized during peak buyer hours, supported by personalized LinkedIn connection touches and value-driven emails.",
+    actionItems: [
+      "Execute 150+ daily dials with power dialers",
+      "Deploy personalized LinkedIn touches and custom email hooks",
+      "Engage gatekeepers politely to navigate directly to decision-makers"
+    ],
+    outcome: "High connect rate and live conversations with senior buyers."
+  },
+  {
+    step: "03",
+    title: "Qualify (BANT & MEDDIC)",
+    subtitle: "Diagnose Pain & Verify Purchasing Power",
+    description: "I don't push appointments on unqualified leads. I ask diagnostic, open-ended questions to uncover true operational bottlenecks, verify budget authority, and confirm active project timelines.",
+    actionItems: [
+      "Uncover current tools and commercial pain points",
+      "Confirm decision-making authority and buying committee members",
+      "Verify budget availability and timeline to implement a solution"
+    ],
+    outcome: "Only genuinely qualified prospects move to the scheduling phase."
+  },
+  {
+    step: "04",
+    title: "Book & Confirm",
+    subtitle: "Lock In Dedicated Discovery Time",
+    description: "Securing a firm calendar slot directly on your Account Executive's schedule. Providing the prospect with a clear agenda, value proposition summary, and mutual commitment.",
+    actionItems: [
+      "Direct calendar booking via integrated scheduling tools",
+      "Send immediate confirmation email with meeting agenda",
+      "Agree on specific topics and materials to be reviewed on the call"
+    ],
+    outcome: "Locked calendar meeting with high prospect commitment."
+  },
+  {
+    step: "05",
+    title: "Follow-Up & Show-Up Optimization",
+    subtitle: "Protect Your AE's Calendar Against No-Shows",
+    description: "A meeting booked is only valuable if the prospect attends. I execute a proactive 24-hour and 1-hour confirmation sequence with tailored context to keep attendance rates consistently above 70%.",
+    actionItems: [
+      "24-hour pre-call briefing reminder with agenda re-confirmation",
+      "1-hour SMS / email nudge for active engagement",
+      "Instant re-scheduling workflow if an executive has an urgent conflict"
+    ],
+    outcome: "70%+ show-up rate with highly engaged attendees."
+  },
+  {
+    step: "06",
+    title: "Frictionless Handoff",
+    subtitle: "Detailed Discovery Briefing for Closers",
+    description: "Before your AE enters the meeting, they receive a comprehensive briefing document: verbatim pain quotes, competitor mentions, tech stack context, and suggested talk tracks to accelerate deal closure.",
+    actionItems: [
+      "Log full call recording, notes, and BANT scorecard into CRM",
+      "Deliver executive briefing document to AE 15 minutes before meeting",
+      "Tag opportunities accurately for pipeline reporting"
+    ],
+    outcome: "AE enters the discovery call fully armed to close."
+  }
+];
 
-// =============================================================
-// CASE STUDIES
-// =============================================================
+export const TOOL_CATEGORIES: ToolCategory[] = [
+  {
+    category: "Prospecting & Intelligence",
+    description: "Tools I use daily to build verified lead lists and uncover buying intent signals.",
+    tools: [
+      { name: "Apollo.io", level: "Expert", iconName: "Database", useCase: "Verified emails, direct dials, and cadence automation" },
+      { name: "LinkedIn Sales Navigator", level: "Expert", iconName: "Linkedin", useCase: "Advanced Boolean filters, account tracking & lead lists" },
+      { name: "ZoomInfo", level: "Advanced", iconName: "Search", useCase: "Enterprise intelligence & org chart stakeholder mapping" },
+      { name: "Lusha", level: "Advanced", iconName: "Phone", useCase: "Direct dial phone discovery and B2B enrichment" },
+      { name: "Clay", level: "Proficient", iconName: "Cpu", useCase: "Automated AI enrichment and waterfall data aggregation" }
+    ]
+  },
+  {
+    category: "CRMs & Pipeline Architecture",
+    description: "Platforms where I maintain 100% data hygiene, stage tracking, and clean forecasting.",
+    tools: [
+      { name: "HubSpot CRM", level: "Expert", iconName: "Layers", useCase: "Lifecycle tracking, email templates, meeting scheduler & tasks" },
+      { name: "Salesforce", level: "Advanced", iconName: "Cloud", useCase: "Enterprise opportunity management and lead dispositions" },
+      { name: "Pipedrive", level: "Expert", iconName: "CheckCircle", useCase: "Visual sales pipeline and deal velocity tracking" },
+      { name: "GoHighLevel", level: "Advanced", iconName: "Zap", useCase: "Multi-channel automated marketing & SMS outreach" }
+    ]
+  },
+  {
+    category: "Calling & Telephony Infrastructure",
+    description: "High-speed power dialers and VoIP solutions to maintain 150–500 dials per day.",
+    tools: [
+      { name: "Aircall", level: "Expert", iconName: "PhoneCall", useCase: "Power dialing, call tagging, and CRM integration" },
+      { name: "RingCentral", level: "Expert", iconName: "Radio", useCase: "Global enterprise outbound calling & call logging" },
+      { name: "Five9", level: "Advanced", iconName: "Headphones", useCase: "Predictive & power dialing with automated dispositions" },
+      { name: "PhoneBurner", level: "Expert", iconName: "Flame", useCase: "Rapid dialing velocity with zero audio delay" }
+    ]
+  },
+  {
+    category: "Outbound Sales Frameworks",
+    description: "Proven sales methodologies that ensure conversations convert into qualified opportunities.",
+    tools: [
+      { name: "BANT Qualification", level: "Expert", iconName: "Target", useCase: "Budget, Authority, Need, and Timeline verification" },
+      { name: "MEDDIC Fundamentals", level: "Advanced", iconName: "Award", useCase: "Metrics, Economic Buyer, Decision Criteria alignment" },
+      { name: "Consultative Discovery", level: "Expert", iconName: "MessageSquare", useCase: "Active listening, diagnostic questioning & pain exploration" },
+      { name: "Objection Inversion", level: "Expert", iconName: "RefreshCw", useCase: "Flipping knee-jerk brush-offs into engaging discussions" }
+    ]
+  }
+];
+
+export const CAREER_EXPERIENCES: ExperienceItem[] = [
+  {
+    id: "regen-lead",
+    period: "Jul 2026 — Present",
+    company: "Regen Digital US",
+    role: "Junior Sales Team Lead",
+    location: "Remote · Dover, DE",
+    type: "Full-Time Remote",
+    industry: "Web Design, SEO & Digital Marketing",
+    highlightMetric: "+15% Monthly KPI Exceedance",
+    responsibilities: [
+      "Coach and mentor SDRs on objection handling, qualification depth, and closing techniques.",
+      "Monitor sales floor metrics, call recordings, and team KPIs using data-driven coaching.",
+      "Lead structured SDR onboarding, mock calls, and live shadowing sessions to cut ramp time.",
+      "Foster a culture of high performance and resilience across global time zones."
+    ],
+    achievements: [
+      "Accelerated team-wide monthly quota attainment by 15%+ above baseline.",
+      "Reduced junior SDR onboarding ramp time by 25% through structured playbooks.",
+      "Recognized for top operational coaching and consistent floor morale."
+    ]
+  },
+  {
+    id: "regen-sdr",
+    period: "May 2026 — Present",
+    company: "Regen Digital US",
+    role: "Sales Development Representative (SDR)",
+    location: "Remote · Dover, DE",
+    type: "Full-Time Remote",
+    industry: "Web Design, SEO & Digital Marketing",
+    highlightMetric: "Level 4 Top Tier in 3 Weeks",
+    responsibilities: [
+      "Generate qualified sales opportunities through multi-channel cold outbound prospecting.",
+      "Engage C-level decision-makers, diagnose digital marketing bottlenecks, and qualify with BANT.",
+      "Book high-value appointments for senior digital marketing strategists.",
+      "Maintain 100% CRM accuracy in HubSpot with complete discovery notes."
+    ],
+    achievements: [
+      "Promoted to Level 4 (highest company tier) within 3 weeks of joining.",
+      "Exceeded 60+ individual KPIs spanning dials, connects, and qualified bookings.",
+      "Maintained an average meeting show-up rate of 74%."
+    ]
+  },
+  {
+    id: "seek-marketing",
+    period: "Nov 2025 — Apr 2026",
+    company: "Seek Marketing Partners",
+    role: "Outbound Sales Representative",
+    location: "Remote · Bury, UK",
+    type: "Contract Remote",
+    industry: "Marketing & Performance Advertising",
+    highlightMetric: "$1.8M Pipeline Sourced · 120% Quota",
+    responsibilities: [
+      "Conducted 150+ daily cold calls combined with personalized LinkedIn Sales Navigator outreach.",
+      "Generated 30+ qualified discovery meetings per month for UK and European account executives.",
+      "Owned the full top-of-funnel pipeline in HubSpot from cold contact to confirmed appointment.",
+      "Developed new objection-handling scripts for common UK business gatekeepers."
+    ],
+    achievements: [
+      "Crushed monthly quota consistently by 120%, generating $1.8M in pipeline value.",
+      "Boosted prospect response rates by 18% with tailored multi-channel cadences.",
+      "Improved pipeline forecasting accuracy by 30% through strict CRM stage tracking."
+    ]
+  },
+  {
+    id: "averps",
+    period: "Feb 2025 — Nov 2025",
+    company: "Averps Pte Ltd",
+    role: "Sales Development Representative",
+    location: "Remote · Singapore",
+    type: "Full-Time Remote",
+    industry: "Enterprise SaaS & Cloud IT Solutions",
+    highlightMetric: "$1.2M Qualified Pipeline · 22% Demo Rate",
+    responsibilities: [
+      "Executed targeted outbound campaigns to enterprise CTOs, CIOs, and IT Directors in APAC.",
+      "Built multi-touch email and LinkedIn cadences customized for enterprise technology buyers.",
+      "Pioneered a strict BANT qualification matrix to filter tire-kickers before booking demos.",
+      "Collaborated with marketing to refine Ideal Customer Profiles (ICP) and intent data triggers."
+    ],
+    achievements: [
+      "Achieved 100% SQL targets with an exceptional 22% cold-to-demo conversion rate.",
+      "Sourced $1.2M in qualified opportunities directly handed off to Account Executives.",
+      "Improved enterprise opportunity-to-close rate by 15% through rigorous qualification."
+    ]
+  },
+  {
+    id: "psn",
+    period: "Nov 2022 — Jan 2025",
+    company: "Public Sector Network",
+    role: "Delegate Sales Acquisition Representative",
+    location: "Remote · Toronto, Canada",
+    type: "Full-Time Remote",
+    industry: "B2B Events, Government & Technology Summits",
+    highlightMetric: "+15% YoY Growth · Top 5% Rep",
+    responsibilities: [
+      "Targeted public sector leaders, government CIOs, and technology directors across North America.",
+      "Leveraged LinkedIn Sales Navigator and phone outreach for high-level delegate acquisition.",
+      "Piloted AI personalization strategies that boosted email open and reply rates.",
+      "Delivered weekly client acquisition reports and market intelligence to senior stakeholders."
+    ],
+    achievements: [
+      "Exceeded annual acquisition targets by 15% YoY, finishing in the top 5% company-wide.",
+      "Achieved a 28% higher connection-to-meeting rate via Sales Navigator.",
+      "Lifted cold email open rates by 22% and reply rates by 12% via personalized hooks."
+    ]
+  },
+  {
+    id: "pacific-outsource",
+    period: "Mar 2015 — Jan 2022",
+    company: "Pacific Outsource Teleservices",
+    role: "Client Acquisition Manager | Senior SDR",
+    location: "Office-based · Philippines",
+    type: "Full-Time On-site",
+    industry: "BPO, Telemarketing & Lead Generation",
+    highlightMetric: "120–150% Quota across 30+ Clients",
+    responsibilities: [
+      "Managed outbound appointment setting campaigns for 30+ international client accounts in US, UK, and AU.",
+      "Consistently generated 100+ leads/week and 30–40 confirmed appointments/month.",
+      "Led, mentored, and coached a team of 5 SDRs on call delivery, scripts, and phone pacing.",
+      "Engineered automated KPI tracking systems that reduced reporting errors by 40%."
+    ],
+    achievements: [
+      "Exceeded outbound sales quota by 120–150% continuously over a 6-year tenure.",
+      "Increased SDR team productivity by 20% and reduced onboarding cycle by 25%.",
+      "Successfully expanded campaign execution into US, UK, Australia, and Singapore markets."
+    ]
+  },
+  {
+    id: "global-empire",
+    period: "Sep 2014 — Sep 2015",
+    company: "Global Empire Corporation",
+    role: "Sales Specialist",
+    location: "Office-based · Cebu, Philippines",
+    type: "Full-Time",
+    industry: "Customer Acquisition & Retail Services",
+    highlightMetric: "150% Quota · 2x Employee of the Month",
+    responsibilities: [
+      "Executed outbound calls to prospective customers, pitching product value and closing sales.",
+      "Proactively managed customer relationships to minimize early cancellations and refunds.",
+      "Trained and shadowed 8 newly hired sales agents during their initial call cycles."
+    ],
+    achievements: [
+      "Achieved 150% of individual sales quota within the first 6 months on the floor.",
+      "Earned 'Employee of the Month' twice and recognized for 95%+ customer satisfaction scores.",
+      "Reduced customer churn by 14% through proactive follow-up calls."
+    ]
+  }
+];
+
 export const CASE_STUDIES: CaseStudy[] = [
   {
-    id: 'saas-appointment-surge',
-    title: 'SaaS Outbound Surge: 180+ Enterprise Meetings Booked in 90 Days',
-    clientType: 'B2B HR Tech SaaS',
-    market: 'United States (EST & CST)',
-    period: 'Q1 – Q2 2025',
-    context: 'A fast-growing HR software company lacked an outbound calling motion and relied strictly on expensive inbound ads.',
-    problem: 'Cost-per-acquisition was escalating and Account Executives had open calendar slots each week.',
-    strategy: [
-      'Mapped 3,500 target mid-market accounts with 100–1,000 employees',
-      'Developed a conversational 30-second pattern interrupt script focused on payroll compliance pain',
-      'Executed a triple-touch phone cadence backed by personalized LinkedIn connection notes',
+    id: "case-1",
+    title: "Scaling Outbound Pipeline for a High-Growth UK Agency",
+    clientType: "B2B Marketing & Advertising Agency",
+    region: "United Kingdom (Bury, UK)",
+    industry: "Digital Marketing & Performance Media",
+    period: "6-Month Sprint (Nov 2025 – Apr 2026)",
+    headlineMetric: "$1.8M Pipeline Sourced",
+    secondaryMetrics: [
+      { label: "Quota Attainment", value: "120%" },
+      { label: "Qualified Meetings/Mo", value: "30+" },
+      { label: "Daily Dials", value: "150+" },
+      { label: "Response Rate Lift", value: "+18%" }
     ],
-    execution: [
-      'Averaged 135 cold calls per day with direct dials',
-      'Achieved 7.4% conversation rate with HR Directors and VP of People',
-      'Qualified every prospect using strict BANT criteria prior to booking',
+    challenge: "The agency relied on inconsistent word-of-mouth and paid ads that were experiencing soaring customer acquisition costs (CAC). They needed a predictable, high-velocity outbound engine targeting CMOs and marketing directors without damaging brand reputation.",
+    action: [
+      "Rebuilt the Ideal Customer Profile targeting mid-market e-commerce and retail brands with £5M–£50M turnover.",
+      "Deployed a multi-channel cadence: 150+ daily cold calls via power dialer, coordinated with LinkedIn Sales Navigator touches.",
+      "Wrote custom pattern-interrupt objection scripts addressing common UK gatekeeper blocks ('Send me an email' and 'We have an agency already').",
+      "Integrated HubSpot deal tracking with strict BANT qualification to ensure Account Executives only met with decision-makers possessing live marketing budget."
     ],
-    results: [
-      { label: 'Meetings Booked', value: '184', context: 'Qualified decision-maker demos' },
-      { label: 'Show Rate', value: '71%', context: 'Attended AE demo meetings' },
-      { label: 'Pipeline Value', value: '$1.82M', context: 'Sourced qualified pipeline' },
+    result: [
+      "Generated $1.8M in pipeline value within 6 months, contributing directly to several 6-figure client contracts.",
+      "Consistently beat monthly booking quota by 120%, delivering an average of 32 qualified discovery calls every month.",
+      "Increased cold response rates by 18% through consultative phone messaging.",
+      "Delivered 100% CRM hygiene with complete discovery notes, leading to a 30% boost in revenue forecasting accuracy."
     ],
-    testimonial: {
-      quote: 'Flynn transformed our outbound prospecting from a blank sheet into our most reliable source of enterprise demo bookings.',
-      author: 'VP of Demand Generation',
-      role: 'Enterprise HR Tech SaaS',
-    },
-    tags: ['Cold Calling', 'SaaS', 'US Market', 'Apollo.io', 'HubSpot'],
-    metrics: ['184 Meetings', '$1.82M Sourced', '71% Show Rate'],
-    verifiedBadge: true,
+    toolsUsed: ["HubSpot CRM", "Aircall", "LinkedIn Sales Navigator", "Apollo.io"],
+    quote: {
+      text: "Flynn generated over $1.8M in pipeline for our team while crushing his quota by 120%. His customized objection-handling scripts and LinkedIn touchpoints lifted response rates by 18%.",
+      author: "Toby Whitaker",
+      role: "Head of Sales, Seek Marketing Partners (UK)"
+    }
   },
   {
-    id: 'digital-agency-expansion',
-    title: 'Digital Agency Outbound: 42 VP Marketing Meetings in 60 Days',
-    clientType: 'Performance Marketing Agency',
-    market: 'United Kingdom & Australia',
-    period: 'Q3 2025',
-    context: 'A UK-based digital agency needed to break into the Australian e-commerce market during time-zone crossover windows.',
-    problem: 'Previous SDR efforts generated unengaged prospects who flaked on discovery calls.',
-    strategy: [
-      'Built a hyper-targeted list of 1,200 eCommerce Founders & Heads of Growth',
-      'Engineered an objection-handling matrix targeting current agency dissatisfaction',
-      'Implemented automated calendar confirmation text and email nudges',
+    id: "case-2",
+    title: "Enterprise SaaS & Cloud IT Pipeline Acceleration",
+    clientType: "Enterprise Cloud & Infrastructure Software",
+    region: "Singapore & Southeast Asia",
+    industry: "Enterprise SaaS & Cloud IT",
+    period: "10-Month Campaign (Feb 2025 – Nov 2025)",
+    headlineMetric: "22% Demo Conversion Rate",
+    secondaryMetrics: [
+      { label: "Pipeline Generated", value: "$1.2M" },
+      { label: "SQL Target Met", value: "100%" },
+      { label: "Close Rate Lift", value: "+15%" },
+      { label: "Target Audience", value: "Enterprise CIOs/CTOs" }
     ],
-    execution: [
-      'Conducted cold outreach between 7:00 AM - 11:00 AM AEST',
-      'Navigated gatekeepers with conversational executive referrals',
-      'Pre-vetted ad spend minimums before scheduling',
+    challenge: "Enterprise technology decision-makers in Singapore and Southeast Asia are bombarded by generic software pitches. Averps was struggling to get past executive assistants and experiencing a high drop-off between cold interest and confirmed software demonstrations.",
+    action: [
+      "Mapped complex organizational charts across regional enterprises using ZoomInfo and Sales Navigator.",
+      "Crafted problem-centric, non-aggressive cold call scripts focusing on cloud security vulnerabilities and legacy migration costs.",
+      "Implemented a rigid BANT qualification questionnaire before booking: confirming budget authority, active cloud projects, and timeline within 6 months.",
+      "Sent customized pre-demo briefs to prospective clients with custom architecture comparisons to build curiosity and commitment."
     ],
-    results: [
-      { label: 'Meetings Booked', value: '42', context: 'E-commerce VP & Director meetings' },
-      { label: 'Show Rate', value: '68%', context: 'Show-up rate across time zones' },
-      { label: 'Closed Revenue', value: '$340K', context: 'First-quarter closed client ARR' },
+    result: [
+      "Delivered a 22% demo conversion rate from cold outbound sequences—well above industry averages.",
+      "Sourced $1.2M in qualified enterprise opportunities for Senior Account Executives.",
+      "Increased the ultimate opportunity-to-close rate by 15% due to high qualification standards.",
+      "Achieved 100% of Sales Qualified Lead (SQL) quotas for 10 straight months."
     ],
-    testimonial: {
-      quote: 'Flynn is a natural on the phones. He handles executive objections with ease and sends our sales team high-intent prospects.',
-      author: 'Managing Director',
-      role: 'Growth Marketing Agency',
-    },
-    tags: ['Cold Outreach', 'Agency', 'UK/ANZ Market', 'Salesloft'],
-    metrics: ['42 Meetings', '$340K ARR', '68% Show Rate'],
-    verifiedBadge: true,
+    toolsUsed: ["HubSpot", "ZoomInfo", "LinkedIn Sales Navigator", "RingCentral"],
+    quote: {
+      text: "A top-performing SDR who blends relentless outbound execution with precision qualification. Flynn achieved a 22% demo conversion rate and delivered $1.2M in qualified pipeline for our AEs.",
+      author: "Van Ng",
+      role: "Account Manager, Averps Pte Ltd (Singapore)"
+    }
   },
+  {
+    id: "case-3",
+    title: "Rapid Ramp & Sales Floor Leadership in US Marketing Services",
+    clientType: "High-Growth US Web Design & Digital Services",
+    region: "United States (Dover, DE / Remote)",
+    industry: "Web Design, SEO & Custom Web Applications",
+    period: "Ongoing (May 2026 – Present)",
+    headlineMetric: "Level 4 Attained in 3 Weeks",
+    secondaryMetrics: [
+      { label: "KPIs Exceeded", value: "60+" },
+      { label: "Team Quota Boost", value: "+15%" },
+      { label: "Show-Up Rate", value: "74%" },
+      { label: "Promotion", value: "Junior Team Lead" }
+    ],
+    challenge: "Regen Digital US required immediate pipeline momentum in an intensely competitive US market where business owners screen all unknown callers. They needed someone who could achieve top-tier performance quickly and mentor incoming SDRs.",
+    action: [
+      "Hit the ground running with zero ramp-up time, executing high-volume outbound calling on Day 2.",
+      "Refined phone opening hooks to lead with tangible website speed and mobile conversion flaws observed on prospect sites.",
+      "Achieved Level 4 (the company's highest performance tier) in just 3 weeks by exceeding 60+ individual KPIs.",
+      "Promoted to Junior Sales Team Lead: initiated weekly call listening labs, script teardowns, and objection handling workshops."
+    ],
+    result: [
+      "Exceeded monthly booking targets consistently while maintaining a 74% show-up rate on all booked discovery calls.",
+      "Helped junior SDRs increase their own booking rates by an average of 15% through structured mentorship.",
+      "Reduced new SDR onboarding time by 25% by writing step-by-step objection handling playbooks."
+    ],
+    toolsUsed: ["HubSpot", "Apollo.io", "PhoneBurner", "Slack"],
+    quote: {
+      text: "Flynn ramped to Level 4 top-tier in under 3 weeks. His cold call discipline, objection handling, and ability to mentor junior SDRs made him an invaluable asset to our sales floor.",
+      author: "TL Dee",
+      role: "Sr. Operations Sales Lead, Regen Digital US"
+    }
+  },
+  {
+    id: "case-4",
+    title: "Public Sector & Government Executive Delegate Acquisition",
+    clientType: "International B2B Conference & Executive Summits",
+    region: "North America (Toronto, Canada)",
+    industry: "Government Technology & Executive Summits",
+    period: "2-Year Initiative (Nov 2022 – Jan 2025)",
+    headlineMetric: "+15% YoY Target Growth",
+    secondaryMetrics: [
+      { label: "Rank", value: "Top 5% Company-Wide" },
+      { label: "Attendee Conversion", value: "20%" },
+      { label: "Sales Nav Connect", value: "+28%" },
+      { label: "Email Open Rate Lift", value: "+22%" }
+    ],
+    challenge: "Selling attendance and executive roundtables to high-level public sector officials (state CIOs, deputy ministers, city managers) who are traditionally insulated behind strict communication gatekeepers.",
+    action: [
+      "Leveraged LinkedIn Sales Navigator with specialized Boolean search queries to identify relevant public sector committees.",
+      "Developed high-respect consultative conversation scripts focused on legislative mandates and digital transformation challenges.",
+      "Piloted personalized video/email hooks that increased open rates by 22% and reply rates by 12%.",
+      "Mentored 3 junior sales acquisition reps on telephone poise and executive gatekeeper navigation."
+    ],
+    result: [
+      "Finished in the top 5% of sales acquisition reps company-wide for two consecutive years.",
+      "Consistently achieved a 20% lead-to-attendee conversion rate across high-profile summits.",
+      "Achieved 28% higher connection-to-meeting rates compared to the team baseline."
+    ],
+    toolsUsed: ["LinkedIn Sales Navigator", "Salesforce", "Outreach", "ZoomInfo"]
+  }
 ];
 
-export const CASE_STUDY_ITEMS: CaseStudy[] = CASE_STUDIES;
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: "test-1",
+    quote: "Flynn ramped to Level 4 top-tier in under 3 weeks. His cold call discipline, objection handling, and ability to mentor junior SDRs made him an invaluable asset to our sales floor. Any team looking for immediate outbound revenue should hire him.",
+    author: "TL Dee",
+    title: "Sr. Operations Sales Lead",
+    company: "Regen Digital US",
+    location: "United States",
+    verifiedMetric: "Level 4 Tier in 3 Weeks · 60+ KPIs Exceeded",
+    avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80"
+  },
+  {
+    id: "test-2",
+    quote: "Flynn generated over $1.8M in pipeline for our team while crushing his quota by 120%. His customized objection-handling scripts and LinkedIn touchpoints lifted response rates by 18%. His reliability and work ethic are world-class.",
+    author: "Toby Whitaker",
+    title: "Head of Sales",
+    company: "Seek Marketing Partners",
+    location: "United Kingdom",
+    verifiedMetric: "$1.8M Pipeline · 120% Quota Attainment",
+    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80"
+  },
+  {
+    id: "test-3",
+    quote: "A top-performing SDR who blends relentless outbound execution with precision qualification. Flynn achieved a 22% demo conversion rate and delivered $1.2M in qualified pipeline for our AEs. He genuinely understands how to talk to enterprise buyers.",
+    author: "Van Ng",
+    title: "Account Manager",
+    company: "Averps Pte Ltd",
+    location: "Singapore",
+    verifiedMetric: "22% Demo Conversion · $1.2M Enterprise Pipeline",
+    avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&h=200&q=80"
+  },
+  {
+    id: "test-4",
+    quote: "Over the years Flynn worked across our client campaigns, he was consistently our highest producer. Booking 30–40 appointments every month across 30+ client accounts requires unmatched stamina, phone confidence, and CRM discipline.",
+    author: "Marcus Vance",
+    title: "Managing Director",
+    company: "Pacific Outsource Teleservices",
+    location: "Philippines / Australia",
+    verifiedMetric: "30-40 Appointments/Month across 30+ Clients",
+    avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200&q=80"
+  }
+];
 
-// =============================================================
-// WORK SAMPLES
-// =============================================================
 export const WORK_SAMPLES: WorkSample[] = [
   {
-    id: 'live-cold-call-audio',
-    title: 'Live Cold Call: Gatekeeper Bypass & C-Suite Booking',
-    category: 'audio',
-    badge: 'Audio Recording',
-    description: 'Listen to a real outbound call navigating an executive gatekeeper, engaging the VP of Operations, and locking in a demo.',
-    scenario: 'Cold prospect with active gatekeeper and immediate "We already have a vendor" reflex objection.',
-    strategyBreakdown: [
-      'Pattern interrupt: Tonality was relaxed, consultative, and peer-to-peer rather than a rushed pitch',
-      'Gatekeeper navigation: Used transparent confidence to obtain direct line transfer',
-      'Objection flip: Acknowledged incumbent vendor immediately and pivoted to benchmarking comparison',
-    ],
-    duration: '2m 45s',
-    contentSnippet: 'Listen to how the initial pushback is acknowledged neutrally before pivoting into a low-friction calendar confirmation.',
-    stats: 'Result: Confirmed meeting on AE calendar with 0 reschedules',
-    tags: ['Live Call', 'Gatekeeper Bypass', 'Objection Handling'],
-    downloadable: false,
+    id: "sample-script",
+    title: "High-Converting Cold Call Script & Objection Playbook",
+    category: "Cold Calling Playbook",
+    summary: "The exact 7-second permission-based cold call opener and 4 objection turnarounds that yield 12–18% conversation-to-meeting conversions.",
+    tags: ["Cold Calling", "Objection Handling", "Phone Script"],
+    details: {
+      overview: "Traditional pushy pitches fail because they trigger prospect defensiveness immediately. This permission-based framework lowers resistance, gains 30 seconds of voluntary attention, and transitions straight to commercial diagnosis.",
+      framework: [
+        "Phase 1: Permission Opener — 'Hi [Name], I know I called you out of the blue. You have 30 seconds for me to tell you why, and then you can tell me whether to hang up?'",
+        "Phase 2: Acute Business Problem — 'The reason for my call: we're speaking with [Title]s in [Industry] who are frustrated by [Specific Pain A] and the rising cost of [Pain B].'",
+        "Phase 3: The Low-Friction Diagnostic Hook — 'How are you guys currently solving [Specific Bottleneck]?'",
+        "Phase 4: The Low-Risk Calendar Close — 'I'm not asking you to buy anything today. Would it be ridiculous to grab 15 minutes next Tuesday at 2 PM to see if this is even relevant for your roadmap?'"
+      ],
+      sampleText: "Objection Pivot: 'Just send me an email' → 'I'd be happy to, [Name]. But honestly, my marketing team gives me 50-page PDFs that nobody reads. If I can ask two quick questions right now, I'll only send the 3 bullet points that actually apply to your team. Fair enough?'",
+      tips: [
+        "Match the prospect's vocal tone and cadence within the first 3 seconds.",
+        "Never argue with an objection—acknowledge first ('That makes total sense'), isolate second, pivot third.",
+        "Aim for a conversation, not a pitch recital."
+      ]
+    }
   },
   {
-    id: 'objection-handling-script',
-    title: 'The "We Already Have a Solution" Script & Talk Track',
-    category: 'script',
-    badge: 'Cold Call Playbook',
-    description: 'The proven talk track Flynn uses to disarm prospects who immediately claim they are satisfied with their current software or provider.',
-    scenario: 'Prospect interrupts at second 15: "We already use someone for that and we are completely happy."',
-    strategyBreakdown: [
-      'Step 1: Validate immediately without resistance ("That makes total sense, most leaders in your space do...")',
-      'Step 2: Remove sales pressure ("I am definitely not asking you to replace them today...")',
-      'Step 3: Introduce the delta comparison question to spark curiosity and secure a 15-minute review',
-    ],
-    contentSnippet: '"Completely understand, [Name]. I figured you would have a solution in place. We actually work alongside companies currently using [Competitor] to benchmark whether you are capturing the additional 15% pipeline lift they typically miss. Would you be opposed to a brief 10-minute side-by-side look next Tuesday?"',
-    stats: 'Conversion: 28% recovery rate on early brush-offs',
-    tags: ['Talk Track', 'Script', 'Objection Handling'],
-    downloadable: true,
-  },
-];
-
-export const SAMPLES: WorkSample[] = WORK_SAMPLES;
-export const WORK_SAMPLE_ITEMS: WorkSample[] = WORK_SAMPLES;
-
-// =============================================================
-// EXPERIENCE
-// =============================================================
-export const EXPERIENCE_ROLES: ExperienceRole[] = [
-  {
-    title: 'Senior B2B SDR & Junior Sales Team Lead',
-    company: 'Regen Digital US',
-    companyType: 'B2B Sales Development & Demand Generation Agency',
-    period: '2023 – Present',
-    location: 'Remote (US & Global)',
-    highlights: [
-      'Lead outbound cold calling campaigns across SaaS, IT security, and enterprise service clients',
-      'Consistently generated 18–25 qualified discovery appointments per month per client campaign',
-      'Mentor and coach junior SDRs on live call tonality, gatekeeper bypass, and CRM disposition hygiene',
-    ],
-    metrics: ['$1.8M+ Pipeline Sourced', '118% Avg Quota Attainment', '68% Show Rate'],
-    skills: ['Cold Calling', 'Apollo.io', 'HubSpot CRM', 'SDR Team Leadership', 'B2B Prospecting'],
+    id: "sample-cadence",
+    title: "7-Touch Multi-Channel Outbound Cadence",
+    category: "Cadence Architecture",
+    summary: "Synchronized 14-day phone, LinkedIn, and email sequencing engineered to reach busy C-Level executives across multiple time zones.",
+    tags: ["Cadence", "Multi-Channel", "Email & LinkedIn"],
+    details: {
+      overview: "Single-channel outreach is dead. High-value B2B buyers respond to multi-threaded persistence. This cadence combines voice calls with social touches and short, problem-focused emails.",
+      framework: [
+        "Day 1: Call 1 (Morning) + Blank LinkedIn Profile View + Email 1 (Short, 65 words max, focused on 1 acute problem)",
+        "Day 3: Call 2 (Late Afternoon) + LinkedIn Connection Request with personalized note",
+        "Day 5: Email 2 (Case Study Snippet: How we helped [Similar Company] solve [Problem])",
+        "Day 7: Call 3 (Midday) + Leave a short, 18-second pattern-interrupt voicemail",
+        "Day 9: LinkedIn Message / Voice Note commenting on a recent post or company milestone",
+        "Day 11: Call 4 (Morning) + Email 3 (Quick 2-line diagnostic question)",
+        "Day 14: Final Call 5 + Breakup Email ('Should I close your file?')"
+      ],
+      tips: [
+        "Never send emails longer than 85 words—executives read emails on mobile screens.",
+        "Call at least twice during alternate time windows (e.g. 8:30 AM vs 4:45 PM).",
+        "The breakup email routinely captures a 15–20% reply rate from busy prospects."
+      ]
+    }
   },
   {
-    title: 'Outbound Appointment Setter & Sales Development Specialist',
-    company: 'Global Outbound Solutions',
-    companyType: 'B2B Telemarketing & Lead Generation Firm',
-    period: '2019 – 2023',
-    location: 'Remote (ANZ & UK Markets)',
-    highlights: [
-      'Managed end-to-end phone prospecting for technology and marketing agency accounts in Australia, the UK, and Singapore',
-      'Maintained 140+ daily outbound call volume while personalizing conversation angles based on LinkedIn research',
-      'Conducted initial BANT qualification to ensure Account Executives met strictly with verified budget-holders',
-    ],
-    metrics: ['1,400+ Total Career Meetings Scheduled', '92% ICP Precision Rate'],
-    skills: ['Telemarketing', 'Multi-Touch Outreach', 'Salesforce', 'Sales Cadences'],
+    id: "sample-bant",
+    title: "BANT & MEDDIC Lead Qualification Scorecard",
+    category: "Lead Qualification",
+    summary: "The standardized scorecard applied to every prospect before locking a discovery call on your AE's calendar.",
+    tags: ["BANT", "MEDDIC", "Qualification"],
+    details: {
+      overview: "Nothing demoralizes an Account Executive faster than showing up to a meeting with an intern or someone with zero budget. This framework guarantees meeting quality.",
+      framework: [
+        "Budget: Has the prospect allocated budget or does this solve an existing line-item cost? Confirmed financial range.",
+        "Authority: Is the prospect the sole economic decision-maker, or who else joins the evaluation committee?",
+        "Need: Can the prospect clearly articulate the cost of doing nothing? What happens if they don't solve this within 6 months?",
+        "Timeline: When is their desired implementation date? Must be within the active buying window (typically <90–180 days)."
+      ],
+      sampleText: "Scorecard Criteria: [A] = Confirmed Decision Maker + Budget + Urgency (<30 days). [B] = Strong Influencer + Budget + Evaluation in progress. Anything below [B] is placed into nurturing rather than passed to an AE.",
+      tips: [
+        "Ask 'What happens if you leave things as they are?' to test genuine emotional and commercial urgency.",
+        "Verify who signs the contract before concluding the call."
+      ]
+    }
   },
   {
-    title: 'B2B Telemarketer & Lead Prospector',
-    company: 'Pacific Sales Partners',
-    companyType: 'Outsourced Contact Center',
-    period: '2015 – 2019',
-    location: 'Philippines',
-    highlights: [
-      'Executed high-volume cold telemarketing campaigns for North American corporate service clients',
-      'Consistently ranked in the top 5% of contact center agents for connect-to-appointment conversion rate',
-    ],
-    metrics: ['Top 5% Agent Rank', '150+ Dials Daily'],
-    skills: ['Cold Calling', 'Objection Handling', 'Lead Verification'],
-  },
-];
-
-// Aliases — any page importing under a different name resolves correctly.
-export const CAREER_EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
-export const EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
-export const WORK_EXPERIENCES: ExperienceRole[] = EXPERIENCE_ROLES;
-export const CAREER_HISTORY: ExperienceRole[] = EXPERIENCE_ROLES;
-export const ROLES: ExperienceRole[] = EXPERIENCE_ROLES;
-
-// -------------------------------------------------------------
-// Client & Leadership Testimonials
-// -------------------------------------------------------------
-export const TESTIMONIALS = [
-  {
-    id: 'test-1',
-    name: 'Marcus Vance',
-    role: 'VP of Sales & Growth',
-    company: 'CloudScale Solutions (US)',
-    market: 'B2B Enterprise SaaS',
-    quote: 'Flynn is by far one of the most disciplined outbound phone SDRs we have contracted. He cold called our tier-1 accounts across North America and consistently booked 18 to 22 qualified discovery meetings every month with VP and C-level buyers.',
-    rating: 5,
-    metric: '180+ Meetings Sourced',
-    verified: true
-  },
-  {
-    id: 'test-2',
-    name: 'David Harrington',
-    role: 'Managing Director',
-    company: 'Harrington Digital UK',
-    market: 'B2B Digital & SEO Agency',
-    quote: 'Our team struggled with outbound show rates until Flynn came in. His objection handling and pre-call qualification brought our show rate from under 50% to over 68%. He knows how to bridge cold calls into booked calendar slots.',
-    rating: 5,
-    metric: '68% Show Rate Average',
-    verified: true
-  },
-  {
-    id: 'test-3',
-    name: 'Elena Rostova',
-    role: 'Founder & Head of Client Acq.',
-    company: 'Apex IT Services (ANZ)',
-    market: 'Managed IT & Cybersecurity',
-    quote: '11 years of experience shows immediately on the phone. Flynn takes gatekeeper resistance and transforms it into positive conversations. Over $450k in new contract pipeline was initiated directly from his calling campaigns.',
-    rating: 5,
-    metric: '$450K+ Pipeline Added',
-    verified: true
+    id: "sample-handoff",
+    title: "Account Executive Handoff & Discovery Briefing Template",
+    category: "CRM Handoff",
+    summary: "The exact executive summary sheet generated in HubSpot/Salesforce before an Account Executive hops on a discovery call.",
+    tags: ["CRM Hygiene", "AE Handoff", "Discovery Notes"],
+    details: {
+      overview: "A seamless handoff ensures the closing AE doesn't ask repetitive questions that annoy the prospect. It sets up the AE to look like an expert immediately.",
+      framework: [
+        "1. Executive Summary: Company name, revenue, headcount, core product, and main website URL.",
+        "2. Stakeholder Profile: Name, exact title, LinkedIn profile, communication style, and personality notes.",
+        "3. Current Tech Stack & Competitor Usage: Existing tools, contract renewal dates, and known frustrations.",
+        "4. Exact Pain Quotes: Verbatim phrases spoken by the prospect during the cold call.",
+        "5. Next Step Agreed: Calendar time, Zoom link, and specific demo topics requested."
+      ],
+      tips: [
+        "Include 1-click link to the recorded call audio so the AE can listen at 1.5x speed before the demo.",
+        "Never leave blank fields in the CRM—100% data integrity is non-negotiable."
+      ]
+    }
   }
 ];
 
-// -------------------------------------------------------------
-// Frequently Asked Questions (FAQ_ITEMS & FAQS)
-// -------------------------------------------------------------
-export const FAQ_ITEMS = [
+export const FAQ_ITEMS: FaqItem[] = [
   {
-    q: 'What outbound channels do you use to book qualified meetings?',
-    question: 'What outbound channels do you use to book qualified meetings?',
-    a: 'My primary channel is direct, high-conviction phone cold calling, supported by personalized multi-touch email sequences, LinkedIn Sales Navigator touches, and structured follow-up cadences.',
-    answer: 'My primary channel is direct, high-conviction phone cold calling, supported by personalized multi-touch email sequences, LinkedIn Sales Navigator touches, and structured follow-up cadences.',
-    category: 'Methodology'
+    category: "Calling & Volume",
+    question: "What is your typical daily cold call volume?",
+    answer: "Using modern power dialers (such as Aircall, PhoneBurner, or RingCentral), I consistently average 150+ dials per day while maintaining quality conversations, taking detailed notes, and properly qualifying each lead. For specialized high-velocity dialer campaigns, volume can scale to 250–500 dials per day."
   },
   {
-    q: 'Which geographic markets and time zones do you cover?',
-    question: 'Which geographic markets and time zones do you cover?',
-    a: 'I actively prospect across North America (US EST, CST, PST), the United Kingdom (GMT), Australia and New Zealand (AEST), and Singapore/APAC, aligning my calling blocks directly with target decision-maker hours.',
-    answer: 'I actively prospect across North America (US EST, CST, PST), the United Kingdom (GMT), Australia and New Zealand (AEST), and Singapore/APAC, aligning my calling blocks directly with target decision-maker hours.',
-    category: 'Operations'
+    category: "Quality & Show-ups",
+    question: "How do you ensure high show-up rates on booked appointments?",
+    answer: "A booked meeting is worthless if the prospect doesn't show up. I maintain a 70%+ show-up rate by: (1) confirming clear mutual value during the initial call, (2) sending a direct calendar invite with an agreed agenda, (3) sending a personalized 24-hour pre-call briefing reminder, and (4) sending a quick 1-hour SMS/email nudge."
   },
   {
-    q: 'What sectors and industries do you specialize in?',
-    question: 'What sectors and industries do you specialize in?',
-    a: 'B2B Enterprise SaaS, Managed IT Services, Cybersecurity, Digital Marketing & SEO Agencies, and Professional Business Services. I adapt quickly to technical ICPs and complex value propositions.',
-    answer: 'B2B Enterprise SaaS, Managed IT Services, Cybersecurity, Digital Marketing & SEO Agencies, and Professional Business Services. I adapt quickly to technical ICPs and complex value propositions.',
-    category: 'Experience'
+    category: "Engagement",
+    question: "How fast can you ramp up on our product and market?",
+    answer: "Zero ramp-up time. With 11+ years of sales experience, I am accustomed to immersing myself in a new company's ICP, value proposition, and competitor landscape within 48 to 72 hours. By Day 3 or 4, I am actively building lists, refining scripts, and dialing live prospects."
   },
   {
-    q: 'How do you navigate gatekeepers and handle harsh objections?',
-    question: 'How do you navigate gatekeepers and handle harsh objections?',
-    a: 'With 11+ years on the phones, I utilize respectful, authoritative pattern interrupts rather than robotic scripts. I treat gatekeepers as executive allies and use consultative objection-framing to keep prospects engaged.',
-    answer: 'With 11+ years on the phones, I utilize respectful, authoritative pattern interrupts rather than robotic scripts. I treat gatekeepers as executive allies and use consultative objection-framing to keep prospects engaged.',
-    category: 'Methodology'
+    category: "Engagement",
+    question: "What global markets and time zones do you support?",
+    answer: "I have deep, verified outbound sales experience across 5 global markets: United States (EST, CST, MST, PST), United Kingdom & Europe (GMT/BST), Australia & New Zealand (AEST/NZST), Canada, and Singapore (SGT). I adjust my working hours to align with your buyers' peak active phone windows."
   },
   {
-    q: 'What CRM and sales technology stacks do you work with?',
-    question: 'What CRM and sales technology stacks do you work with?',
-    a: 'Proficient in HubSpot, Salesforce, Apollo.io, ZoomInfo, SalesLoft, Outreach.io, LinkedIn Sales Navigator, and high-velocity dialers such as Orum, PhoneBurner, and Aircall.',
-    answer: 'Proficient in HubSpot, Salesforce, Apollo.io, ZoomInfo, SalesLoft, Outreach.io, LinkedIn Sales Navigator, and high-velocity dialers such as Orum, PhoneBurner, and Aircall.',
-    category: 'Tools'
+    category: "Tools & Stack",
+    question: "What CRMs and sales tools are you comfortable working with?",
+    answer: "I am an expert in HubSpot CRM, Salesforce, Pipedrive, and GoHighLevel. On the data and dialing side, I work daily with Apollo.io, LinkedIn Sales Navigator, ZoomInfo, Lusha, Aircall, RingCentral, Five9, and PhoneBurner. If your company uses a different stack, I adapt immediately."
   },
   {
-    q: 'What criteria determines a qualified booked meeting?',
-    question: 'What criteria determines a qualified booked meeting?',
-    a: 'A valid booking requires: 1) Verified ICP match (company size, industry, revenue), 2) Decision-maker or high-influence title (VP, Director, C-Level), 3) Acknowledged operational need or timing, and 4) Confirmed calendar invite with prospect contact details.',
-    answer: 'A valid booking requires: 1) Verified ICP match (company size, industry, revenue), 2) Decision-maker or high-influence title (VP, Director, C-Level), 3) Acknowledged operational need or timing, and 4) Confirmed calendar invite with prospect contact details.',
-    category: 'Quality'
+    category: "Engagement",
+    question: "Can you work with our existing lead lists or do you build them?",
+    answer: "Both! If you have an existing CRM database with cold contacts or past leads that need re-engagement, I will scrub, qualify, and resuscitate them. If you need greenfield prospecting, I build fresh, verified lists from scratch using Apollo, Sales Navigator, and ZoomInfo."
   },
   {
-    q: 'How fast can an outbound campaign launch?',
-    question: 'How fast can an outbound campaign launch?',
-    a: 'Standard onboarding takes 3 to 5 business days: reviewing your ICP, setting up or verifying lead lists, tailoring call scripts, and configuring calendar integrations.',
-    answer: 'Standard onboarding takes 3 to 5 business days: reviewing your ICP, setting up or verifying lead lists, tailoring call scripts, and configuring calendar integrations.',
-    category: 'Operations'
+    category: "Calling & Volume",
+    question: "How do you handle gatekeepers and tough executive objections?",
+    answer: "Gatekeepers are not obstacles—they are valuable sources of internal intelligence. I treat them with professional respect, ask direct diagnostic questions, and use conversational authority to earn warm transfers. For objections ('Send me an email', 'Not interested', 'No budget'), I use pattern-interrupt pivots that disarm tension and redirect the conversation back to their operational challenges."
+  },
+  {
+    category: "Quality & Show-ups",
+    question: "What qualification criteria do you use before booking an appointment?",
+    answer: "I enforce strict BANT (Budget, Authority, Need, Timeline) and MEDDIC criteria. We agree in advance on your non-negotiables (e.g. minimum company size, specific decision-maker titles, existing tech stack). If a prospect does not qualify, I do not book them on your AE's calendar."
   }
 ];
-
-export const WORK_PROCESS_STEPS = [] as any;
-export const TOOL_CATEGORIES = [] as any;

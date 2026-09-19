@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ChevronRight, Home } from 'lucide-react';
 import { PageId } from '../types';
 
@@ -9,13 +9,13 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
-export interface BreadcrumbsProps {
+interface BreadcrumbsProps {
   items?: BreadcrumbItem[];
   crumbs?: BreadcrumbItem[];
   onNavigate?: (page: PageId) => void;
 }
 
-export function breadcrumbSchema(crumbs: { label?: string; name?: string; href?: string; url?: string }[]) {
+export function breadcrumbSchema(crumbs: BreadcrumbItem[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -23,7 +23,7 @@ export function breadcrumbSchema(crumbs: { label?: string; name?: string; href?:
       '@type': 'ListItem',
       position: i + 1,
       name: c.name || c.label || '',
-      item: `https://flynnjamespontino-porfolio.onrender.com${c.url || c.href || ''}`,
+      item: `https://flynnjames.com${c.url || c.href || ''}`,
     })),
   };
 }
@@ -38,25 +38,23 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, crumbs, onNavig
         <ol className="flex items-center gap-2 py-3 text-[11.5px] font-mono text-slate-500">
           {list.map((item, idx) => {
             const isLast = idx === list.length - 1;
-            const label = item.name || item.label || '';
-            const key = item.url || item.href || idx;
+            const name = item.name || item.label || '';
             return (
-              <li key={key} className="flex items-center gap-2">
-                {idx === 0 && <Home className="w-3 h-3 text-slate-600" aria-hidden="true" />}
+              <li key={item.url || item.href || idx} className="flex items-center gap-2">
+                {idx === 0 && <Home className="w-3 h-3 text-slate-600" />}
                 {!isLast ? (
                   <>
                     <button
-                      type="button"
                       onClick={() => onNavigate?.('home')}
-                      className="hover:text-amber-400 transition-colors uppercase tracking-wider focus:outline-none focus:ring-1 focus:ring-amber-400 rounded px-1"
+                      className="hover:text-amber-400 transition-colors uppercase tracking-wider"
                     >
-                      {label}
+                      {name}
                     </button>
-                    <ChevronRight className="w-3 h-3 text-slate-700" aria-hidden="true" />
+                    <ChevronRight className="w-3 h-3 text-slate-700" />
                   </>
                 ) : (
-                  <span className="text-slate-300 uppercase tracking-wider font-semibold" aria-current="page">
-                    {label}
+                  <span className="text-slate-300 uppercase tracking-wider" aria-current="page">
+                    {name}
                   </span>
                 )}
               </li>

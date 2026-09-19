@@ -1,65 +1,134 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+﻿import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
-import { CaseStudy } from '../types';
+import { SectionHeading } from '../components/SectionHeading';
 import { CASE_STUDIES } from '../data/portfolioData';
+import { CaseStudy } from '../types';
+import { useSEO } from '../hooks/useSEO';
 
 interface CaseStudiesPageProps {
   onSelectCaseStudy: (cs: CaseStudy) => void;
+  onOpenContact: (serviceName?: string) => void;
 }
 
 export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseStudy }) => {
+  useSEO({
+    title: 'B2B Sales Case Studies — $1.8M+ Pipeline Sourced',
+    description:
+      'Detailed case studies of B2B outbound campaigns: $1.8M pipeline sourced for a UK agency, 22% demo conversion for enterprise SaaS, and Level 4 ramp in 3 weeks.',
+    canonical: '/case-studies',
+    keywords:
+      'B2B sales case studies, appointment setting results, cold calling case studies, outbound pipeline results',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'B2B Outbound Sales Case Studies',
+      description:
+        'Detailed breakdowns of outbound campaigns producing measurable B2B pipeline across marketing, SaaS, and enterprise IT.',
+      numberOfItems: CASE_STUDIES.length,
+      itemListElement: CASE_STUDIES.map((cs, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: cs.title,
+        description: cs.challenge.slice(0, 160),
+        url: `https://flynnjames.com/case-studies#${cs.id}`,
+      })),
+    },
+  });
+
   return (
     <>
-      <section className="relative overflow-hidden border-b border-slate-800/60">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(https://user29984.na.imgto.link/public/20260907/flynn-profile.avif)',
-          }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/85 to-slate-950/95" aria-hidden="true" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 pb-20 sm:pt-20 sm:pb-24">
-          <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-amber-400 mb-4">Case Studies</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5">
-            Outbound Campaign Results
-          </h1>
-          <p className="text-[15px] sm:text-[16.5px] text-slate-300 leading-relaxed max-w-3xl">
-            Verified metrics from real B2B outbound campaigns — qualified appointments, pipeline sourced, and show rates across SaaS and technology sectors.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        index="05"
+        eyebrow="Case Studies"
+        title="Real campaigns."
+        titleAccent="Real receipts."
+        description="Detailed breakdowns of B2B outbound campaigns where I solved cold acquisition bottlenecks and generated measurable pipeline. Click any case for the full blueprint."
+        photoClass="bg-photo-cases"
+      />
+
       <Section>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {CASE_STUDIES.map((cs) => (
-            <button
+        <div className="max-w-3xl mb-14">
+          <SectionHeading
+            index="05.0"
+            eyebrow="Verified results"
+            title="Measurable pipeline from"
+            titleAccent="real B2B campaigns."
+          />
+          <div className="mt-6 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
+            <p>
+              These case studies document four separate B2B outbound campaigns Flynn James has run across different
+              industries, markets, and buyer profiles. Each includes the specific bottleneck that was solved, the
+              tactical strategy that was executed, and the quantified revenue outcomes achieved.
+            </p>
+            <p>
+              Campaigns span the UK (marketing agency outbound), Singapore (enterprise cloud SaaS), the United States
+              (web design services), and Canada (public sector executive acquisition). Combined, they represent more than
+              $3M in directly sourced pipeline.
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          {CASE_STUDIES.map((cs, i) => (
+            <motion.button
               key={cs.id}
-              type="button"
+              id={cs.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
               onClick={() => onSelectCaseStudy(cs)}
-              className="text-left bg-slate-900/40 border border-slate-800/60 hover:border-amber-400/40 rounded-2xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-400/5 focus:outline-none focus:ring-2 focus:ring-amber-400/50 group"
+              className="w-full text-left group bg-slate-900/60 hover:bg-slate-900/90 backdrop-blur-sm border border-slate-700/60 hover:border-slate-600/80 rounded-xl p-7 sm:p-10 transition-all cursor-pointer"
+              aria-label={`View case study: ${cs.title}`}
             >
-              <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mb-3">
-                {cs.clientType} · {cs.market}
-              </p>
-              <h3 className="text-[20px] font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
-                {cs.title}
-              </h3>
-              <p className="text-[13.5px] text-slate-400 leading-relaxed mb-5 line-clamp-3">{cs.context}</p>
-              <div className="flex flex-wrap gap-2">
-                {cs.metrics.slice(0, 3).map((m) => (
-                  <span
-                    key={m}
-                    className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded"
-                  >
-                    {m}
-                  </span>
-                ))}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="lg:col-span-7">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-5 text-[11px] font-mono tracking-wider">
+                    <span className="text-slate-400 uppercase">{cs.industry}</span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-slate-400">{cs.region}</span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-slate-400">{cs.period}</span>
+                  </div>
+
+                  <h2 className="text-[22px] sm:text-[26px] font-bold text-white leading-[1.2] tracking-tight mb-4 group-hover:text-amber-50 transition-colors">
+                    {cs.title}
+                  </h2>
+
+                  <p className="text-[14px] text-slate-400 leading-[1.75] line-clamp-3">{cs.challenge}</p>
+
+                  <div className="mt-6 flex items-center gap-2 text-[12.5px] font-medium text-slate-400 group-hover:text-amber-400 transition-colors">
+                    <span>Read full breakdown</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5">
+                  <div className="pb-6 mb-6 border-b border-slate-700/60">
+                    <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider mb-2">
+                      Headline outcome
+                    </div>
+                    <div className="text-[32px] sm:text-[40px] font-bold text-amber-400 tabular tracking-tight leading-none">
+                      {cs.headlineMetric}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-x-5 gap-y-4">
+                    {cs.secondaryMetrics.map((m, j) => (
+                      <div key={j}>
+                        <div className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
+                          {m.label}
+                        </div>
+                        <div className="text-[15px] text-white font-semibold mt-1.5 tabular">{m.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="mt-5 flex items-center gap-2 text-[12px] font-mono uppercase tracking-wider text-slate-500 group-hover:text-amber-400 transition-colors">
-                View Case Study <ArrowRight className="w-3.5 h-3.5" />
-              </div>
-            </button>
+            </motion.button>
           ))}
         </div>
       </Section>
