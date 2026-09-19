@@ -60,7 +60,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact 
                 <div className="p-6 bg-slate-950/90 border-t border-slate-800/80">
                   <h2 className="text-lg font-bold text-white">Flynn James Q. Pontino</h2>
                   <p className="text-xs text-amber-400 font-mono mt-0.5">Senior B2B SDR & Junior Sales Team Lead</p>
-                  <p className="text-xs text-slate-400 mt-2">Bacolod City, Philippines  US/UK/ANZ Full Shift Overlap</p>
+                  <p className="text-xs text-slate-400 mt-2">Bacolod City, Philippines • US/UK/ANZ Full Shift Overlap</p>
                 </div>
               </div>
             </div>

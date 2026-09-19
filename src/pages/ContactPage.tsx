@@ -113,7 +113,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
                   <span>Working Hours & Response</span>
                 </div>
                 <p className="text-xs text-slate-400">
-                  Mon  Fri: 9:00 AM  6:00 PM EST / CST. Inquiries answered within 24 hours.
+                  Mon – Fri: 9:00 AM – 6:00 PM EST / CST. Inquiries answered within 24 hours.
                 </p>
               </div>
             </div>
