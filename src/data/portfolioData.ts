@@ -42,6 +42,87 @@ export const KEY_STATS: StatItem[] = [
   },
 ];
 
+export const STATS = KEY_STATS;
+
+export const CAREER_EXPERIENCES: ExperienceRole[] = [
+  {
+    id: 'exp-1',
+    title: 'Senior B2B Sales Development Representative',
+    role: 'Senior B2B Sales Development Representative',
+    company: 'Regen Digital US',
+    companyType: 'B2B Sales Acceleration Agency',
+    period: '2021 – Present',
+    duration: '2021 – Present',
+    location: 'Remote (US, UK & Global Markets)',
+    type: 'Full-time / Remote',
+    description: 'Leading high-velocity outbound phone campaigns and appointment setting for high-growth tech and B2B clients.',
+    highlights: [
+      'Lead outbound dialing campaigns for tier-1 US tech, SaaS, and professional service clients.',
+      'Averaged 75+ quality outbound dials daily with rigorous CRM data hygiene in HubSpot and Salesforce.',
+      'Consistently generated $50K–$120K in monthly qualified sales pipeline per client account.',
+      'Mentored 6 junior SDRs on objection-handling frameworks and conversational cadence.',
+    ],
+    achievements: [
+      'Lead outbound dialing campaigns for tier-1 US tech, SaaS, and professional service clients.',
+      'Averaged 75+ quality outbound dials daily with rigorous CRM data hygiene in HubSpot and Salesforce.',
+      'Consistently generated $50K–$120K in monthly qualified sales pipeline per client account.',
+      'Mentored 6 junior SDRs on objection-handling frameworks and conversational cadence.',
+    ],
+    metrics: ['130% Average Quota Attainment', '$1.8M+ Total Sourced Pipeline', '68% Show Rate'],
+    skills: ['Cold Calling', 'B2B Appointment Setting', 'Pipeline Management', 'SDR Coaching'],
+  },
+  {
+    id: 'exp-2',
+    title: 'B2B Telemarketing & Outbound Sales Specialist',
+    role: 'B2B Telemarketing & Outbound Sales Specialist',
+    company: 'Global Outbound Solutions',
+    companyType: 'Telemarketing & Lead Gen Firm',
+    period: '2016 – 2021',
+    duration: '2016 – 2021',
+    location: 'Cebu, Philippines',
+    type: 'Full-time',
+    description: 'Spearheaded targeted outbound cold campaigns for Australian and UK telecommunication and enterprise IT providers.',
+    highlights: [
+      'Handled targeted outbound cold campaigns for Australian and UK telecommunication and IT providers.',
+      'Developed custom call flows that improved connect-to-appointment conversion from 4.2% to 8.8%.',
+      'Maintained 99% accuracy on prospect BANT qualification criteria before calendar handover.',
+    ],
+    achievements: [
+      'Handled targeted outbound cold campaigns for Australian and UK telecommunication and IT providers.',
+      'Developed custom call flows that improved connect-to-appointment conversion from 4.2% to 8.8%.',
+      'Maintained 99% accuracy on prospect BANT qualification criteria before calendar handover.',
+    ],
+    metrics: ['Over 120,000 Lifetime Outbound Calls Placed', 'Top 5% Performer Company-Wide'],
+    skills: ['Direct Dials', 'Account Research', 'Objection Handling', 'CRM Hygiene'],
+  },
+  {
+    id: 'exp-3',
+    title: 'Junior Outbound Sales Representative',
+    role: 'Junior Outbound Sales Representative',
+    company: 'Apex TeleServices',
+    companyType: 'Call Center & Business Services',
+    period: '2013 – 2016',
+    duration: '2013 – 2016',
+    location: 'Cebu, Philippines',
+    type: 'Full-time',
+    description: 'Mastered cold calling fundamentals, gatekeeper navigation, active listening, and vocal tonality.',
+    highlights: [
+      'Initiated career in heavy phone environments, mastering vocal tonality, active listening, and pace control.',
+      'Consistently recognized for lowest bounce rates and highest contact verification standards.',
+    ],
+    achievements: [
+      'Initiated career in heavy phone environments, mastering vocal tonality, active listening, and pace control.',
+      'Consistently recognized for lowest bounce rates and highest contact verification standards.',
+    ],
+    metrics: ['Promoted to Junior Team Lead in 18 months'],
+    skills: ['Phone Mastery', 'Tonality', 'Persistence', 'Active Listening'],
+  },
+];
+
+// Dual-exporting aliases to prevent missing export errors across all pages
+export const EXPERIENCE = CAREER_EXPERIENCES;
+export const EXPERIENCES = CAREER_EXPERIENCES;
+
 export const SERVICES: ServiceItem[] = [
   {
     id: 'cold-calling',
@@ -209,51 +290,6 @@ export const WORK_SAMPLES: WorkSample[] = [
   },
 ];
 
-export const EXPERIENCE: ExperienceRole[] = [
-  {
-    title: 'Senior B2B Sales Development Representative',
-    company: 'Regen Digital US',
-    companyType: 'B2B Sales Acceleration Agency',
-    period: '2021 – Present',
-    location: 'Remote (US, UK & Global Markets)',
-    highlights: [
-      'Lead outbound dialing campaigns for tier-1 US tech, SaaS, and professional service clients.',
-      'Averaged 75+ quality outbound dials daily with rigorous CRM data hygiene in HubSpot and Salesforce.',
-      'Consistently generated $50K–$120K in monthly qualified sales pipeline per client account.',
-      'Mentored 6 junior SDRs on objection-handling frameworks and conversational cadence.',
-    ],
-    metrics: ['130% Average Quota Attainment', '$1.8M+ Total Sourced Pipeline', '68% Show Rate'],
-    skills: ['Cold Calling', 'B2B Appointment Setting', 'Pipeline Management', 'SDR Coaching'],
-  },
-  {
-    title: 'B2B Telemarketing & Outbound Sales Specialist',
-    company: 'Global Outbound Solutions',
-    companyType: 'Telemarketing & Lead Gen Firm',
-    period: '2016 – 2021',
-    location: 'Cebu, Philippines',
-    highlights: [
-      'Handled targeted outbound cold campaigns for Australian and UK telecommunication and IT providers.',
-      'Developed custom call flows that improved connect-to-appointment conversion from 4.2% to 8.8%.',
-      'Maintained 99% accuracy on prospect BANT qualification criteria before calendar handover.',
-    ],
-    metrics: ['Over 120,000 Lifetime Outbound Calls Placed', 'Top 5% Performer Company-Wide'],
-    skills: ['Direct Dials', 'Account Research', 'Objection Handling', 'CRM Hygiene'],
-  },
-  {
-    title: 'Junior Outbound Sales Representative',
-    company: 'Apex TeleServices',
-    companyType: 'Call Center & Business Services',
-    period: '2013 – 2016',
-    location: 'Cebu, Philippines',
-    highlights: [
-      'Initiated career in heavy phone environments, mastering vocal tonality, active listening, and pace control.',
-      'Consistently recognized for lowest bounce rates and highest contact verification standards.',
-    ],
-    metrics: ['Promoted to Junior Team Lead in 18 months'],
-    skills: ['Phone Mastery', 'Tonality', 'Persistence', 'Active Listening'],
-  },
-];
-
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
     category: 'Sales Execution & Outreach',
@@ -275,6 +311,8 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     ],
   },
 ];
+
+export const SKILLS = SKILL_CATEGORIES;
 
 export const TOOLS: ToolItem[] = [
   { name: 'Apollo.io', category: 'Data & Dialing', proficiency: 'Expert', useCase: 'Lead search, mobile verification, and multi-touch email cadences.' },
@@ -303,3 +341,42 @@ export const FAQS: FaqItem[] = [
     a: 'I am currently available for dedicated retainer contracts, full-time remote SDR roles, or fractional SDR team coaching. My working schedule accommodates US Eastern, US Pacific, UK GMT, and ANZ time zones.',
   },
 ];
+
+export const TESTIMONIALS = [
+  {
+    id: 't-1',
+    quote: 'Flynn is by far the most consistent cold caller we have ever worked with. He does not pitch—he listens, diagnoses, and books high-caliber meetings.',
+    author: 'David M.',
+    role: 'VP of Growth',
+    company: 'TalentSphere US',
+  },
+  {
+    id: 't-2',
+    quote: 'Flynn navigated complex gatekeepers with total ease and represented our brand with elite professionalism.',
+    author: 'Marcus T.',
+    role: 'Managing Director',
+    company: 'CyberGuard ANZ',
+  },
+];
+
+export const DIFFERENTIATORS = [
+  {
+    title: '11+ Years of Phone Fluency',
+    description: 'Mastery of vocal tonality, active listening, and conversational control across 120,000+ dials.',
+  },
+  {
+    title: 'Global Market Adaptability',
+    description: 'Dialing experience across US (EST/PST), UK (GMT), and ANZ business cultures and etiquette.',
+  },
+  {
+    title: 'Zero-Fluff Qualification',
+    description: 'Strict adherence to BANT / MEDDPICC criteria so your Account Executives only speak with real buyers.',
+  },
+  {
+    title: 'Data & Pipeline Hygiene',
+    description: 'Thorough CRM logging, call recordings, and verified contact intelligence in HubSpot and Salesforce.',
+  },
+];
+
+export const WHY_WORK_WITH_ME = DIFFERENTIATORS;
+export const CORE_DIFFERENTIATORS = DIFFERENTIATORS;

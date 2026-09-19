@@ -57,12 +57,18 @@ export interface WorkSample {
 }
 
 export interface ExperienceRole {
+  id?: string;
   title: string;
+  role?: string;
   company: string;
-  companyType: string;
+  companyType?: string;
   period: string;
-  location: string;
+  duration?: string;
+  location?: string;
+  type?: string;
+  description?: string;
   highlights: string[];
+  achievements?: string[];
   metrics: string[];
   skills: string[];
 }
