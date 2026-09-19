@@ -7,23 +7,20 @@ interface ContactPageProps {
   onSuccess?: () => void;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({
-  preselectedService,
-  onSuccess,
-}) => {
+export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, onSuccess }) => {
   return (
-    <div className="bg-[#0b0f19] min-h-screen">
+    <div className="min-h-screen">
       <PageHeader
         index="06"
-        eyebrow="Direct Inquiry"
-        title="Schedule a Discovery Conversation"
-        description="Connect directly with Flynn James Pontino to discuss your target market, outbound cold calling campaign, or SDR team enablement."
+        eyebrow="Direct Channel"
+        title="Contact Flynn James Pontino"
+        description="Ready to fill your sales pipeline? Discuss target account profiles, campaign specifications, or team SDR leadership below."
+        badge="Direct Response"
       />
-
       <ContactSection
+        showHeader={false}
         preselectedService={preselectedService}
         onSuccess={onSuccess}
-        isStandalonePage={true}
       />
     </div>
   );
