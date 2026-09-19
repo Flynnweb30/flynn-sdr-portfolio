@@ -1,315 +1,123 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Award, Target, Headphones, Shield, Flame, Briefcase, GraduationCap, Globe } from 'lucide-react';
-import { PageHeader } from '../components/PageHeader';
-import { Section } from '../components/Section';
-import { SectionHeading } from '../components/SectionHeading';
-import { Button } from '../components/Button';
-import { OptimizedImage } from '../components/OptimizedImage';
-import { PERSONAL_INFO } from '../data/portfolioData';
 import { PageId } from '../types';
-import { useSEO } from '../hooks/useSEO';
+import { PERSONAL_INFO, KEY_STATS, TOOLS } from '../data/portfolioData';
+import { ArrowRight, Award, ShieldCheck, CheckCircle2, Clock, Globe, Target } from 'lucide-react';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
   onOpenContact: (serviceName?: string) => void;
 }
 
-const PILLARS = [
-  {
-    icon: Target,
-    title: 'Consultative, not transactional',
-    body: 'I diagnose before I prescribe. Every cold call starts with calculated questions that help prospects articulate their own bottlenecks before I ever pitch a solution.',
-  },
-  {
-    icon: Flame,
-    title: 'Relentless outbound grit',
-    body: "150+ dials a day doesn't intimidate me — it's the baseline I've held for over a decade. Mental endurance is a skill that takes years to build.",
-  },
-  {
-    icon: Headphones,
-    title: 'Active listening & pattern breaks',
-    body: 'Cold calling is 80% listening. I disarm knee-jerk defensiveness in the first seven seconds and turn objections into genuine business conversations.',
-  },
-  {
-    icon: Shield,
-    title: 'Pristine CRM discipline',
-    body: 'No phantom pipeline. Every contact, disposition note, recording, and callback is documented for complete forecasting transparency.',
-  },
-];
-
-const TRAITS = [
-  'Coachability & adaptability — new offers in 48–72 hrs',
-  'Executive phone presence with C-level buyers',
-  'Strict BANT qualification on every meeting booked',
-  'Autonomous work ethic in remote, KPI-driven teams',
-];
-
-const EXPERTISE = [
-  { icon: Briefcase, label: 'Core Discipline', value: 'B2B Outbound Sales Development' },
-  { icon: GraduationCap, label: 'Methodology', value: 'BANT · MEDDIC · Consultative Discovery' },
-  { icon: Globe, label: 'Markets Served', value: 'US · UK · ANZ · CA · SG' },
-  { icon: Award, label: 'Performance Tier', value: 'Level 4 · Top 5% Company-Wide' },
-];
-
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenContact }) => {
-  useSEO({
-    title: 'About Flynn James — 11+ Years in B2B Outbound Sales',
-    description:
-      'Meet Flynn James, a Senior B2B SDR and Junior Sales Team Lead with 11+ years of cold calling, appointment setting, and SDR coaching experience.',
-    canonical: '/about',
-    keywords: 'about Flynn James, B2B sales specialist, SDR background, outbound sales expert',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'ProfilePage',
-      dateCreated: '2025-01-15',
-      dateModified: new Date().toISOString().split('T')[0],
-      mainEntity: {
-        '@type': 'Person',
-        name: 'Flynn James Q. Pontino',
-        alternateName: 'Flynn James',
-        jobTitle: 'Senior B2B SDR & Junior Sales Team Lead',
-        description: 'Senior B2B Sales Development Representative with 11+ years of outbound experience.',
-        url: 'https://flynnjames.com/about',
-        email: 'va.flynnjames@gmail.com',
-        telephone: '+63-930-635-9306',
-        image: 'https://user29984.na.imgto.link/public/20260907/flynn-profile.avif',
-        sameAs: ['https://www.linkedin.com/in/fjpontino'],
-        knowsAbout: [
-          'B2B Appointment Setting',
-          'Cold Calling',
-          'Lead Generation',
-          'SDR Coaching',
-          'Outbound Sales',
-          'LinkedIn Sales Navigator',
-        ],
-        worksFor: {
-          '@type': 'Organization',
-          name: 'Regen Digital US',
-        },
-      },
-    },
-  });
-
   return (
-    <>
-      <PageHeader
-        index="02"
-        eyebrow="About"
-        title="A pipeline partner,"
-        titleAccent="not a dialing machine."
-        description="I bridge the gap between high-volume outbound grit and executive consultative selling. Here's the story behind 11+ years on the phones."
-      />
+    <div className="space-y-0">
+      {/* About Header */}
+      <section className="relative py-16 sm:py-24 border-b border-slate-800/80 bg-slate-950/80 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none" />
 
-      <Section>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          <div className="lg:col-span-7 space-y-6">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <h2 className="text-[24px] sm:text-[28px] font-bold text-white leading-snug tracking-tight">
-                Eleven years of turning cold lists into warm revenue.
-              </h2>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[15px] text-slate-300 leading-[1.8]"
-            >
-              I'm <strong className="text-white font-semibold">{PERSONAL_INFO.name}</strong>. I started on the phone lines in
-              2014 — hundreds of dials a day across time zones, accents, and industries I'd never heard of. What looked like
-              a grind became a craft.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-[15px] text-slate-300 leading-[1.8]"
-            >
-              Over the years, I refined the craft into a science: permission-based phone openings, multi-touch email
-              cadences, hyper-targeted LinkedIn outreach, and CRM hygiene that makes your pipeline forecast actually mean
-              something.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[15px] text-slate-300 leading-[1.8]"
-            >
-              Whether I'm running independent outbound campaigns or leading SDR teams at{' '}
-              <strong className="text-white font-semibold">Regen Digital US</strong>, the mission stays the same: put your
-              closers in front of informed, engaged decision-makers who are actually ready to solve a problem.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="my-10 border-l-2 border-amber-400/60 pl-6"
-            >
-              <p className="font-serif italic text-[19px] sm:text-[21px] text-slate-200 leading-[1.5]">
-                "A calendar invite is only as valuable as the deal it generates. My job isn't to book a slot — it's to hand
-                your AE an informed, engaged buyer."
-              </p>
-              <div className="mt-4 text-[11.5px] font-mono text-slate-500 uppercase tracking-wider">— Flynn James</div>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="text-[15px] text-slate-300 leading-[1.8]"
-            >
-              When you bring me onto a campaign, there's no guesswork and no lengthy ramp. I plug into your CRM immediately,
-              align with your ICP, and start booking qualified meetings within the first week.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-4 flex flex-wrap gap-3"
-            >
-              <Button variant="primary" onClick={() => onOpenContact()} className="group">
-                Work with Flynn
-              </Button>
-              <Button variant="secondary" onClick={() => onNavigate('experience')} withArrow className="group">
-                Full career timeline
-              </Button>
-            </motion.div>
-          </div>
-
-          <motion.aside
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5"
-          >
-            <div className="sticky top-24 space-y-6">
-              <div className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-6">
-                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-800/60">
-                  <OptimizedImage
-                    src="https://user29984.na.imgto.link/public/20260907/flynn-profile.avif"
-                    alt="Flynn James, Senior B2B SDR and outbound sales specialist"
-                    width={56}
-                    height={56}
-                    className="w-14 h-14 rounded-lg object-cover border border-amber-400/30"
-                    priority
-                  />
-                  <div>
-                    <div className="text-[14.5px] font-semibold text-white leading-tight">Flynn James Q. Pontino</div>
-                    <div className="text-[11.5px] text-slate-400 mt-1">Senior B2B SDR · Team Lead</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 mb-5">
-                  <Award className="w-4 h-4 text-amber-400" />
-                  <h3 className="text-[13px] font-semibold text-white uppercase tracking-wider font-mono">
-                    Operating DNA
-                  </h3>
-                </div>
-
-                <ul className="space-y-4">
-                  {TRAITS.map((trait, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="mt-1.5 w-1 h-1 rounded-full bg-amber-400/70 shrink-0" />
-                      <span className="text-[13px] text-slate-300 leading-relaxed">{trait}</span>
-                    </li>
-                  ))}
-                </ul>
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400 text-xs font-mono tracking-wider uppercase">
+                [01] Background & Methodology
               </div>
 
-              <div className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/60 rounded-xl p-6">
-                <h3 className="text-[13px] font-semibold text-white uppercase tracking-wider font-mono mb-5">
-                  Professional profile
-                </h3>
-                <dl className="space-y-4 text-[13px]">
-                  {EXPERTISE.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <div key={item.label} className="flex items-start gap-3">
-                        <Icon className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                        <div className="flex-1">
-                          <dt className="text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
-                            {item.label}
-                          </dt>
-                          <dd className="text-slate-200 mt-1 font-medium">{item.value}</dd>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </dl>
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                11+ Years in the Outbound Trenches. Over 120,000 Lifetime Dials Placed.
+              </h1>
+
+              <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+                Hi, I’m Flynn James Q. Pontino. Since 2013, I’ve specialized in B2B outbound phone sales, cold calling, and sales development. 
+                I don’t treat outbound as a numbers-spamming game—I treat cold calling as a strategic diagnostic conversation that unlocks pipeline.
+              </p>
+
+              <div className="space-y-3 text-sm text-slate-300">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 mt-1 shrink-0" />
+                  <span><strong>Enterprise & Mid-Market Focus:</strong> Navigating complex gatekeepers and engaging C-Suite, VP, and Director decision-makers.</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 mt-1 shrink-0" />
+                  <span><strong>Global Market Fluency:</strong> Experienced in localized US (EST/PST), UK, Australian, and Singapore business etiquette.</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 mt-1 shrink-0" />
+                  <span><strong>Zero Fluff Reporting:</strong> Daily call logs, verified recording links, and accurate pipeline stage updates directly in your CRM.</span>
+                </div>
+              </div>
+
+              <div className="pt-4 flex flex-wrap gap-4">
+                <button
+                  onClick={() => onOpenContact()}
+                  className="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm tracking-wide transition-all cursor-pointer shadow-lg shadow-amber-400/20"
+                >
+                  Schedule an Intro Call
+                </button>
+                <button
+                  onClick={() => onNavigate('experience')}
+                  className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-semibold text-sm transition-all cursor-pointer"
+                >
+                  View Full Career History
+                </button>
               </div>
             </div>
-          </motion.aside>
-        </div>
-      </Section>
 
-      <Section bordered className="section-photo bg-photo-laptop">
-        <SectionHeading
-          index="02.1"
-          eyebrow="How I think"
-          title="Four principles that"
-          titleAccent="shape every call."
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/60 rounded-lg overflow-hidden border border-slate-800/60 mt-14">
-          {PILLARS.map((p, i) => {
-            const Icon = p.icon;
-            return (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="bg-[#0b0f19]/90 hover:bg-slate-900/80 p-8 transition-colors"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-9 h-9 rounded-md bg-slate-800/60 border border-slate-700/60 flex items-center justify-center">
-                    <Icon className="w-4 h-4 text-amber-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-[15px] font-semibold text-white mb-2">{p.title}</h3>
-                    <p className="text-[13.5px] text-slate-400 leading-[1.75]">{p.body}</p>
+            {/* Right Profile Photo */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative max-w-sm w-full">
+                <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-sky-500/20 rounded-2xl blur-xl opacity-70" />
+                <div className="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl">
+                  <img
+                    src="https://user29984.na.imgto.link/public/20260907/flynn-profile.avif"
+                    alt="Flynn James Q. Pontino"
+                    className="w-full aspect-[4/5] object-cover object-[center_top]"
+                  />
+                  <div className="p-4 bg-slate-950/90 border-t border-slate-800/80 flex items-center justify-between">
+                    <div>
+                      <div className="text-sm font-bold text-white">{PERSONAL_INFO.name}</div>
+                      <div className="text-xs text-amber-400 font-mono">{PERSONAL_INFO.title}</div>
+                    </div>
+                    <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950 border border-emerald-800 px-2 py-0.5 rounded-full">
+                      Cebu, PH (Remote)
+                    </span>
                   </div>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </Section>
-
-      {/* Expanded SEO content block */}
-      <Section bordered>
-        <div className="max-w-3xl">
-          <SectionHeading
-            index="02.2"
-            eyebrow="Background"
-            title="Where the experience"
-            titleAccent="comes from."
-          />
-          <div className="mt-8 space-y-5 text-[15px] text-slate-300 leading-[1.85]">
-            <p>
-              Flynn's career spans over a decade of frontline B2B outbound. He began in 2014 in a high-volume BPO
-              environment in the Philippines, moved through progressively senior sales roles across international
-              campaigns, and now operates as a remote Senior B2B SDR and Junior Sales Team Lead for Regen Digital US.
-            </p>
-            <p>
-              Along the way, he has generated qualified pipeline for companies in digital marketing, enterprise SaaS,
-              cloud IT infrastructure, government technology, and B2B events. His track record includes $1.8M+ in sourced
-              pipeline for a UK marketing agency, $1.2M in enterprise deals for a Singapore cloud provider, and Top 5%
-              rep status across two consecutive years at Public Sector Network in Toronto.
-            </p>
-            <p>
-              Beyond personal quota attainment, Flynn mentors junior SDRs — running call listening labs, objection
-              handling workshops, and structured onboarding playbooks that reduce ramp time by 25%.
-            </p>
+              </div>
+            </div>
           </div>
         </div>
-      </Section>
-    </>
+      </section>
+
+      {/* Tooling & Technologies */}
+      <section className="py-20 bg-slate-950/60 border-t border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="max-w-3xl mb-12">
+            <div className="text-xs font-mono uppercase tracking-wider text-amber-400 mb-2">Systems & Stack</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Tools & Outbound Infrastructure</h2>
+            <p className="text-slate-400 mt-2 text-sm sm:text-base">
+              Proficient across industry-standard CRMs, intelligence databases, cloud dialers, and sequencing engines.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {TOOLS.map((t, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-white text-base">{t.name}</h3>
+                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
+                    {t.proficiency}
+                  </span>
+                </div>
+                <div className="text-xs text-slate-500 font-mono">{t.category}</div>
+                <p className="text-xs text-slate-300 leading-relaxed pt-2 border-t border-slate-800/60">
+                  {t.useCase}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };

@@ -1,406 +1,291 @@
 import React, { useState } from 'react';
-import { 
-  Mail, Phone, Linkedin, FileText, Send, CheckCircle2, 
-  Copy, ExternalLink, Sparkles, Clock, Globe, ShieldCheck 
-} from 'lucide-react';
+import { Mail, Phone, Clock, Globe, ArrowRight, CheckCircle2, Send, Calendar, ShieldCheck, User } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface ContactSectionProps {
-  initialService?: string;
-  onSuccessToast?: (msg: string) => void;
+  preselectedService?: string;
+  onSuccess?: () => void;
+  showHeader?: boolean;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ initialService, onSuccessToast }) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({
+  preselectedService,
+  onSuccess,
+  showHeader = true,
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
-    serviceNeeded: initialService || 'B2B Appointment Setting',
-    targetMarket: 'United States',
-    callingVolume: '150+ Dials/Day',
-    message: ''
+    service: preselectedService || 'cold-calling',
+    targetMarket: 'US / North America',
+    message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [copiedEmail, setCopiedEmail] = useState(false);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopiedEmail(true);
-    if (onSuccessToast) onSuccessToast("Email address copied to clipboard!");
-    setTimeout(() => setCopiedEmail(false), 3000);
-  };
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate reliable form submission
+    // Simulate reliable dispatch
     setTimeout(() => {
       setIsSubmitting(false);
-      setSubmitted(true);
-      if (onSuccessToast) onSuccessToast("Thank you! Your inquiry was sent to Flynn James. Expect a response within 24 hours.");
-    }, 1000);
+      setIsSubmitted(true);
+      if (onSuccess) onSuccess();
+    }, 800);
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#070b14] relative border-t border-slate-800/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-3">
-            <Mail className="w-3.5 h-3.5 text-cyan-400" />
-            <span>LET'S BUILD YOUR PIPELINE</span>
+    <section id="contact-section" className="relative py-16 sm:py-24 border-t border-slate-800/80 overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/5 via-slate-950/0 to-transparent pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        {showHeader && (
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400 text-xs font-mono tracking-wider uppercase mb-4">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              Direct Engagement & Retainers
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+              Ready to Fill Your Sales Calendar With Qualified Pipeline?
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-slate-400 leading-relaxed">
+              Whether you need a dedicated senior SDR to drive daily outbound calls or playbooks to scale your internal team, let’s schedule a concrete conversation.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Ready to Fill Your Calendar With{' '}
-            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-              Qualified Meetings?
-            </span>
-          </h2>
-          <p className="mt-4 text-slate-300 text-base leading-relaxed">
-            Whether you need a full-time senior SDR, an outbound appointment setting specialist, or an SDR coach for your sales team.
-          </p>
-        </div>
+        )}
 
-        {/* 2-Column Contact Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Left Column: Direct Contact & Channels */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="bg-[#0f172a] rounded-2xl border border-slate-800 p-6 sm:p-7 space-y-6">
-              <h3 className="text-xl font-bold text-white font-heading">
-                Direct Channels & Social
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Feel free to reach out directly via email, phone, or LinkedIn. I typically respond to all outbound inquiries within 2–4 hours during business days.
-              </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Direct Credentials & Channels */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-6 sm:p-8 backdrop-blur-md relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/5 rounded-full blur-2xl pointer-events-none" />
 
-              <div className="space-y-3 pt-2">
-                {/* Email Box with 1-click copy */}
-                <div className="p-3.5 rounded-xl bg-[#070b14] border border-slate-800 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 overflow-hidden">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
-                      <Mail className="w-4 h-4" />
-                    </div>
-                    <div className="truncate">
-                      <span className="text-[11px] text-slate-400 block font-semibold">Direct Email</span>
-                      <a 
-                        href={`mailto:${PERSONAL_INFO.email}`} 
-                        className="text-xs sm:text-sm font-bold text-white hover:text-cyan-400 transition-colors truncate block"
-                      >
-                        {PERSONAL_INFO.email}
-                      </a>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={handleCopyEmail}
-                    className="shrink-0 p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-cyan-400 border border-slate-700 transition-all text-xs flex items-center gap-1"
-                    title="Copy email address"
-                  >
-                    {copiedEmail ? (
-                      <>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-[10px] text-emerald-400">Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span className="text-[10px]">Copy</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                {/* Phone Call */}
-                <div className="p-3.5 rounded-xl bg-[#070b14] border border-slate-800 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-[11px] text-slate-400 block font-semibold">Direct Phone / WhatsApp</span>
-                      <a 
-                        href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`} 
-                        className="text-xs sm:text-sm font-bold text-white hover:text-cyan-400 transition-colors block"
-                      >
-                        {PERSONAL_INFO.phone}
-                      </a>
-                    </div>
-                  </div>
-                  <a
-                    href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
-                    className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-700 text-xs flex items-center gap-1"
-                  >
-                    <span>Call</span>
-                  </a>
-                </div>
-
-                {/* LinkedIn Profile */}
-                <div className="p-3.5 rounded-xl bg-[#070b14] border border-slate-800 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
-                      <Linkedin className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-[11px] text-slate-400 block font-semibold">LinkedIn Profile</span>
-                      <span className="text-xs sm:text-sm font-bold text-white block">
-                        linkedin.com/in/fjpontino
-                      </span>
-                    </div>
-                  </div>
-                  <a
-                    href={PERSONAL_INFO.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-700 text-xs flex items-center gap-1"
-                  >
-                    <span>Connect</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-
-                {/* Resume Download Link */}
-                <div className="p-3.5 rounded-xl bg-[#070b14] border border-slate-800 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
-                      <FileText className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-[11px] text-slate-400 block font-semibold">Official Resume</span>
-                      <span className="text-xs sm:text-sm font-bold text-white block">
-                        Google Drive Verified PDF
-                      </span>
-                    </div>
-                  </div>
-                  <a
-                    href={PERSONAL_INFO.resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-cyan-400 text-slate-950 font-bold hover:bg-cyan-300 text-xs flex items-center gap-1"
-                  >
-                    <span>View Resume</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
+              <div className="flex items-center gap-4 mb-6">
+                <img
+                  src="https://user29984.na.imgto.link/public/20260907/flynn-profile.avif"
+                  alt="Flynn James Pontino"
+                  className="w-16 h-16 rounded-xl object-cover border border-amber-400/30 shadow-md"
+                />
+                <div>
+                  <h3 className="text-lg font-bold text-white">{PERSONAL_INFO.name}</h3>
+                  <p className="text-xs text-amber-400 font-mono mt-0.5">{PERSONAL_INFO.title}</p>
+                  <span className="inline-flex items-center gap-1.5 mt-2 text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-full font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                    Available for Q3/Q4 Contracts
+                  </span>
                 </div>
               </div>
 
-              {/* What Happens Next Guarantee */}
-              <div className="pt-4 border-t border-slate-800/80 space-y-2">
-                <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
-                  What Happens Next:
+              <div className="space-y-4 text-sm">
+                <a
+                  href={`mailto:${PERSONAL_INFO.email}`}
+                  className="flex items-center gap-3.5 p-3 rounded-xl bg-slate-950/60 border border-slate-800/70 hover:border-amber-400/40 hover:bg-slate-800/50 transition-all text-slate-300 hover:text-white group"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-amber-400/10 flex items-center justify-center text-amber-400 group-hover:scale-105 transition-transform">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[11px] text-slate-500 font-mono uppercase tracking-wider">Direct Email</div>
+                    <div className="font-medium truncate">{PERSONAL_INFO.email}</div>
+                  </div>
+                </a>
+
+                <a
+                  href="tel:+639306359306"
+                  className="flex items-center gap-3.5 p-3 rounded-xl bg-slate-950/60 border border-slate-800/70 hover:border-amber-400/40 hover:bg-slate-800/50 transition-all text-slate-300 hover:text-white group"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-amber-400/10 flex items-center justify-center text-amber-400 group-hover:scale-105 transition-transform">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[11px] text-slate-500 font-mono uppercase tracking-wider">Direct / WhatsApp</div>
+                    <div className="font-medium">{PERSONAL_INFO.phone}</div>
+                  </div>
+                </a>
+
+                <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/70 space-y-2">
+                  <div className="flex items-center gap-2 text-xs text-amber-400 font-mono">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>Timezone Overlap Guarantee</span>
+                  </div>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {PERSONAL_INFO.timezoneOverlap}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  4–6 Hour Response Time
                 </span>
-                <div className="space-y-1.5 text-xs text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>Response within 24 hours guaranteed.</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Globe className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>Free 20-minute ICP & pipeline teardown call.</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>Tailored outbound pilot plan with clear KPI targets.</span>
-                  </div>
-                </div>
+                <a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-400 hover:underline inline-flex items-center gap-1"
+                >
+                  LinkedIn Profile <ArrowRight className="w-3 h-3" />
+                </a>
               </div>
+            </div>
 
+            {/* Quick Assurance Box */}
+            <div className="bg-slate-900/40 border border-slate-800/60 rounded-xl p-5 text-xs text-slate-400 space-y-2.5">
+              <div className="font-semibold text-slate-200">What happens after you reach out?</div>
+              <ul className="space-y-1.5 list-disc pl-4 text-slate-400">
+                <li>I will personally review your website, ICP, and market fit.</li>
+                <li>We schedule a focused 20-minute discovery call with actionable outbound insights.</li>
+                <li>No aggressive pitches or low-quality generic proposals.</li>
+              </ul>
             </div>
           </div>
 
-          {/* Right Column: Interactive Contact / Hire Me Form */}
+          {/* Right Column: Interactive Consultation Form */}
           <div className="lg:col-span-7">
-            <div className="bg-[#0f172a] rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-xl">
-              
-              {submitted ? (
+            <div className="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-6 sm:p-10 backdrop-blur-md shadow-xl relative">
+              {isSubmitted ? (
                 <div className="py-12 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white font-heading">
-                    Inquiry Received!
-                  </h3>
-                  <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-white">{formData.name}</strong>. Flynn James has received your message and will get back to you at <span className="text-cyan-300">{formData.email}</span> within 24 hours.
+                  <h3 className="text-2xl font-bold text-white">Inquiry Received</h3>
+                  <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+                    Thank you for reaching out. I have received your message and will review your requirements before getting back to you within 4–6 business hours.
                   </p>
                   <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormData({
-                        name: '',
-                        email: '',
-                        company: '',
-                        serviceNeeded: 'B2B Appointment Setting',
-                        targetMarket: 'United States',
-                        callingVolume: '150+ Dials/Day',
-                        message: ''
-                      });
-                    }}
-                    className="mt-4 px-5 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-lg"
+                    onClick={() => setIsSubmitted(false)}
+                    className="mt-4 px-6 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-sm font-medium text-white transition-colors"
                   >
-                    Send Another Message
+                    Send Another Note
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4" id="portfolio-contact-form">
-                  <div className="border-b border-slate-800 pb-4 mb-2">
-                    <h3 className="text-xl font-bold text-white font-heading">
-                      Request a Strategy Session or Campaign Proposal
-                    </h3>
-                    <p className="text-xs text-slate-400 mt-1">
-                      Fill out the fields below. All information is confidential and will never be shared.
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="border-b border-slate-800/80 pb-4 mb-6">
+                    <h3 className="text-xl font-bold text-white">Direct Project Inquiry</h3>
+                    <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                      Tell me about your outbound goals, target accounts, or hiring requirements.
                     </p>
                   </div>
 
-                  {/* Name and Email */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                        Your Full Name *
+                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                        Your Name *
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Sarah Jenkins"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#070b14] border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors"
+                        placeholder="Alex Mercer"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-950/70 border border-slate-800 focus:border-amber-400 focus:outline-none text-sm text-white placeholder:text-slate-600 transition-colors"
                       />
                     </div>
-
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                        Business Email Address *
+                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                        Work Email *
                       </label>
                       <input
                         type="email"
                         required
-                        placeholder="s.jenkins@company.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#070b14] border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors"
+                        placeholder="alex@company.com"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-950/70 border border-slate-800 focus:border-amber-400 focus:outline-none text-sm text-white placeholder:text-slate-600 transition-colors"
                       />
                     </div>
                   </div>
 
-                  {/* Company & Service Selection */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                        Company Name / URL *
+                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                        Company Name / URL
                       </label>
                       <input
                         type="text"
-                        required
-                        placeholder="Acme Growth Inc."
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#070b14] border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors"
+                        placeholder="Acme Tech or acme.io"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-950/70 border border-slate-800 focus:border-amber-400 focus:outline-none text-sm text-white placeholder:text-slate-600 transition-colors"
                       />
                     </div>
-
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                        Primary Service Needed *
+                      <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                        Primary Service Needed
                       </label>
                       <select
-                        value={formData.serviceNeeded}
-                        onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#070b14] border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-400 transition-colors"
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-slate-950/70 border border-slate-800 focus:border-amber-400 focus:outline-none text-sm text-white transition-colors"
                       >
-                        <option value="B2B Appointment Setting">B2B Appointment Setting</option>
-                        <option value="High-Volume Cold Calling">High-Volume Cold Calling (150+ dials)</option>
-                        <option value="Lead Generation & Account Targeting">Lead Gen & Account Targeting</option>
-                        <option value="SDR Support & Team Coaching">SDR Coaching & Team Leadership</option>
-                        <option value="LinkedIn Social Selling">LinkedIn Outreach / Sales Nav</option>
-                        <option value="Custom Outbound Campaign">End-to-End Hybrid Outbound</option>
+                        <option value="cold-calling">B2B Cold Calling & Phone Outreach</option>
+                        <option value="appointment-setting">Multi-Channel Appointment Setting</option>
+                        <option value="sdr-leadership">SDR Coaching & Outbound Playbooks</option>
+                        <option value="lead-generation">Lead List Building & CRM Setup</option>
+                        <option value="full-time-role">Full-Time / Retainer SDR Role</option>
                       </select>
                     </div>
                   </div>
 
-                  {/* Target Market & Daily Dial expectation */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                        Target Geography / Timezone *
-                      </label>
-                      <select
-                        value={formData.targetMarket}
-                        onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#070b14] border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-400 transition-colors"
-                      >
-                        <option value="United States">United States (EST / CST / PST)</option>
-                        <option value="United Kingdom / Europe">United Kingdom / Europe (GMT / BST)</option>
-                        <option value="Australia & New Zealand">Australia & New Zealand (AEST)</option>
-                        <option value="Canada">Canada (EST / MST / PST)</option>
-                        <option value="Singapore / APAC">Singapore & APAC (SGT)</option>
-                        <option value="Global / Multi-Region">Global / Multi-Region</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                        Expected Monthly Meeting Target
-                      </label>
-                      <select
-                        value={formData.callingVolume}
-                        onChange={(e) => setFormData({ ...formData, callingVolume: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#070b14] border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-400 transition-colors"
-                      >
-                        <option value="15-20 Meetings/Mo">15–20 Qualified Meetings / Month</option>
-                        <option value="25-35 Meetings/Mo">25–35 Qualified Meetings / Month</option>
-                        <option value="40+ Meetings/Mo">40+ Qualified Meetings / Month (Dedicated)</option>
-                        <option value="Consulting / Team Audit">Outbound Audit & SDR Coaching Only</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Message Field */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                      Tell Me About Your ICP & Main Sales Bottleneck *
+                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                      Target Market & Timezone Focus
+                    </label>
+                    <select
+                      value={formData.targetMarket}
+                      onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-950/70 border border-slate-800 focus:border-amber-400 focus:outline-none text-sm text-white transition-colors"
+                    >
+                      <option value="US / North America">United States / North America (EST & PST)</option>
+                      <option value="United Kingdom / Europe">United Kingdom / Europe (GMT & CET)</option>
+                      <option value="Australia & New Zealand">Australia & New Zealand (AEST / NZST)</option>
+                      <option value="Singapore / APAC">Singapore & APAC</option>
+                      <option value="Multiple Markets">Multiple Global Regions</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">
+                      How Can I Help? (Current Challenges & Goals) *
                     </label>
                     <textarea
                       required
                       rows={4}
-                      placeholder="e.g. We sell a $12k B2B SaaS platform to HR Directors in the US. Our closing reps don't have enough qualified meetings on their calendars and our SDR response rates are low..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#070b14] border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400 transition-colors"
-                    ></textarea>
+                      placeholder="Share a brief overview of who you are selling to, current show rates, monthly meeting targets, or whether you need a dedicated rep..."
+                      className="w-full px-4 py-3 rounded-xl bg-slate-950/70 border border-slate-800 focus:border-amber-400 focus:outline-none text-sm text-white placeholder:text-slate-600 transition-colors"
+                    />
                   </div>
 
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300 hover:from-cyan-300 hover:to-white rounded-xl shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm tracking-wide transition-all duration-200 shadow-lg shadow-amber-400/20 disabled:opacity-50 cursor-pointer"
                   >
                     {isSubmitting ? (
-                      <span>Sending inquiry...</span>
+                      <>
+                        <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                        Submitting Inquiry...
+                      </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        <span>Submit Outbound Inquiry — Get Strategy Brief</span>
+                        Send Outbound Inquiry
                       </>
                     )}
                   </button>
-
-                  <p className="text-[11px] text-center text-slate-500">
-                    No spam ever. 100% confidential. Response guaranteed within 24 hours.
-                  </p>
                 </form>
               )}
-
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

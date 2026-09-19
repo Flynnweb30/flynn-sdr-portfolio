@@ -1,258 +1,198 @@
 import React, { useState } from 'react';
-import { 
-  Target, Calendar, PhoneCall, Users, Linkedin, Layers, 
-  ArrowRight, CheckCircle, ExternalLink, Sparkles 
-} from 'lucide-react';
-import { CORE_SERVICES } from '../data/portfolioData';
+import { PhoneCall, CalendarCheck, Users, Database, ArrowRight, CheckCircle, Zap, Shield, Sparkles } from 'lucide-react';
+import { SERVICES } from '../data/portfolioData';
 import { ServiceItem } from '../types';
 
 interface ServicesProps {
-  onSelectService: (service: ServiceItem) => void;
-  onOpenContactWithService: (serviceName: string) => void;
+  onSelectService?: (service: ServiceItem) => void;
+  onOpenContact?: (serviceName?: string) => void;
 }
 
-export const Services: React.FC<ServicesProps> = ({ onSelectService, onOpenContactWithService }) => {
-  const [activeFilter, setActiveFilter] = useState<'all' | 'outbound' | 'pipeline' | 'leadership'>('all');
+const SERVICE_ICONS: Record<string, React.ReactNode> = {
+  'cold-calling': <PhoneCall className="w-5 h-5 text-amber-400" />,
+  'appointment-setting': <CalendarCheck className="w-5 h-5 text-sky-400" />,
+  'sdr-leadership': <Users className="w-5 h-5 text-emerald-400" />,
+  'lead-generation': <Database className="w-5 h-5 text-violet-400" />,
+};
 
-  const getServiceIcon = (id: string) => {
-    switch (id) {
-      case 'lead-generation':
-        return Target;
-      case 'appointment-setting':
-        return Calendar;
-      case 'cold-calling':
-        return PhoneCall;
-      case 'sdr-support':
-        return Users;
-      case 'linkedin-outreach':
-        return Linkedin;
-      case 'pipeline-management':
-        return Layers;
-      default:
-        return Sparkles;
-    }
-  };
+const WORKFLOW_STEPS: Record<string, { step: string; desc: string }[]> = {
+  'cold-calling': [
+    { step: '01. Account Prep', desc: 'Direct dials & title verification' },
+    { step: '02. Live Calling', desc: 'Pattern-interrupt & live discovery' },
+    { step: '03. Qualification', desc: 'BANT verification on the phone' },
+    { step: '04. Cal Handover', desc: 'Direct invite + CRM notes synced' },
+  ],
+  'appointment-setting': [
+    { step: '01. Tiering', desc: 'High-intent accounts classified' },
+    { step: '02. Cadence', desc: 'Phone + Email + LinkedIn touchpoints' },
+    { step: '03. Booking', desc: 'Prospect confirms calendar slot' },
+    { step: '04. Show-Up Flow', desc: 'Custom reminder series sent' },
+  ],
+  'sdr-leadership': [
+    { step: '01. Audit', desc: 'Call recordings & metrics reviewed' },
+    { step: '02. Playbooks', desc: 'Battlecards & script optimization' },
+    { step: '03. Live Labs', desc: 'Side-by-side live call coaching' },
+    { step: '04. KPI Tracking', desc: 'Weekly pipeline acceleration review' },
+  ],
+  'lead-generation': [
+    { step: '01. TAM Filter', desc: 'Industry, headcount, revenue' },
+    { step: '02. Data Scrub', desc: 'Triple-check email & phone accuracy' },
+    { step: '03. Enrichment', desc: 'Tech stack & buying intent added' },
+    { step: '04. Integration', desc: 'Direct sync to HubSpot / Salesforce' },
+  ],
+};
 
-  const getServiceImage = (id: string) => {
-    switch (id) {
-      case 'lead-generation':
-        return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80";
-      case 'appointment-setting':
-        return "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=800&q=80";
-      case 'cold-calling':
-        return "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=800&q=80";
-      case 'sdr-support':
-        return "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80";
-      case 'linkedin-outreach':
-        return "https://images.unsplash.com/photo-1611944212129-29977ae1398c?auto=format&fit=crop&w=800&q=80";
-      case 'pipeline-management':
-        return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80";
-      default:
-        return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80";
-    }
-  };
-
-  const filteredServices = CORE_SERVICES.filter(service => {
-    if (activeFilter === 'outbound') {
-      return ['cold-calling', 'appointment-setting', 'linkedin-outreach'].includes(service.id);
-    }
-    if (activeFilter === 'pipeline') {
-      return ['lead-generation', 'pipeline-management'].includes(service.id);
-    }
-    if (activeFilter === 'leadership') {
-      return ['sdr-support', 'appointment-setting'].includes(service.id);
-    }
-    return true;
-  });
+export const Services: React.FC<ServicesProps> = ({ onSelectService, onOpenContact }) => {
+  const [activeHoverId, setActiveHoverId] = useState<string>(SERVICES[0].id);
 
   return (
-    <section id="services" className="py-24 bg-[#0a0f1c] relative border-t border-slate-800/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>FULL OUTBOUND ENGINE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Services Built to{' '}
-            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-              Fill Your Sales Pipeline
-            </span>
-          </h2>
-          <p className="mt-4 text-slate-300 text-base leading-relaxed">
-            From cold list generation and phone execution to AE calendar booking and team leadership.
-          </p>
+    <section id="services-section" className="relative py-20 sm:py-28 bg-[#0b0f19] border-t border-slate-800/80 overflow-hidden">
+      {/* Subtle atmospheric ambient glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-amber-500/5 via-sky-500/5 to-transparent blur-3xl pointer-events-none" />
 
-          {/* Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-7">
-            <button
-              onClick={() => setActiveFilter('all')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                activeFilter === 'all'
-                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
-                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
-              }`}
-            >
-              All 6 Services
-            </button>
-            <button
-              onClick={() => setActiveFilter('outbound')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                activeFilter === 'outbound'
-                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
-                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
-              }`}
-            >
-              Outbound & Cold Calling
-            </button>
-            <button
-              onClick={() => setActiveFilter('pipeline')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                activeFilter === 'pipeline'
-                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
-                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
-              }`}
-            >
-              Targeting & CRM Hygiene
-            </button>
-            <button
-              onClick={() => setActiveFilter('leadership')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                activeFilter === 'leadership'
-                  ? 'bg-cyan-400 text-slate-950 shadow-md shadow-cyan-500/20'
-                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
-              }`}
-            >
-              SDR Enablement & Coaching
-            </button>
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400 text-xs font-mono tracking-wider uppercase mb-4">
+              <Sparkles className="w-3.5 h-3.5" />
+              Specialized Sales Capabilities
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+              Predictable Outbound Systems That Drive Revenue
+            </h2>
+            <p className="mt-3.5 text-slate-400 text-base sm:text-lg leading-relaxed">
+              Every service is engineered around one standard: delivering high-conviction discovery calls to your calendar with zero fluff.
+            </p>
+          </div>
+
+          <div className="text-xs font-mono text-slate-500 hidden md:block">
+            HOVER OVER CARDS TO INSPECT EXECUTION MATRIX & DELIVERABLES
           </div>
         </div>
 
-        {/* Services Grid with Visual Placeholders */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredServices.map((service) => {
-            const Icon = getServiceIcon(service.id);
-            const imageUrl = getServiceImage(service.id);
+        {/* Dynamic Services Grid Inspired by Reference Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          {SERVICES.map((service, index) => {
+            const isHovered = activeHoverId === service.id;
+            const steps = WORKFLOW_STEPS[service.id] || [];
 
             return (
               <div
                 key={service.id}
-                className="bg-[#0f172a] rounded-2xl border border-slate-800/90 hover:border-cyan-500/40 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-cyan-950/20 group"
-                id={`service-card-${service.id}`}
+                onMouseEnter={() => setActiveHoverId(service.id)}
+                className={`group relative rounded-2xl border transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between ${
+                  isHovered
+                    ? 'bg-slate-900/90 border-amber-400/50 shadow-2xl shadow-amber-500/10 -translate-y-1'
+                    : 'bg-slate-900/50 border-slate-800/80 hover:border-slate-700'
+                }`}
               >
-                {/* Visual Image Header */}
-                <div className="relative h-44 overflow-hidden bg-slate-900">
-                  <img
-                    src={imageUrl}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-90"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/40 to-transparent"></div>
-                  
-                  {/* Badge */}
-                  <div className="absolute top-3 left-3">
-                    <span className="px-2.5 py-1 text-[11px] font-bold text-cyan-300 bg-[#070b14]/90 border border-cyan-500/40 rounded-full backdrop-blur-md">
-                      {service.badge}
+                {/* Top Subtle Amber Glow Bar on Hover */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent transition-opacity duration-300 ${
+                    isHovered ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+
+                {/* Card Top Information */}
+                <div>
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-2 rounded-xl bg-slate-950 border border-slate-800">
+                        {SERVICE_ICONS[service.id]}
+                      </div>
+                      <span className="font-mono text-xs text-amber-400 font-semibold uppercase tracking-wider">
+                        {`[0${index + 1}] ${service.badge}`}
+                      </span>
+                    </div>
+
+                    <span className="text-[11px] font-mono text-slate-400 bg-slate-950/80 border border-slate-800 px-2.5 py-1 rounded-full">
+                      {service.metrics.split('•')[0].trim()}
                     </span>
                   </div>
 
-                  {/* Icon badge */}
-                  <div className="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-cyan-400 text-slate-950 flex items-center justify-center shadow-lg shadow-cyan-400/20 font-bold">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-amber-300 transition-colors">
+                    {service.title}
+                  </h3>
 
-                {/* Content Body */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div>
-                    <h3 className="text-lg font-bold text-white font-heading group-hover:text-cyan-300 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-xs text-cyan-400/90 font-medium mt-1">
-                      {service.tagline}
-                    </p>
-                    <p className="text-xs text-slate-300 leading-relaxed mt-3">
-                      {service.description}
-                    </p>
-                  </div>
+                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                    {service.tagline}
+                  </p>
 
-                  {/* Benchmark Metric Pill */}
-                  <div className="bg-[#070b14] border border-slate-800 p-2.5 rounded-lg text-xs">
-                    <span className="text-slate-400 text-[10px] uppercase tracking-wider block font-semibold">Key Benchmark</span>
-                    <span className="text-cyan-300 font-bold">{service.metrics}</span>
-                  </div>
-
-                  {/* Features bullets */}
-                  <ul className="space-y-1.5 text-xs text-slate-300 pt-1">
-                    {service.features.map((feat, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tools Stack Tags */}
-                  <div className="pt-2 border-t border-slate-800/80">
-                    <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide mb-1.5">
-                      Tools & Stack:
+                  {/* Reference-Inspired Execution Matrix / Workflow Strip */}
+                  <div className="mt-6 pt-5 border-t border-slate-800/80">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center justify-between">
+                      <span>Execution Cadence & Flow</span>
+                      <span className="text-amber-400/80">End-to-End Handled</span>
                     </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {service.toolsUsed.map((tool) => (
-                        <span
-                          key={tool}
-                          className="px-2 py-0.5 text-[10px] font-medium bg-slate-900 border border-slate-700/80 text-slate-300 rounded"
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {steps.map((st, i) => (
+                        <div
+                          key={i}
+                          className={`p-2.5 rounded-lg border text-left transition-all ${
+                            isHovered
+                              ? 'bg-slate-950/80 border-slate-800 text-slate-200'
+                              : 'bg-slate-950/40 border-slate-900 text-slate-400'
+                          }`}
                         >
-                          {tool}
-                        </span>
+                          <div className="text-[10px] font-mono text-amber-400/90 font-bold">{st.step}</div>
+                          <div className="text-[11px] text-slate-300 font-medium leading-tight mt-1">{st.desc}</div>
+                        </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="pt-3 flex items-center justify-between gap-2">
-                    <button
-                      onClick={() => onSelectService(service)}
-                      className="text-xs font-semibold text-slate-300 hover:text-cyan-400 flex items-center gap-1 group/btn"
-                    >
-                      <span>View Deliverables</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-
-                    <button
-                      onClick={() => onOpenContactWithService(service.title)}
-                      className="px-3 py-1.5 text-xs font-semibold bg-cyan-500/10 hover:bg-cyan-400 hover:text-slate-950 text-cyan-300 border border-cyan-500/30 rounded-lg transition-all"
-                    >
-                      Inquire →
-                    </button>
+                  {/* Features / Deliverables Checklist */}
+                  <div className="mt-5 space-y-2">
+                    {service.features.map((feat, fIdx) => (
+                      <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
                   </div>
+
+                  {/* Tooling Tags */}
+                  <div className="mt-6 pt-4 border-t border-slate-800/60 flex flex-wrap items-center gap-1.5">
+                    <span className="text-[10px] font-mono text-slate-500 uppercase mr-1">Stack:</span>
+                    {service.toolsUsed.map((tool, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-950 border border-slate-800/80 text-slate-400"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Action Footer */}
+                <div className="mt-6 pt-5 border-t border-slate-800/80 flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onSelectService) onSelectService(service);
+                    }}
+                    className="text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    View Deliverable Details
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onOpenContact) onOpenContact(service.title);
+                    }}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 px-3.5 py-2 rounded-lg bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 transition-all cursor-pointer"
+                  >
+                    <span>Pre-Select & Book</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
-
-        {/* Bottom Banner */}
-        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-blue-950/40 border border-cyan-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <h4 className="text-lg sm:text-xl font-bold text-white font-heading">
-              Need a Custom Hybrid Campaign (Phone + LinkedIn + Email)?
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
-              I frequently build end-to-end bespoke outbound playbooks combining high-volume calling, social touches, and CRM setup.
-            </p>
-          </div>
-          <button
-            onClick={() => onOpenContactWithService("Custom Hybrid Outbound Campaign")}
-            className="shrink-0 px-6 py-3 text-xs font-bold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-xl shadow-md shadow-cyan-500/20 transition-all"
-          >
-            Design My Custom Outbound Motion →
-          </button>
-        </div>
-
       </div>
     </section>
   );
