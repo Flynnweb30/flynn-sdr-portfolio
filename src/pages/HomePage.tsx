@@ -52,9 +52,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <div className="flex flex-col w-full text-slate-100 selection:bg-amber-400/20 selection:text-amber-200">
       
-      {/* ========================================================================= */}
-      {/* HERO SECTION  Team Office Photo Background With Subtle Scrim            */}
-      {/* ========================================================================= */}
+      {/* Hero Section */}
       <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-slate-800/80">
         <div className="absolute inset-0 z-0">
           <img
@@ -87,7 +85,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mb-10 font-normal">
-              Hi, Im <strong className="text-white font-semibold">Flynn James Q. Pontino</strong>  a Senior B2B SDR with 11+ years on the phones.
+              Hi, I’m <strong className="text-white font-semibold">Flynn James Q. Pontino</strong> — a Senior B2B SDR with 11+ years on the phones.
               I connect SaaS platforms, IT firms, and agencies directly with executive buyers across the US, UK, ANZ, and Singapore.
             </p>
 
@@ -129,15 +127,13 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* SERVICES SECTION  Visual/Content Layout Inspired by Reference 2          */}
-      {/* ========================================================================= */}
+      {/* Services Section */}
       <section id="services-overview" className="py-24 sm:py-28 bg-[#0b0f19] border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* Left Anchor Column (Matching Reference Headline + Link Structure) */}
+            {/* Left Anchor Column */}
             <div className="lg:col-span-4 lg:sticky lg:top-28">
               <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-mono uppercase tracking-widest mb-3">
                 <Sparkles className="w-3.5 h-3.5" />
@@ -147,7 +143,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Appointment setting & outbound sales
               </h2>
               <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
-                Targeted prospect research, natural phone cadence, and CRM pipeline hygienedelivered directly as an extension of your growth team.
+                Targeted prospect research, natural phone cadence, and CRM pipeline hygiene—delivered directly as an extension of your growth team.
               </p>
 
               <button
@@ -159,7 +155,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
 
-              {/* Dynamic Interactive Preview Card (Updates on Service Hover) */}
+              {/* Dynamic Hover Card */}
               <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 shadow-lg space-y-3 transition-all duration-300">
                 <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400 flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
@@ -178,7 +174,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Right Multi-Column Service Listing (Inspired by Reference 2) */}
+            {/* Right Multi-Column Service Listing */}
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                 {SERVICES.map((service) => {
@@ -202,7 +198,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                         }
                       }}
                     >
-                      {/* Left Thumbnail Image */}
                       <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 bg-slate-800 border border-slate-700/60 shadow-sm">
                         <img
                           src={thumb}
@@ -215,7 +210,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                         <div className="absolute inset-0 bg-black/15" />
                       </div>
 
-                      {/* Right Title + Description Content */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-1">
                           <h3 className={`text-sm sm:text-base font-bold transition-colors truncate ${
@@ -236,7 +230,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                 })}
               </div>
 
-              {/* Bottom Quick-Action Banner */}
               <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-slate-900/90 to-slate-900/40 border border-slate-800/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                   <h4 className="text-sm font-semibold text-white">Need custom campaign volume or an offshore sales squad?</h4>
@@ -257,9 +250,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* PROOF & CASE STUDIES HIGHLIGHTS                                          */}
-      {/* ========================================================================= */}
+      {/* Case Studies */}
       <section className="py-24 bg-[#0d1322] border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           
@@ -330,9 +321,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* WORK SAMPLES PREVIEW                                                     */}
-      {/* ========================================================================= */}
+      {/* Samples */}
       <section className="py-24 bg-[#0b0f19] border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           
@@ -392,9 +381,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* CONTACT SECTION  Synchronized 1:1 with ContactPage.tsx                  */}
-      {/* ========================================================================= */}
+      {/* Synchronized Contact Section */}
       <section id="contact-sync" className="py-24 sm:py-28 bg-[#090d16]">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           
@@ -413,7 +400,6 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
-            {/* Left Column: Direct Info Card */}
             <div className="lg:col-span-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 space-y-6 shadow-xl">
               <div>
                 <h3 className="text-xl font-bold text-white mb-2">Direct Contact Channels</h3>
@@ -465,12 +451,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>Working Hours & Response</span>
                 </div>
                 <p className="text-xs text-slate-400">
-                  Mon  Fri: 9:00 AM  6:00 PM EST / CST. Inquiries answered within 24 hours.
+                  Mon – Fri: 9:00 AM – 6:00 PM EST / CST. Inquiries answered within 24 hours.
                 </p>
               </div>
             </div>
 
-            {/* Right Column: Interactive Form */}
             <div className="lg:col-span-7 rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 shadow-xl">
               <h3 className="text-xl font-bold text-white mb-1">Inquiry Form</h3>
               <p className="text-xs text-slate-400 mb-6">Fill out the brief details below to coordinate a discovery call.</p>
