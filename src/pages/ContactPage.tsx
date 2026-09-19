@@ -1,30 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { Mail, PhoneCall, Linkedin, Clock, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  Mail, 
+  PhoneCall, 
+  ShieldCheck, 
+  Clock, 
+  CheckCircle2, 
+  Send, 
+  MapPin, 
+  Sparkles 
+} from 'lucide-react';
+import { PageHeader } from '../components/PageHeader';
+import { Section } from '../components/Section';
+import { Button } from '../components/Button';
 
 interface ContactPageProps {
   preselectedService?: string;
   onSuccess?: () => void;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, onSuccess }) => {
+export const ContactPage: React.FC<ContactPageProps> = ({
+  preselectedService,
+  onSuccess,
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     company: '',
-    targetMarket: 'US',
     service: preselectedService || 'Appointment Setting',
+    targetMarket: 'US & Canada',
     message: ''
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (preselectedService) {
-      setFormData(prev => ({ ...prev, service: preselectedService }));
-    }
-  }, [preselectedService]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,60 +39,52 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      if (onSuccess) onSuccess();
-    }, 600);
+      onSuccess?.();
+    }, 900);
   };
 
   return (
-    <div className="flex flex-col w-full text-slate-100 selection:bg-amber-400/20 selection:text-amber-200">
-      <section className="relative py-20 sm:py-28 bg-[#0d1322] border-b border-slate-800/80 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-mono uppercase tracking-widest mb-3">
-              <Mail className="w-3.5 h-3.5" />
-              <span>Direct Communication</span>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6">
-              Let's Discuss Your Outbound Sales Pipeline
-            </h1>
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-              Whether you need high-volume cold calling, consultative appointment setting, or SDR coaching, I'm ready to review your goals.
-            </p>
-          </div>
-        </div>
-      </section>
+    <div className="space-y-16 sm:space-y-24">
+      <PageHeader
+        index="06"
+        eyebrow="Availability & Inquiries"
+        title="Hire a Senior B2B SDR & Lead Generator"
+        description="Direct outbound telemarketing, contract pipeline sourcing, and SDR team calibration. Available for engagements across US, UK, ANZ, and Singapore."
+      />
 
-      <section className="py-20 bg-[#0b0f19]">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 space-y-6 shadow-xl">
-              <div>
-                <h2 className="text-xl font-bold text-white mb-2">Direct Contact Channels</h2>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Based in Bacolod City, Philippines, maintaining full working shift overlap with the US (EST/CST/PST), UK (GMT), and ANZ.
-                </p>
-              </div>
+      <Section className="relative pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {/* Left Column Contact Cards */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 backdrop-blur-md">
+              <h2 className="text-xl font-bold text-white tracking-tight border-b border-slate-800 pb-4">
+                Direct Contact Channels
+              </h2>
 
-              <div className="space-y-4 pt-2">
+              <div className="space-y-4">
                 <a
                   href="mailto:va.flynnjames@gmail.com"
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 hover:text-amber-300 transition-colors"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 transition-colors group"
                 >
-                  <Mail className="w-4 h-4 text-amber-400 shrink-0" />
+                  <Mail className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <div className="text-[11px] text-slate-500 uppercase tracking-wider font-mono">Direct Email</div>
-                    <div className="text-sm font-medium text-slate-200">va.flynnjames@gmail.com</div>
+                    <div className="text-xs font-mono text-slate-400">Direct Email</div>
+                    <div className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
+                      va.flynnjames@gmail.com
+                    </div>
                   </div>
                 </a>
 
                 <a
                   href="tel:+639306359306"
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 hover:text-amber-300 transition-colors"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 transition-colors group"
                 >
-                  <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
+                  <PhoneCall className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <div className="text-[11px] text-slate-500 uppercase tracking-wider font-mono">Direct Phone / WhatsApp</div>
-                    <div className="text-sm font-medium text-slate-200">+63-930-635-9306</div>
+                    <div className="text-xs font-mono text-slate-400">Phone / WhatsApp</div>
+                    <div className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
+                      +63-930-635-9306
+                    </div>
                   </div>
                 </a>
 
@@ -93,137 +92,178 @@ export const ContactPage: React.FC<ContactPageProps> = ({ preselectedService, on
                   href="https://www.linkedin.com/in/fjpontino"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 hover:text-amber-300 transition-colors"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-400/40 transition-colors group"
                 >
-                  <Linkedin className="w-4 h-4 text-amber-400 shrink-0" />
+                  <ShieldCheck className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <div className="text-[11px] text-slate-500 uppercase tracking-wider font-mono">LinkedIn</div>
-                    <div className="text-sm font-medium text-slate-200">linkedin.com/in/fjpontino</div>
+                    <div className="text-xs font-mono text-slate-400">LinkedIn Profile</div>
+                    <div className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
+                      linkedin.com/in/fjpontino
+                    </div>
                   </div>
                 </a>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-2">
-                <div className="flex items-center gap-2 text-xs text-amber-300 font-mono">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>Working Hours & Response</span>
+              <div className="pt-4 border-t border-slate-800 space-y-3">
+                <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                  Target Markets Served
                 </div>
-                <p className="text-xs text-slate-400">
-                  Mon - Fri: 9:00 AM - 6:00 PM EST / CST. Inquiries answered within 24 hours.
+                <div className="flex flex-wrap gap-2">
+                  {['US (EST/CST/PST)', 'UK (GMT)', 'Australia (AEST)', 'Singapore (SGT)'].map((tz) => (
+                    <span key={tz} className="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700/80 text-[11px] font-mono text-slate-300">
+                      {tz}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-amber-400/5 border border-amber-400/15 space-y-1.5">
+                <div className="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5" /> 24-Hour Response Guarantee
+                </div>
+                <p className="text-[12px] text-slate-300 leading-relaxed">
+                  Every inquiry receives a direct review of ICP alignment and current calendar capacity.
                 </p>
               </div>
             </div>
+          </div>
 
-            <div className="lg:col-span-7 rounded-2xl bg-slate-900/80 border border-slate-800/90 p-8 shadow-xl">
+          {/* Right Column Form Card */}
+          <div className="lg:col-span-7">
+            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 backdrop-blur-md">
               {submitted ? (
-                <div className="text-center py-12 space-y-4">
-                  <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                  <h3 className="text-xl font-bold text-white">Message Received!</h3>
-                  <p className="text-sm text-slate-400 max-w-md mx-auto">
-                    Thank you for reaching out. Flynn will review your requirements and respond directly via email within 24 hours.
+                <div className="py-12 text-center space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-amber-400/15 border border-amber-400/40 flex items-center justify-center text-amber-400 mx-auto">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Inquiry Received</h3>
+                  <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
+                    Thank you. I have received your message and will review your target market requirements within 24 hours.
                   </p>
-                  <button
-                    type="button"
-                    onClick={() => setSubmitted(false)}
-                    className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold mt-4 transition-colors"
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({
+                        name: '',
+                        email: '',
+                        company: '',
+                        service: 'Appointment Setting',
+                        targetMarket: 'US & Canada',
+                        message: ''
+                      });
+                    }}
                   >
-                    Send Another Note
-                  </button>
+                    Send Another Message
+                  </Button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <h2 className="text-xl font-bold text-white mb-1">Inquiry Form</h2>
-                  <p className="text-xs text-slate-400 mb-6">Fill out the brief details below to coordinate a discovery call.</p>
-
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Your Name *</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono text-slate-300">Your Name *</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Alex Morgan"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                        placeholder="e.g. Sarah Jenkins"
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
                       />
                     </div>
-
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Work Email *</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono text-slate-300">Work Email *</label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="alex@company.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                        placeholder="sarah@company.com"
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Company / Product</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono text-slate-300">Company / Website</label>
                       <input
                         type="text"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder="e.g. B2B SaaS"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                        placeholder="company.com"
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
                       />
                     </div>
-
-                    <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Target Market</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono text-slate-300">Primary Service Needed</label>
                       <select
-                        value={formData.targetMarket}
-                        onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-300 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
                       >
-                        <option value="US">United States (EST / CST / PST)</option>
-                        <option value="UK">United Kingdom / EMEA</option>
-                        <option value="ANZ">Australia & New Zealand</option>
-                        <option value="SG">Singapore / Southeast Asia</option>
+                        <option>Appointment Setting</option>
+                        <option>Cold Calling & Phone Outreach</option>
+                        <option>Outbound Lead Generation</option>
+                        <option>SDR Team Coaching</option>
+                        <option>Multi-Touch Sequences</option>
+                        <option>Full-Time Senior SDR Role</option>
                       </select>
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Service of Interest</label>
-                    <input
-                      type="text"
-                      value={formData.service}
-                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
-                    />
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono text-slate-300">Target Market / Region</label>
+                    <select
+                      value={formData.targetMarket}
+                      onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
+                    >
+                      <option>US & Canada (EST, CST, PST)</option>
+                      <option>United Kingdom & Europe (GMT / CET)</option>
+                      <option>Australia & New Zealand (AEST)</option>
+                      <option>Singapore & Southeast Asia (SGT)</option>
+                      <option>Global / Multi-Region</option>
+                    </select>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5 font-mono">Message / Outreach Goals *</label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono text-slate-300">Project Scope & Meeting Goals</label>
                     <textarea
                       rows={4}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Share your outreach targets, target titles, or existing campaign challenges..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all resize-none"
+                      placeholder="Share your current prospecting requirements, target titles, or monthly meeting objectives..."
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/60"
                     />
                   </div>
 
-                  <button
+                  <Button
+                    variant="primary"
+                    size="lg"
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-semibold text-sm transition-all duration-200 shadow-md shadow-amber-400/20 active:scale-[0.98] disabled:opacity-50"
+                    className="w-full justify-center"
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message Now'}
-                  </button>
+                    {isSubmitting ? (
+                      <span className="flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                        Sending Inquiry...
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        <Send className="w-4 h-4" /> Send Outbound Inquiry
+                      </span>
+                    )}
+                  </Button>
                 </form>
               )}
             </div>
-
           </div>
         </div>
-      </section>
+      </Section>
     </div>
   );
 };
