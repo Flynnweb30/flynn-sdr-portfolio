@@ -1,3 +1,72 @@
+export type PageId =
+  | 'home'
+  | 'about'
+  | 'services'
+  | 'experience'
+  | 'case-studies'
+  | 'samples'
+  | 'contact'
+  | 'privacy';
+
+export interface StatItem {
+  value: string;
+  label: string;
+  helperText?: string;
+  sourceText?: string;
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  clientType: string;
+  market: string;
+  period: string;
+  context: string;
+  problem: string;
+  strategy: string[];
+  execution: string[];
+  results: {
+    label: string;
+    value: string;
+    context: string;
+  }[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+  };
+  tags: string[];
+  metrics: string[];
+  verifiedBadge?: boolean;
+}
+
+export interface WorkSample {
+  id: string;
+  title: string;
+  category: 'audio' | 'script' | 'sequence' | 'framework';
+  description: string;
+  badge: string;
+  scenario: string;
+  strategyBreakdown: string[];
+  audioUrl?: string;
+  duration?: string;
+  contentSnippet?: string;
+  stats?: string;
+  tags: string[];
+  downloadable?: boolean;
+}
+
+export interface ExperienceRole {
+  title: string;
+  company: string;
+  companyType: string;
+  period: string;
+  location: string;
+  highlights: string[];
+  metrics: string[];
+  skills: string[];
+}
+
 export interface ServiceItem {
   id: string;
   title: string;
@@ -10,88 +79,25 @@ export interface ServiceItem {
   deliverableSummary: string;
 }
 
-export interface ExperienceItem {
-  id: string;
-  period: string;
-  company: string;
-  role: string;
-  location: string;
-  type: string;
-  industry: string;
-  highlightMetric: string;
-  responsibilities: string[];
-  achievements: string[];
-}
-
-export interface ToolCategory {
+export interface SkillCategory {
   category: string;
-  description: string;
-  tools: {
+  skills: {
     name: string;
-    level: 'Expert' | 'Advanced' | 'Proficient';
-    iconName: string;
-    useCase: string;
+    level: string;
+    years: string;
+    highlight?: boolean;
   }[];
 }
 
-export interface WorkStep {
-  step: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  actionItems: string[];
-  outcome: string;
-}
-
-export interface CaseStudy {
-  id: string;
-  title: string;
-  clientType: string;
-  region: string;
-  industry: string;
-  period: string;
-  headlineMetric: string;
-  secondaryMetrics: { label: string; value: string }[];
-  challenge: string;
-  action: string[];
-  result: string[];
-  toolsUsed: string[];
-  quote?: {
-    text: string;
-    author: string;
-    role: string;
-  };
-}
-
-export interface Testimonial {
-  id: string;
-  quote: string;
-  author: string;
-  title: string;
-  company: string;
-  location: string;
-  verifiedMetric: string;
-  avatarUrl: string;
-}
-
 export interface FaqItem {
-  question: string;
-  answer: string;
-  category: 'Engagement' | 'Calling & Volume' | 'Quality & Show-ups' | 'Tools & Stack';
+  q: string;
+  a: string;
+  category?: string;
 }
 
-export interface WorkSample {
-  id: string;
-  title: string;
+export interface ToolItem {
+  name: string;
   category: string;
-  summary: string;
-  tags: string[];
-  details: {
-    overview: string;
-    framework: string[];
-    sampleText?: string;
-    tips: string[];
-  };
+  proficiency: 'Advanced' | 'Expert' | 'Intermediate';
+  useCase: string;
 }
-
-export type PageId = 'home' | 'about' | 'services' | 'experience' | 'case-studies' | 'samples' | 'contact';

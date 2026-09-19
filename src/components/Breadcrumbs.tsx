@@ -42,19 +42,20 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, crumbs, onNavig
             const key = item.url || item.href || idx;
             return (
               <li key={key} className="flex items-center gap-2">
-                {idx === 0 && <Home className="w-3 h-3 text-slate-600" />}
+                {idx === 0 && <Home className="w-3 h-3 text-slate-600" aria-hidden="true" />}
                 {!isLast ? (
                   <>
                     <button
+                      type="button"
                       onClick={() => onNavigate?.('home')}
-                      className="hover:text-amber-400 transition-colors uppercase tracking-wider"
+                      className="hover:text-amber-400 transition-colors uppercase tracking-wider focus:outline-none focus:ring-1 focus:ring-amber-400 rounded px-1"
                     >
                       {label}
                     </button>
-                    <ChevronRight className="w-3 h-3 text-slate-700" />
+                    <ChevronRight className="w-3 h-3 text-slate-700" aria-hidden="true" />
                   </>
                 ) : (
-                  <span className="text-slate-300 uppercase tracking-wider" aria-current="page">
+                  <span className="text-slate-300 uppercase tracking-wider font-semibold" aria-current="page">
                     {label}
                   </span>
                 )}

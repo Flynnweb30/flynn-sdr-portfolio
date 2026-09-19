@@ -1,71 +1,62 @@
 import { useEffect } from 'react';
-import { SEOMetadata } from '../data/seoData';
+import { SEO_DATA, SEOMetadata } from '../data/seoData';
 
 interface SEOHeadProps {
-  meta: SEOMetadata;
-  schema?: object | object[];
+  page: string;
+  canonical?: string;
+  metadata?: Partial<SEOMetadata>;
 }
 
-export const SEOHead: React.FC<SEOHeadProps> = ({ meta, schema }) => {
-  useEffect(() => {
-    // Title
-    document.title = meta.title;
+export const SEOHead: React.FC<SEOHeadProps> = ({ page, canonical, metadata }) => {
+  const currentData = metadata || SEO_DATA[page] || SEO_DATA.home;
+  const canonicalUrl = canonical || currentData.canonical;
 
-    // Helper to set/create meta tags
-    const setMeta = (attr: 'name' | 'property', key: string, value: string) => {
-      let el = document.querySelector(`meta[${attr}="${key}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attr, key);
-        document.head.appendChild(el);
+  useEffect(() => {
+    if (currentData.title) {
+      document.title = currentData.title;
+    }
+
+    const updateMetaTag = (attribute: string, key: string, content: string) => {
+      let meta = document.querySelector(`meta[${attribute}="${key}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(attribute, key);
+        document.head.appendChild(meta);
       }
-      el.setAttribute('content', value);
+      meta.setAttribute('content', content);
     };
 
-    // Standard meta
-    setMeta('name', 'description', meta.description);
-    if (meta.keywords?.length) {
-      setMeta('name', 'keywords', meta.keywords.join(', '));
+    if (currentData.description) {
+      updateMetaTag('name', 'description', currentData.description);
+      updateMetaTag('property', 'og:description', currentData.description);
+      updateMetaTag('name', 'twitter:description', currentData.description);
     }
-    setMeta('name', 'robots', meta.noindex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
-    setMeta('name', 'googlebot', meta.noindex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
 
-    // Open Graph
-    setMeta('property', 'og:title', meta.title);
-    setMeta('property', 'og:description', meta.description);
-    setMeta('property', 'og:url', meta.canonical);
-    setMeta('property', 'og:image', meta.ogImage);
-    setMeta('property', 'og:type', meta.ogType || 'website');
-    setMeta('property', 'og:site_name', 'Flynn James Pontino');
-
-    // Twitter / X
-    setMeta('name', 'twitter:card', 'summary_large_image');
-    setMeta('name', 'twitter:title', meta.title);
-    setMeta('name', 'twitter:description', meta.description);
-    setMeta('name', 'twitter:image', meta.ogImage);
-
-    // Canonical
-    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      document.head.appendChild(canonical);
+    if (currentData.title) {
+      updateMetaTag('property', 'og:title', currentData.title);
+      updateMetaTag('name', 'twitter:title', currentData.title);
     }
-    canonical.href = meta.canonical;
 
-    // JSON-LD schema
-    const SCHEMA_ID = 'dynamic-jsonld';
-    const existing = document.getElementById(SCHEMA_ID);
-    if (existing) existing.remove();
-
-    if (schema) {
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.id = SCHEMA_ID;
-      script.textContent = JSON.stringify(schema);
-      document.head.appendChild(script);
+    if (canonicalUrl) {
+      updateMetaTag('property', 'og:url', canonicalUrl);
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', canonicalUrl);
     }
-  }, [meta, schema]);
+
+    if (currentData.ogImage) {
+      updateMetaTag('property', 'og:image', currentData.ogImage);
+      updateMetaTag('name', 'twitter:image', currentData.ogImage);
+    }
+
+    if (currentData.keywords && currentData.keywords.length > 0) {
+      updateMetaTag('name', 'keywords', currentData.keywords.join(', '));
+    }
+  }, [currentData, canonicalUrl]);
 
   return null;
 };
